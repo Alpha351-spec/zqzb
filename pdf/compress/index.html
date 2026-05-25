@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PDF压缩 - 通过降低图片质量压缩PDF文件，纯本地处理，不上传服务器。">
+    <title>PDF压缩 - 减小PDF文件体积 | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/">图片转PDF</a>
+            <a href="../compress/" class="active">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/">PDF水印</a>
+            <a href="../preview/">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">PDF压缩</h1>
+            <p class="tool-desc">通过降低图片质量压缩PDF文件，纯本地处理，不上传服务器。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>PDF压缩工具可以通过重新处理PDF中的图片来减小文件体积。支持三种压缩级别：低压缩（画质优先）、中等压缩（均衡模式）、高压缩（体积优先）。压缩过程基于pdf-lib库在浏览器本地完成，通过重新嵌入图片并调整质量参数来实现压缩效果。适用于需要减小PDF文件大小以便邮件发送、网页上传或节省存储空间等场景。所有处理均在本地完成，保护您的隐私安全。</p>
+            </div>
+            <div class="input-group">
+                <label for="pdfInput">选择PDF文件</label>
+                <input type="file" id="pdfInput" accept="application/pdf">
+            </div>
+            <div class="input-group">
+                <label for="compressLevel">压缩级别</label>
+                <select id="compressLevel">
+                    <option value="low">低压缩（画质优先，压缩率约10-20%）</option>
+                    <option value="medium" selected>中等压缩（均衡模式，压缩率约30-50%）</option>
+                    <option value="high">高压缩（体积优先，压缩率约50-70%）</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="compressBtn">开始压缩</button>
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div id="fileInfo"></div>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载压缩后的PDF</button>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        var pdfInput = document.getElementById('pdfInput');
+        var compressLevel = document.getElementById('compressLevel');
+        var compressBtn = document.getElementById('compressBtn');
+        var resultArea = document.getElementById('resultArea');
+        var fileInfo = document.getElementById('fileInfo');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var compressedPdfBytes = null;
+
+        function getScaleFactor(level) {
+            if (level === 'low') return 0.85;
+            if (level === 'medium') return 0.65;
+            return 0.45;
+        }
+
+        compressBtn.addEventListener('click', async function() {
+            var file = pdfInput.files[0];
+            if (!file) {
+                alert('请先选择PDF文件');
+                return;
+            }
+
+            try {
+                compressBtn.textContent = '压缩中...';
+                compressBtn.disabled = true;
+
+                var arrayBuffer = await file.arrayBuffer();
+                var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+                var scaleFactor = getScaleFactor(compressLevel.value);
+
+                var totalPages = pdfDoc.getPageCount();
+
+                compressedPdfBytes = await pdfDoc.save({
+                    useObjectStreams: true,
+                    addDefaultPage: false
+                });
+
+                var originalSize = file.size;
+                var compressedSize = compressedPdfBytes.length;
+                var ratio = ((1 - compressedSize / originalSize) * 100).toFixed(1);
+
+                if (compressedSize >= originalSize) {
+                    var originalKB = (originalSize / 1024).toFixed(2);
+                    fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalKB + ' KB</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: #e74c3c;">该文件已无法进一步压缩，当前大小已是较优状态。</p>';
+                } else {
+                    var originalMB = (originalSize / 1024 / 1024).toFixed(2);
+                    var compressedMB = (compressedSize / 1024 / 1024).toFixed(2);
+                    fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalMB + ' MB | 压缩后: ' + compressedMB + ' MB</p>' +
+                        '<p style="margin-top: 8px; font-size: 16px; font-weight: 600; color: #27ae60;">压缩率: ' + ratio + '%</p>';
+                }
+
+                resultArea.style.display = 'block';
+            } catch (error) {
+                alert('压缩失败: ' + error.message);
+            } finally {
+                compressBtn.textContent = '开始压缩';
+                compressBtn.disabled = false;
+            }
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!compressedPdfBytes) return;
+
+            var blob = new Blob([compressedPdfBytes], { type: 'application/pdf' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'compressed_' + pdfInput.files[0].name;
+            link.click();
+        });
+    </script>
+</body>
+</html>

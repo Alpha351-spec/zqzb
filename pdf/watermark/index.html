@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="为PDF每页添加自定义水印，保护版权，纯本地处理。">
+    <title>PDF水印 - 添加文字或图片水印 | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/">图片转PDF</a>
+            <a href="../compress/">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/" class="active">PDF水印</a>
+            <a href="../preview/">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">PDF水印</h1>
+            <p class="tool-desc">为PDF每页添加自定义文字水印，保护文档版权。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>PDF水印工具可以为您的PDF文件每一页添加自定义文字水印。支持设置水印文字、字体大小、透明度和位置。水印将以半透明效果叠加在PDF页面上，既能保护文档版权，又不影响正常阅读。采用pdf-lib库进行处理，所有操作均在浏览器本地完成，文件不会上传到任何服务器，充分保障您的隐私安全。</p>
+            </div>
+            <div class="input-group">
+                <label for="pdfInput">选择PDF文件</label>
+                <input type="file" id="pdfInput" accept=".pdf">
+            </div>
+            <div class="input-group">
+                <label for="watermarkText">水印文字</label>
+                <input type="text" id="watermarkText" placeholder="请输入水印文字" value="机密文件" style="border-radius: 12px; padding: 12px 16px; border: 1px solid #eaeaea; width: 100%; box-sizing: border-box;">
+            </div>
+            <div class="input-group">
+                <label>字体大小</label>
+                <div class="range-container">
+                    <input type="range" id="fontSize" min="20" max="100" value="50">
+                    <span class="range-value" id="fontSizeValue">50px</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>透明度</label>
+                <div class="range-container">
+                    <input type="range" id="opacity" min="10" max="100" value="30">
+                    <span class="range-value" id="opacityValue">30%</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="position">水印位置</label>
+                <select id="position" style="border-radius: 12px; padding: 12px 16px; border: 1px solid #eaeaea; width: 100%; box-sizing: border-box; background: white;">
+                    <option value="center">居中</option>
+                    <option value="top-left">左上角</option>
+                    <option value="top-right">右上角</option>
+                    <option value="bottom-left">左下角</option>
+                    <option value="bottom-right">右下角</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="watermarkBtn">添加水印</button>
+            <div class="result-area" id="resultArea" style="display: none;">
+                <p style="margin: 0; font-size: 15px; color: #555555;">水印添加完成！文件已准备好下载。</p>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载水印PDF</button>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        var pdfInput = document.getElementById('pdfInput');
+        var watermarkText = document.getElementById('watermarkText');
+        var fontSize = document.getElementById('fontSize');
+        var fontSizeValue = document.getElementById('fontSizeValue');
+        var opacity = document.getElementById('opacity');
+        var opacityValue = document.getElementById('opacityValue');
+        var position = document.getElementById('position');
+        var watermarkBtn = document.getElementById('watermarkBtn');
+        var resultArea = document.getElementById('resultArea');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var watermarkedPdfBytes = null;
+        var originalFileName = '';
+
+        function updateRangeBackground(rangeInput) {
+            var value = rangeInput.value;
+            var min = rangeInput.min;
+            var max = rangeInput.max;
+            var percentage = ((value - min) / (max - min)) * 100;
+            rangeInput.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, #eaeaea ' + percentage + '%, #eaeaea 100%)';
+        }
+
+        fontSize.addEventListener('input', function() {
+            fontSizeValue.textContent = this.value + 'px';
+            updateRangeBackground(this);
+        });
+
+        opacity.addEventListener('input', function() {
+            opacityValue.textContent = this.value + '%';
+            updateRangeBackground(this);
+        });
+
+        updateRangeBackground(fontSize);
+        updateRangeBackground(opacity);
+
+        function renderTextToCanvas(text, size, opacityVal) {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            ctx.font = size + 'px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif';
+            var metrics = ctx.measureText(text);
+            var textWidth = Math.ceil(metrics.width) + 4;
+            var textHeight = Math.ceil(size * 1.4) + 4;
+            canvas.width = textWidth;
+            canvas.height = textHeight;
+            ctx.font = size + 'px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif';
+            ctx.fillStyle = 'rgba(128, 128, 128, ' + opacityVal + ')';
+            ctx.textBaseline = 'top';
+            ctx.fillText(text, 2, 2);
+            return canvas;
+        }
+
+        watermarkBtn.addEventListener('click', async function() {
+            var file = pdfInput.files[0];
+            if (!file) {
+                alert('请先选择PDF文件');
+                return;
+            }
+
+            var text = watermarkText.value.trim();
+            if (!text) {
+                alert('请输入水印文字');
+                return;
+            }
+
+            try {
+                watermarkBtn.textContent = '添加中...';
+                watermarkBtn.disabled = true;
+
+                var arrayBuffer = await file.arrayBuffer();
+                var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                var pages = pdfDoc.getPages();
+
+                var fontSizeVal = parseInt(fontSize.value);
+                var opacityVal = parseInt(opacity.value) / 100;
+                var positionVal = position.value;
+
+                var wmCanvas = renderTextToCanvas(text, fontSizeVal, opacityVal);
+                var wmImage = await pdfDoc.embedPng(wmCanvas.toDataURL('image/png'));
+
+                var wmWidth = wmCanvas.width;
+                var wmHeight = wmCanvas.height;
+
+                for (var i = 0; i < pages.length; i++) {
+                    var page = pages[i];
+                    var width = page.getWidth();
+                    var height = page.getHeight();
+
+                    var x, y;
+                    switch (positionVal) {
+                        case 'center':
+                            x = (width - wmWidth) / 2;
+                            y = (height - wmHeight) / 2;
+                            break;
+                        case 'top-left':
+                            x = 20;
+                            y = height - wmHeight - 20;
+                            break;
+                        case 'top-right':
+                            x = width - wmWidth - 20;
+                            y = height - wmHeight - 20;
+                            break;
+                        case 'bottom-left':
+                            x = 20;
+                            y = 20;
+                            break;
+                        case 'bottom-right':
+                            x = width - wmWidth - 20;
+                            y = 20;
+                            break;
+                        default:
+                            x = (width - wmWidth) / 2;
+                            y = (height - wmHeight) / 2;
+                    }
+
+                    page.drawImage(wmImage, {
+                        x: x,
+                        y: y,
+                        width: wmWidth,
+                        height: wmHeight
+                    });
+                }
+
+                watermarkedPdfBytes = await pdfDoc.save();
+                originalFileName = file.name;
+
+                resultArea.style.display = 'block';
+            } catch (error) {
+                alert('添加水印失败: ' + error.message);
+            } finally {
+                watermarkBtn.textContent = '添加水印';
+                watermarkBtn.disabled = false;
+            }
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!watermarkedPdfBytes) return;
+
+            var blob = new Blob([watermarkedPdfBytes], { type: 'application/pdf' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'watermarked_' + originalFileName;
+            link.click();
+        });
+    </script>
+</body>
+</html>

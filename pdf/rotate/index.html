@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PDF旋转页面 - 选择旋转角度旋转PDF页面，支持全部或指定页面，纯本地处理。">
+    <title>PDF旋转页面 - 永久旋转PDF页面 | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/" class="active">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/">图片转PDF</a>
+            <a href="../compress/">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/">PDF水印</a>
+            <a href="../preview/">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">PDF旋转页面</h1>
+            <p class="tool-desc">选择旋转角度旋转PDF页面，支持全部或指定页面，纯本地处理。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>PDF旋转页面工具可以帮助您永久旋转PDF文件中的页面。支持90°、180°、270°三种旋转角度，您可以选择旋转全部页面或指定页码范围。旋转操作基于pdf-lib库在浏览器本地完成，无需上传文件至服务器，充分保障您的隐私安全。适用于扫描文档方向不正确、页面布局需要调整等场景。</p>
+            </div>
+            <div class="input-group">
+                <label for="pdfInput">选择PDF文件</label>
+                <input type="file" id="pdfInput" accept="application/pdf">
+            </div>
+            <div class="input-group">
+                <label for="rotationAngle">旋转角度</label>
+                <select id="rotationAngle">
+                    <option value="90">顺时针 90°</option>
+                    <option value="180">180°</option>
+                    <option value="270">顺时针 270°</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="pageRange">页码范围（留空则旋转全部页面，如：1,3,5-8）</label>
+                <input type="text" id="pageRange" placeholder="例：1,3,5-8">
+            </div>
+            <button class="btn btn-primary" id="rotateBtn">旋转页面</button>
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div id="fileInfo"></div>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载旋转后的PDF</button>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        var pdfInput = document.getElementById('pdfInput');
+        var rotationAngle = document.getElementById('rotationAngle');
+        var pageRange = document.getElementById('pageRange');
+        var rotateBtn = document.getElementById('rotateBtn');
+        var resultArea = document.getElementById('resultArea');
+        var fileInfo = document.getElementById('fileInfo');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var rotatedPdfBytes = null;
+
+        function parsePageRange(rangeStr, totalPages) {
+            var pages = [];
+            if (!rangeStr || rangeStr.trim() === '') {
+                for (var i = 1; i <= totalPages; i++) {
+                    pages.push(i);
+                }
+                return pages;
+            }
+            var parts = rangeStr.split(/[,，]/);
+            for (var p = 0; p < parts.length; p++) {
+                var part = parts[p].trim();
+                if (part.indexOf('-') !== -1) {
+                    var range = part.split('-');
+                    var start = parseInt(range[0]);
+                    var end = parseInt(range[1]);
+                    if (isNaN(start) || isNaN(end) || start < 1 || end > totalPages || start > end) {
+                        continue;
+                    }
+                    for (var j = start; j <= end; j++) {
+                        if (pages.indexOf(j) === -1) {
+                            pages.push(j);
+                        }
+                    }
+                } else {
+                    var num = parseInt(part);
+                    if (!isNaN(num) && num >= 1 && num <= totalPages) {
+                        if (pages.indexOf(num) === -1) {
+                            pages.push(num);
+                        }
+                    }
+                }
+            }
+            return pages.sort(function(a, b) { return a - b; });
+        }
+
+        rotateBtn.addEventListener('click', async function() {
+            var file = pdfInput.files[0];
+            if (!file) {
+                alert('请先选择PDF文件');
+                return;
+            }
+
+            try {
+                rotateBtn.textContent = '处理中...';
+                rotateBtn.disabled = true;
+
+                var arrayBuffer = await file.arrayBuffer();
+                var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+                var totalPages = pdfDoc.getPageCount();
+                var angle = parseInt(rotationAngle.value);
+                var pages = parsePageRange(pageRange.value, totalPages);
+
+                if (pages.length === 0) {
+                    alert('未找到有效的页码，请检查输入');
+                    rotateBtn.textContent = '旋转页面';
+                    rotateBtn.disabled = false;
+                    return;
+                }
+
+                for (var i = 0; i < pages.length; i++) {
+                    var page = pdfDoc.getPage(pages[i] - 1);
+                    var currentRotation = page.getRotation().angle;
+                    page.setRotation(PDFLib.degrees(currentRotation + angle));
+                }
+
+                rotatedPdfBytes = await pdfDoc.save();
+
+                var originalSize = (file.size / 1024).toFixed(2);
+                var newSize = (rotatedPdfBytes.length / 1024).toFixed(2);
+
+                fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
+                    '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + ' | 旋转页数: ' + pages.length + '</p>' +
+                    '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalSize + ' KB | 处理后: ' + newSize + ' KB</p>';
+
+                resultArea.style.display = 'block';
+            } catch (error) {
+                alert('处理失败: ' + error.message);
+            } finally {
+                rotateBtn.textContent = '旋转页面';
+                rotateBtn.disabled = false;
+            }
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!rotatedPdfBytes) return;
+
+            var blob = new Blob([rotatedPdfBytes], { type: 'application/pdf' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'rotated_' + pdfInput.files[0].name;
+            link.click();
+        });
+    </script>
+</body>
+</html>

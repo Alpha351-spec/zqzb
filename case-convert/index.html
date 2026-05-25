@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="大小写转换 - 在线转换文本大小写，支持全大写、全小写、首字母大写、驼峰命名等。所有处理均在本地完成。">
+    <title>大小写转换 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+            <a href="../text-trim/">文字去空格</a>
+            <a href="../word-count/">字数统计</a>
+            <a href="../case-convert/" class="active">大小写转换</a>
+            <a href="../json-formatter/">JSON格式化</a>
+            <a href="../text-diff/">文字对比</a>
+            <a href="../regex-test/">正则测试</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">大小写转换</h1>
+            <p class="tool-desc">转换文本大小写，支持全大写、全小写、首字母大写、驼峰命名等。所有处理均在本地完成。</p>
+
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>大小写转换工具为开发者和内容创作者提供便捷的文本格式转换服务。支持全大写、全小写、单词首字母大写、句首大写以及驼峰命名法等多种转换模式，满足编程命名规范、标题格式化、数据标准化等不同需求。工具基于JavaScript字符串方法结合自定义格式化规则实现，转换速度快且准确。无论您是在编写代码时需要统一变量命名，还是在编辑文档时需要调整标题大小写，都可以轻松完成。所有转换操作均在本地执行，无需担心文本数据泄露。</p>
+            </div>
+
+            <div class="input-group">
+                <label for="textInput">输入文本</label>
+                <textarea id="textInput" placeholder="请输入要转换的文本..."></textarea>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px;">
+                <button class="btn btn-primary" id="upperBtn">全大写</button>
+                <button class="btn btn-primary" id="lowerBtn">全小写</button>
+                <button class="btn" id="capitalizeBtn">首字母大写</button>
+                <button class="btn" id="sentenceBtn">句首大写</button>
+                <button class="btn" id="camelBtn">驼峰命名</button>
+                <button class="btn" id="copyBtn">复制结果</button>
+                <button class="btn" id="clearBtn">清空</button>
+            </div>
+
+            <div class="result-area">
+                <pre id="textOutput">转换结果将显示在这里...</pre>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../text-trim/">文字去空格</a>
+                <a href="../word-count/">字数统计</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+        var textInput = document.getElementById('textInput');
+        var textOutput = document.getElementById('textOutput');
+        var upperBtn = document.getElementById('upperBtn');
+        var lowerBtn = document.getElementById('lowerBtn');
+        var capitalizeBtn = document.getElementById('capitalizeBtn');
+        var sentenceBtn = document.getElementById('sentenceBtn');
+        var camelBtn = document.getElementById('camelBtn');
+        var copyBtn = document.getElementById('copyBtn');
+        var clearBtn = document.getElementById('clearBtn');
+
+        upperBtn.addEventListener('click', function() {
+            var text = textInput.value;
+            if (!text) { alert('请输入文本'); return; }
+            textOutput.textContent = text.toUpperCase();
+        });
+
+        lowerBtn.addEventListener('click', function() {
+            var text = textInput.value;
+            if (!text) { alert('请输入文本'); return; }
+            textOutput.textContent = text.toLowerCase();
+        });
+
+        capitalizeBtn.addEventListener('click', function() {
+            var text = textInput.value;
+            if (!text) { alert('请输入文本'); return; }
+            textOutput.textContent = text.replace(/\b\w/g, function(l) { return l.toUpperCase(); });
+        });
+
+        sentenceBtn.addEventListener('click', function() {
+            var text = textInput.value;
+            if (!text) { alert('请输入文本'); return; }
+            textOutput.textContent = text.replace(/(^\s*|[.!?]\s+)([a-z])/g, function(m, p1, p2) {
+                return p1 + p2.toUpperCase();
+            });
+        });
+
+        camelBtn.addEventListener('click', function() {
+            var text = textInput.value;
+            if (!text) { alert('请输入文本'); return; }
+            textOutput.textContent = text.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, function(m, chr) {
+                return chr.toUpperCase();
+            });
+        });
+
+        copyBtn.addEventListener('click', function() {
+            var text = textOutput.textContent;
+            if (!text || text === '转换结果将显示在这里...') { alert('没有可复制的内容'); return; }
+            navigator.clipboard.writeText(text).then(function() {
+                copyBtn.textContent = '已复制';
+                setTimeout(function() { copyBtn.textContent = '复制结果'; }, 2000);
+            });
+        });
+
+        clearBtn.addEventListener('click', function() {
+            textInput.value = '';
+            textOutput.textContent = '转换结果将显示在这里...';
+        });
+    </script>
+</body>
+</html>

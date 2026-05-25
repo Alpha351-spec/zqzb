@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="图片转PDF - 上传多张图片合并为一个PDF文件，纯本地处理，不上传服务器。">
+    <title>图片转PDF - 多张图片合并为PDF | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/" class="active">图片转PDF</a>
+            <a href="../compress/">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/">PDF水印</a>
+            <a href="../preview/">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">图片转PDF</h1>
+            <p class="tool-desc">上传多张图片合并为一个PDF文件，纯本地处理，不上传服务器。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>图片转PDF工具可以将多张JPG、PNG图片合并为一个PDF文件。支持自定义页面尺寸，可选择A4标准尺寸或保持图片原始尺寸。上传的图片将按照添加顺序依次排列在PDF中，每张图片占一页。基于jsPDF库在浏览器本地完成转换，无需安装任何软件，所有处理均在本地完成，保护您的隐私安全。适用于整理照片、制作电子相册、提交图片文档等场景。</p>
+            </div>
+            <div class="input-group">
+                <label for="imageInput">选择图片（支持多选）</label>
+                <input type="file" id="imageInput" accept="image/jpeg,image/png,image/webp" multiple>
+            </div>
+            <div id="imagePreviewList" style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;"></div>
+            <div class="input-group">
+                <label for="pageSize">页面尺寸</label>
+                <select id="pageSize">
+                    <option value="a4">A4（210×297mm）</option>
+                    <option value="original">保持原图尺寸</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="convertBtn">生成PDF</button>
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div id="fileInfo"></div>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载PDF文件</button>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        var imageInput = document.getElementById('imageInput');
+        var pageSize = document.getElementById('pageSize');
+        var convertBtn = document.getElementById('convertBtn');
+        var resultArea = document.getElementById('resultArea');
+        var fileInfo = document.getElementById('fileInfo');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var imagePreviewList = document.getElementById('imagePreviewList');
+        var pdfBlob = null;
+
+        function loadImage(src) {
+            return new Promise(function(resolve, reject) {
+                var img = new Image();
+                img.onload = function() {
+                    resolve(img);
+                };
+                img.onerror = function() {
+                    reject(new Error('图片加载失败'));
+                };
+                img.src = src;
+            });
+        }
+
+        imageInput.addEventListener('change', function() {
+            imagePreviewList.innerHTML = '';
+            var files = imageInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var img = document.createElement('img');
+                img.src = URL.createObjectURL(files[i]);
+                img.style.width = '80px';
+                img.style.height = '80px';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '8px';
+                img.style.border = '1px solid #eaeaea';
+                imagePreviewList.appendChild(img);
+            }
+        });
+
+        convertBtn.addEventListener('click', async function() {
+            var files = imageInput.files;
+            if (!files || files.length === 0) {
+                alert('请先选择图片');
+                return;
+            }
+
+            try {
+                convertBtn.textContent = '生成中...';
+                convertBtn.disabled = true;
+
+                var jsPDF = window.jspdf.jsPDF;
+                var pdf = null;
+                var sizeMode = pageSize.value;
+
+                for (var i = 0; i < files.length; i++) {
+                    var dataUrl = await new Promise(function(resolve) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            resolve(e.target.result);
+                        };
+                        reader.readAsDataURL(files[i]);
+                    });
+
+                    var img = await loadImage(dataUrl);
+                    var imgWidth = img.naturalWidth;
+                    var imgHeight = img.naturalHeight;
+
+                    if (sizeMode === 'a4') {
+                        var a4Width = 210;
+                        var a4Height = 297;
+                        var ratio = Math.min(a4Width / imgWidth, a4Height / imgHeight);
+                        var drawWidth = imgWidth * ratio;
+                        var drawHeight = imgHeight * ratio;
+                        var offsetX = (a4Width - drawWidth) / 2;
+                        var offsetY = (a4Height - drawHeight) / 2;
+
+                        if (!pdf) {
+                            pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+                        } else {
+                            pdf.addPage('a4', 'portrait');
+                        }
+                        pdf.addImage(dataUrl, 'JPEG', offsetX, offsetY, drawWidth, drawHeight);
+                    } else {
+                        var pxToMm = 0.264583;
+                        var pageW = imgWidth * pxToMm;
+                        var pageH = imgHeight * pxToMm;
+
+                        if (!pdf) {
+                            pdf = new jsPDF({ orientation: pageW > pageH ? 'landscape' : 'portrait', unit: 'mm', format: [pageW, pageH] });
+                        } else {
+                            pdf.addPage([pageW, pageH], pageW > pageH ? 'landscape' : 'portrait');
+                        }
+                        pdf.addImage(dataUrl, 'JPEG', 0, 0, pageW, pageH);
+                    }
+                }
+
+                pdfBlob = pdf.output('blob');
+
+                var totalSize = (pdfBlob.size / 1024 / 1024).toFixed(2);
+                fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">图片数量: ' + files.length + ' | 页面尺寸: ' + (sizeMode === 'a4' ? 'A4' : '原图') + ' | 文件大小: ' + totalSize + ' MB</p>';
+
+                resultArea.style.display = 'block';
+            } catch (error) {
+                alert('生成失败: ' + error.message);
+            } finally {
+                convertBtn.textContent = '生成PDF';
+                convertBtn.disabled = false;
+            }
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!pdfBlob) return;
+
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(pdfBlob);
+            link.download = 'images_merged.pdf';
+            link.click();
+        });
+    </script>
+</body>
+</html>

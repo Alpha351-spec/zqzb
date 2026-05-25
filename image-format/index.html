@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="图片格式转换 - 在线免费转换图片格式，支持PNG/JPG/WebP互转。所有处理均在本地完成。">
+    <title>图片格式转换 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+            <a href="../image-compress/">图片压缩</a>
+            <a href="../image-crop/">图片裁剪</a>
+            <a href="../image-format/" class="active">格式转换</a>
+            <a href="../image-watermark/">图片水印</a>
+            <a href="../image-resize/">尺寸调整</a>
+            <a href="../bg-remover/">智能抠图</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">图片格式转换</h1>
+            <p class="tool-desc">在浏览器本地转换图片格式，支持PNG/JPG/WebP互转。所有处理均在本地完成。</p>
+
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>图片格式转换工具帮助您轻松实现PNG、JPG、WebP三大格式之间的互转，满足不同平台的格式兼容需求。无论是需要将PNG透明图转为JPG以减小体积，还是将图片转为WebP以获得更好的网页加载性能，本工具都能快速完成。采用Canvas toDataURL技术进行格式转换，转换过程中保持图片质量稳定。所有处理均在浏览器本地完成，无需上传文件，保护您的数据隐私。</p>
+            </div>
+
+            <div class="input-group">
+                <label for="imageInput">选择图片</label>
+                <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp">
+            </div>
+
+            <div class="input-group">
+                <label for="formatSelect">转换为</label>
+                <select id="formatSelect">
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPG</option>
+                    <option value="webp">WebP</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" id="convertBtn">转换格式</button>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div id="previewContainer"></div>
+                <div id="fileInfo"></div>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载转换图片</button>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../image-compress/">图片压缩</a>
+                <a href="../image-crop/">图片裁剪</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+        var imageInput = document.getElementById('imageInput');
+        var formatSelect = document.getElementById('formatSelect');
+        var convertBtn = document.getElementById('convertBtn');
+        var resultArea = document.getElementById('resultArea');
+        var previewContainer = document.getElementById('previewContainer');
+        var fileInfo = document.getElementById('fileInfo');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var convertedDataUrl = null;
+
+        convertBtn.addEventListener('click', function() {
+            var file = imageInput.files[0];
+            if (!file) {
+                alert('请先选择图片');
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    var format = formatSelect.value;
+                    var mimeType = 'image/' + format;
+                    convertedDataUrl = canvas.toDataURL(mimeType, 0.92);
+
+                    previewContainer.innerHTML = '<img class="image-preview" src="' + convertedDataUrl + '" alt="转换预览">';
+                    
+                    var originalFormat = file.type.split('/')[1].toUpperCase();
+                    var newFormat = format.toUpperCase();
+                    fileInfo.innerHTML = '<p style="margin-top: 16px; font-size: 14px; color: #555555;">原始格式: ' + originalFormat + ' | 转换为: ' + newFormat + '</p>';
+                    
+                    resultArea.style.display = 'block';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!convertedDataUrl) return;
+
+            var format = formatSelect.value;
+            var link = document.createElement('a');
+            link.download = 'converted_image.' + (format === 'jpeg' ? 'jpg' : format);
+            link.href = convertedDataUrl;
+            link.click();
+        });
+    </script>
+</body>
+</html>

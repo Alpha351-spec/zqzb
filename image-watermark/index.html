@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="图片水印添加 - 在线为图片添加文字水印或图片水印，支持自定义位置、大小、透明度。所有处理均在本地完成。">
+    <title>图片水印添加 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .watermark-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .watermark-tab {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #555555;
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .watermark-tab:hover {
+            color: #111111;
+            border-color: #111111;
+        }
+        .watermark-tab.active {
+            color: #ffffff;
+            background: #009DFF;
+            border-color: #009DFF;
+        }
+        .watermark-section {
+            display: none;
+        }
+        .watermark-section.active {
+            display: block;
+        }
+        .range-container input[type="range"] {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #009DFF 0%, #009DFF 70%, #eaeaea 70%, #eaeaea 100%);
+            outline: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .img-watermark-preview {
+            max-width: 150px;
+            max-height: 150px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+            <a href="../image-compress/">图片压缩</a>
+            <a href="../image-crop/">图片裁剪</a>
+            <a href="../image-format/">格式转换</a>
+            <a href="../image-watermark/" class="active">图片水印</a>
+            <a href="../image-resize/">尺寸调整</a>
+            <a href="../bg-remover/">智能抠图</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">图片水印添加</h1>
+            <p class="tool-desc">在浏览器本地为图片添加文字或图片水印。所有处理均在本地完成。</p>
+
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>图片水印工具适用于版权保护、品牌标识、照片署名等场景。支持文字水印和图片水印两种模式，提供6种位置选项（四角、居中、平铺），可自由调节水印透明度（10%-100%）。文字水印支持自定义字号和颜色，图片水印支持自定义大小比例。平铺模式下水印以30度倾斜角均匀分布，有效防盗。基于Canvas drawImage和drawText技术实现Alpha混合，所有处理在浏览器本地完成，图片数据不上传服务器。</p>
+            </div>
+
+            <div class="input-group">
+                <label for="imageInput">选择底图</label>
+                <input type="file" id="imageInput" accept="image/*">
+            </div>
+
+            <div class="watermark-tabs" id="watermarkTabs">
+                <button class="watermark-tab active" data-type="text">文字水印</button>
+                <button class="watermark-tab" data-type="image">图片水印</button>
+            </div>
+
+            <div class="watermark-section active" id="textSection">
+                <div class="input-group">
+                    <label for="watermarkText">水印文字</label>
+                    <input type="text" id="watermarkText" placeholder="请输入水印文字" value="杂七杂八工具箱">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="input-group">
+                        <label for="fontSize">字体大小</label>
+                        <input type="number" id="fontSize" value="24" min="12" max="200">
+                    </div>
+                    <div class="input-group">
+                        <label for="fontColor">字体颜色</label>
+                        <input type="color" id="fontColor" value="#ffffff" style="height: 44px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="watermark-section" id="imageSection">
+                <div class="input-group">
+                    <label for="watermarkImg">水印图片</label>
+                    <input type="file" id="watermarkImg" accept="image/*">
+                    <img id="watermarkImgPreview" class="img-watermark-preview" alt="水印预览" style="display: none;">
+                </div>
+                <div class="input-group">
+                    <label for="watermarkScale">水印大小（相对于底图宽度的比例）</label>
+                    <div class="range-container">
+                        <input type="range" id="watermarkScale" min="5" max="80" value="20">
+                        <span class="range-value" id="scaleValue">20%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="position">水印位置</label>
+                <select id="position">
+                    <option value="bottom-right">右下角</option>
+                    <option value="bottom-left">左下角</option>
+                    <option value="top-right">右上角</option>
+                    <option value="top-left">左上角</option>
+                    <option value="center">居中</option>
+                    <option value="repeat">平铺</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>透明度</label>
+                <div class="range-container">
+                    <input type="range" id="opacityRange" min="10" max="100" value="70">
+                    <span class="range-value" id="opacityValue">70%</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="addWatermarkBtn">添加水印</button>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div id="previewContainer"></div>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载图片</button>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../image-compress/">图片压缩</a>
+                <a href="../image-crop/">图片裁剪</a>
+                <a href="../image-format/">格式转换</a>
+                <a href="../image-resize/">尺寸调整</a>
+                <a href="../bg-remover/">智能抠图</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+        var imageInput = document.getElementById('imageInput');
+        var watermarkText = document.getElementById('watermarkText');
+        var fontSize = document.getElementById('fontSize');
+        var fontColor = document.getElementById('fontColor');
+        var position = document.getElementById('position');
+        var opacityRange = document.getElementById('opacityRange');
+        var opacityValue = document.getElementById('opacityValue');
+        var addWatermarkBtn = document.getElementById('addWatermarkBtn');
+        var resultArea = document.getElementById('resultArea');
+        var previewContainer = document.getElementById('previewContainer');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var watermarkImg = document.getElementById('watermarkImg');
+        var watermarkImgPreview = document.getElementById('watermarkImgPreview');
+        var watermarkScale = document.getElementById('watermarkScale');
+        var scaleValue = document.getElementById('scaleValue');
+        var resultDataUrl = null;
+        var currentType = 'text';
+
+        var tabs = document.querySelectorAll('.watermark-tab');
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                tabs.forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                currentType = tab.dataset.type;
+                document.getElementById('textSection').classList.toggle('active', currentType === 'text');
+                document.getElementById('imageSection').classList.toggle('active', currentType === 'image');
+            });
+        });
+
+        watermarkImg.addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                watermarkImgPreview.src = URL.createObjectURL(file);
+                watermarkImgPreview.style.display = 'block';
+            }
+        });
+
+        function updateRangeBackground(range, value, min, max) {
+            var percentage = ((value - min) / (max - min)) * 100;
+            range.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, #eaeaea ' + percentage + '%, #eaeaea 100%)';
+        }
+
+        opacityRange.addEventListener('input', function() {
+            opacityValue.textContent = this.value + '%';
+            updateRangeBackground(opacityRange, this.value, 10, 100);
+        });
+
+        watermarkScale.addEventListener('input', function() {
+            scaleValue.textContent = this.value + '%';
+            updateRangeBackground(watermarkScale, this.value, 5, 80);
+        });
+
+        updateRangeBackground(opacityRange, opacityRange.value, 10, 100);
+        updateRangeBackground(watermarkScale, watermarkScale.value, 5, 80);
+
+        function getPositionCoords(pos, canvasW, canvasH, wmW, wmH) {
+            var padding = 20;
+            var x, y;
+            switch (pos) {
+                case 'bottom-right':
+                    x = canvasW - wmW - padding;
+                    y = canvasH - wmH - padding;
+                    break;
+                case 'bottom-left':
+                    x = padding;
+                    y = canvasH - wmH - padding;
+                    break;
+                case 'top-right':
+                    x = canvasW - wmW - padding;
+                    y = padding;
+                    break;
+                case 'top-left':
+                    x = padding;
+                    y = padding;
+                    break;
+                case 'center':
+                    x = (canvasW - wmW) / 2;
+                    y = (canvasH - wmH) / 2;
+                    break;
+            }
+            return { x: x, y: y };
+        }
+
+        function drawTextWatermark(ctx, canvas) {
+            var text = watermarkText.value.trim();
+            if (!text) { alert('请输入水印文字'); return false; }
+
+            var size = parseInt(fontSize.value);
+            ctx.font = size + 'px system-ui, sans-serif';
+            ctx.fillStyle = fontColor.value;
+            ctx.textBaseline = 'top';
+            ctx.globalAlpha = parseInt(opacityRange.value) / 100;
+
+            var textWidth = ctx.measureText(text).width;
+            var textHeight = size;
+
+            if (position.value === 'repeat') {
+                var gapX = textWidth + 60;
+                var gapY = textHeight + 60;
+                for (var row = -1; row < canvas.height / gapY + 1; row++) {
+                    for (var col = -1; col < canvas.width / gapX + 1; col++) {
+                        ctx.save();
+                        ctx.translate(col * gapX + gapX / 2, row * gapY + gapY / 2);
+                        ctx.rotate(-30 * Math.PI / 180);
+                        ctx.fillText(text, -textWidth / 2, -textHeight / 2);
+                        ctx.restore();
+                    }
+                }
+            } else {
+                var pos = getPositionCoords(position.value, canvas.width, canvas.height, textWidth, textHeight);
+                ctx.fillText(text, pos.x, pos.y);
+            }
+            return true;
+        }
+
+        function drawImageWatermark(ctx, canvas, wmImg) {
+            var scale = parseInt(watermarkScale.value) / 100;
+            var wmW = canvas.width * scale;
+            var ratio = wmImg.width / wmImg.height;
+            var wmH = wmW / ratio;
+
+            ctx.globalAlpha = parseInt(opacityRange.value) / 100;
+
+            if (position.value === 'repeat') {
+                var gapX = wmW + 40;
+                var gapY = wmH + 40;
+                for (var row = -1; row < canvas.height / gapY + 1; row++) {
+                    for (var col = -1; col < canvas.width / gapX + 1; col++) {
+                        ctx.save();
+                        ctx.translate(col * gapX + gapX / 2, row * gapY + gapY / 2);
+                        ctx.rotate(-30 * Math.PI / 180);
+                        ctx.drawImage(wmImg, -wmW / 2, -wmH / 2, wmW, wmH);
+                        ctx.restore();
+                    }
+                }
+            } else {
+                var pos = getPositionCoords(position.value, canvas.width, canvas.height, wmW, wmH);
+                ctx.drawImage(wmImg, pos.x, pos.y, wmW, wmH);
+            }
+        }
+
+        addWatermarkBtn.addEventListener('click', function() {
+            var file = imageInput.files[0];
+            if (!file) { alert('请先选择底图'); return; }
+
+            if (currentType === 'text') {
+                var text = watermarkText.value.trim();
+                if (!text) { alert('请输入水印文字'); return; }
+            } else {
+                if (!watermarkImg.files[0]) { alert('请选择水印图片'); return; }
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = new Image();
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    var ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+
+                    var success = false;
+                    if (currentType === 'text') {
+                        success = drawTextWatermark(ctx, canvas);
+                    } else {
+                        var wmImgObj = new Image();
+                        wmImgObj.onload = function() {
+                            drawImageWatermark(ctx, canvas, wmImgObj);
+                            resultDataUrl = canvas.toDataURL('image/png');
+                            previewContainer.innerHTML = '<img class="image-preview" src="' + resultDataUrl + '" alt="水印预览">';
+                            resultArea.style.display = 'block';
+                        };
+                        wmImgObj.src = URL.createObjectURL(watermarkImg.files[0]);
+                        return;
+                    }
+
+                    if (success) {
+                        resultDataUrl = canvas.toDataURL('image/png');
+                        previewContainer.innerHTML = '<img class="image-preview" src="' + resultDataUrl + '" alt="水印预览">';
+                        resultArea.style.display = 'block';
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!resultDataUrl) return;
+            var link = document.createElement('a');
+            link.download = 'watermarked_image.png';
+            link.href = resultDataUrl;
+            link.click();
+        });
+    </script>
+</body>
+</html>

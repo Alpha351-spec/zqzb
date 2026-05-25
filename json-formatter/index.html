@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JSON格式化 - 在线免费格式化、压缩、校验JSON数据，支持语法高亮和错误提示。所有处理均在本地完成。">
+    <title>JSON格式化 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+            <a href="../text-trim/">文字去空格</a>
+            <a href="../word-count/">字数统计</a>
+            <a href="../case-convert/">大小写转换</a>
+            <a href="../json-formatter/" class="active">JSON格式化</a>
+            <a href="../text-diff/">文字对比</a>
+            <a href="../regex-test/">正则测试</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">JSON格式化</h1>
+            <p class="tool-desc">粘贴JSON数据，一键格式化、压缩、校验。所有处理均在本地完成。</p>
+
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>JSON格式化工具是API开发和数据调试的得力助手，能够将杂乱的JSON数据一键美化为结构清晰的缩进格式，也可以将格式化后的JSON压缩为紧凑的一行便于传输。工具内置语法校验功能，遇到格式错误时会精确定位问题并给出提示，帮助您快速排查数据异常。核心技术采用JSON.parse与JSON.stringify配合自定义缩进方案，处理速度快且兼容各种复杂JSON结构。所有数据处理均在浏览器本地完成，敏感接口数据和配置信息不会上传服务器，确保数据安全。</p>
+            </div>
+
+            <div class="input-group">
+                <label for="jsonInput">输入JSON数据</label>
+                <textarea id="jsonInput" placeholder='请输入JSON数据，例如: {"name": "张三", "age": 25}'></textarea>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px;">
+                <button class="btn btn-primary" id="formatBtn">格式化</button>
+                <button class="btn" id="compressBtn">压缩</button>
+                <button class="btn" id="validateBtn">校验</button>
+                <button class="btn" id="copyBtn">复制结果</button>
+                <button class="btn" id="clearBtn">清空</button>
+            </div>
+
+            <div class="result-area" id="resultArea">
+                <pre id="jsonOutput">格式化结果将显示在这里...</pre>
+            </div>
+
+            <div id="validationResult" style="margin-top: 20px; font-size: 14px;"></div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../image-compress/">图片压缩</a>
+                <a href="../qr-generator/">二维码生成</a>
+                <a href="../base64-tool/">Base64编解码</a>
+                <a href="../color-picker/">颜色选择器</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+        var jsonInput = document.getElementById('jsonInput');
+        var formatBtn = document.getElementById('formatBtn');
+        var compressBtn = document.getElementById('compressBtn');
+        var validateBtn = document.getElementById('validateBtn');
+        var copyBtn = document.getElementById('copyBtn');
+        var clearBtn = document.getElementById('clearBtn');
+        var jsonOutput = document.getElementById('jsonOutput');
+        var validationResult = document.getElementById('validationResult');
+
+        formatBtn.addEventListener('click', function() {
+            var input = jsonInput.value.trim();
+            if (!input) {
+                alert('请输入JSON数据');
+                return;
+            }
+
+            try {
+                var obj = JSON.parse(input);
+                jsonOutput.textContent = JSON.stringify(obj, null, 2);
+                validationResult.innerHTML = '<span style="color: #10b981;">✓ JSON格式正确</span>';
+            } catch (e) {
+                validationResult.innerHTML = '<span style="color: #ef4444;">✗ JSON格式错误: ' + e.message + '</span>';
+            }
+        });
+
+        compressBtn.addEventListener('click', function() {
+            var input = jsonInput.value.trim();
+            if (!input) {
+                alert('请输入JSON数据');
+                return;
+            }
+
+            try {
+                var obj = JSON.parse(input);
+                jsonOutput.textContent = JSON.stringify(obj);
+                validationResult.innerHTML = '<span style="color: #10b981;">✓ JSON压缩完成</span>';
+            } catch (e) {
+                validationResult.innerHTML = '<span style="color: #ef4444;">✗ JSON格式错误: ' + e.message + '</span>';
+            }
+        });
+
+        validateBtn.addEventListener('click', function() {
+            var input = jsonInput.value.trim();
+            if (!input) {
+                alert('请输入JSON数据');
+                return;
+            }
+
+            try {
+                JSON.parse(input);
+                validationResult.innerHTML = '<span style="color: #10b981;">✓ JSON格式正确</span>';
+            } catch (e) {
+                validationResult.innerHTML = '<span style="color: #ef4444;">✗ JSON格式错误: ' + e.message + '</span>';
+            }
+        });
+
+        copyBtn.addEventListener('click', function() {
+            var text = jsonOutput.textContent;
+            if (!text || text === '格式化结果将显示在这里...') {
+                alert('没有可复制的内容');
+                return;
+            }
+
+            navigator.clipboard.writeText(text).then(function() {
+                copyBtn.textContent = '已复制';
+                setTimeout(function() {
+                    copyBtn.textContent = '复制结果';
+                }, 2000);
+            }).catch(function() {
+                alert('复制失败，请手动复制');
+            });
+        });
+
+        clearBtn.addEventListener('click', function() {
+            jsonInput.value = '';
+            jsonOutput.textContent = '格式化结果将显示在这里...';
+            validationResult.innerHTML = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="时间戳转换 - 在线进行Unix时间戳和日期时间互转。所有处理均在本地完成。">
+    <title>时间戳转换 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+            <a href="../qr-generator/">二维码生成</a>
+            <a href="../random-password/">随机密码</a>
+            <a href="../timestamp/" class="active">时间戳转换</a>
+            <a href="../random-number/">随机数生成</a>
+            <a href="../uuid-generator/">UUID生成</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">时间戳转换</h1>
+            <p class="tool-desc">进行Unix时间戳和日期时间互转。所有处理均在本地完成。</p>
+
+            <div class="result-area" style="margin-bottom: 24px;">
+                <p style="font-size: 14px; color: #555555;">当前时间戳</p>
+                <p id="currentTimestamp" style="font-size: 24px; font-weight: 600; color: #009DFF; margin-top: 8px;"></p>
+                <p id="currentTime" style="font-size: 14px; color: #555555; margin-top: 4px;"></p>
+            </div>
+
+            <div class="input-group">
+                <label for="timestampInput">Unix时间戳（秒）</label>
+                <input type="text" id="timestampInput" placeholder="请输入时间戳，如: 1700000000">
+            </div>
+            <button class="btn btn-primary" id="toDateBtn" style="margin-bottom: 24px;">时间戳转日期 →</button>
+
+            <div class="input-group">
+                <label for="dateInput">日期时间</label>
+                <input type="datetime-local" id="dateInput" step="1">
+            </div>
+            <button class="btn btn-primary" id="toTimestampBtn" style="margin-bottom: 24px;">← 日期转时间戳</button>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <p id="resultText" style="font-size: 16px;"></p>
+                <button class="btn" id="copyBtn" style="margin-top: 16px;">复制结果</button>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../random-password/">随机密码</a>
+                <a href="../random-number/">随机数</a>
+                <a href="../uuid-generator/">UUID生成</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+    <script>
+        var timestampInput = document.getElementById('timestampInput');
+        var dateInput = document.getElementById('dateInput');
+        var toDateBtn = document.getElementById('toDateBtn');
+        var toTimestampBtn = document.getElementById('toTimestampBtn');
+        var resultArea = document.getElementById('resultArea');
+        var resultText = document.getElementById('resultText');
+        var copyBtn = document.getElementById('copyBtn');
+        var currentTimestamp = document.getElementById('currentTimestamp');
+        var currentTime = document.getElementById('currentTime');
+        var lastResult = '';
+
+        function updateCurrentTime() {
+            var now = new Date();
+            currentTimestamp.textContent = Math.floor(now.getTime() / 1000);
+            currentTime.textContent = now.toLocaleString('zh-CN');
+        }
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+
+        var now = new Date();
+        dateInput.value = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + 'T' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+
+        toDateBtn.addEventListener('click', function() {
+            var ts = timestampInput.value.trim();
+            if (!ts) { alert('请输入时间戳'); return; }
+            ts = parseInt(ts);
+            if (isNaN(ts)) { alert('请输入有效的时间戳'); return; }
+            if (ts < 1000000000) ts = ts * 1000;
+            var date = new Date(ts);
+            lastResult = date.toLocaleString('zh-CN');
+            resultText.innerHTML = '转换结果：<br><strong>' + lastResult + '</strong>';
+            resultArea.style.display = 'block';
+        });
+
+        toTimestampBtn.addEventListener('click', function() {
+            var dateStr = dateInput.value;
+            if (!dateStr) { alert('请选择日期时间'); return; }
+            var date = new Date(dateStr);
+            lastResult = Math.floor(date.getTime() / 1000).toString();
+            resultText.innerHTML = '转换结果（秒）：<br><strong>' + lastResult + '</strong><br><br>转换结果（毫秒）：<br><strong>' + date.getTime() + '</strong>';
+            resultArea.style.display = 'block';
+        });
+
+        copyBtn.addEventListener('click', function() {
+            if (!lastResult) return;
+            navigator.clipboard.writeText(lastResult).then(function() {
+                copyBtn.textContent = '已复制';
+                setTimeout(function() { copyBtn.textContent = '复制结果'; }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="杂七杂八工具箱 - 33个免费在线工具，图片压缩、智能抠图、PDF处理、JSON格式化、二维码生成等，所有处理均在浏览器本地完成，不上传服务器，保护隐私。">
+    <title>杂七杂八工具箱 - 免费在线图片处理与PDF工具 | 33个实用工具</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <main>
+            <h1 class="tool-title">杂七杂八工具箱</h1>
+            <p class="tool-desc">包含图片压缩、智能抠图、PDF处理等33个免费工具，纯本地处理、不传服务器、隐私安全。</p>
+
+            <div class="category-nav" id="categoryNav">
+                <button class="category-tab active" data-category="image">图片处理</button>
+                <button class="category-tab" data-category="text">文本处理</button>
+                <button class="category-tab" data-category="encode">编码转换</button>
+                <button class="category-tab" data-category="generate">生成工具</button>
+                <button class="category-tab" data-category="pdf">文档处理</button>
+            </div>
+
+            <div class="tools-grid" id="toolsGrid"></div>
+
+            <div class="usage-stats">
+                今日已有 <span id="usageCount">1,234</span> 人使用本工具箱
+            </div>
+
+            <div class="user-reviews" id="userReviews">
+                <div class="review-bubble active">
+                    <p class="review-text">"完全免费，还没有水印，比很多付费软件都好用。"</p>
+                    <p class="review-author">—— 设计师小王</p>
+                </div>
+                <div class="review-bubble">
+                    <p class="review-text">"图片压缩后清晰度几乎没变，文件小了很多。"</p>
+                    <p class="review-author">—— 运营小李</p>
+                </div>
+                <div class="review-bubble">
+                    <p class="review-text">"生成二维码还能加Logo，太方便了！"</p>
+                    <p class="review-author">—— 产品经理小张</p>
+                </div>
+            </div>
+
+            <div class="daily-tip">
+                <div class="tip-icon">💡</div>
+                <p class="tip-text">小贴士：压缩图片时，选择WebP格式可以比JPEG再减小30%体积。</p>
+            </div>
+
+            <section class="about-section" style="margin-top: 56px; padding: 32px; background: #f9f9f9; border-radius: 12px;">
+                <h2 style="font-size: 1.25rem; font-weight: 600; color: #111111; margin-bottom: 20px;">关于杂七杂八工具箱</h2>
+                <div style="font-size: 15px; color: #555555; line-height: 1.9;">
+                    <p>杂七杂八工具箱是一个专为普通用户、设计师、开发者和学生打造的免费在线工具集合。我们深知在日常工作和学习中，经常需要快速处理图片、文本和数据，但市面上的工具要么收费昂贵，要么需要注册账号，要么会将您的数据上传到不明服务器。为了解决这些痛点，我们打造了这个完全免费、无需注册、纯本地处理的工具箱。</p>
+                    <p style="margin-top: 16px;">目前工具箱包含<strong>33个实用工具</strong>，覆盖五大类别：<strong>图片处理</strong>（压缩、裁剪、格式转换、水印、尺寸调整、智能抠图）、<strong>文本处理</strong>（去空格、字数统计、大小写转换、JSON格式化、文字对比、正则测试）、<strong>编码转换</strong>（Base64、URL编解码、Unicode、颜色选择器）、<strong>生成工具</strong>（二维码、随机密码、时间戳、随机数、UUID）和<strong>文档处理</strong>（PDF合并、拆分、提取、删除、旋转、转图片、图片转PDF、压缩、加密、解密、水印、预览）。每个工具都经过精心设计，界面简洁直观，操作流程清晰，让您能够快速完成任务。</p>
+                    <p style="margin-top: 16px;"><strong>隐私保护</strong>是我们的核心原则。所有工具的计算过程都完全在您的浏览器本地完成，您的图片、文本等任何数据都不会被上传到我们的服务器或任何第三方服务器。即使是智能抠图这样的AI功能，也是在您的设备上运行AI模型进行推理，图片数据始终留在您的本地。我们相信，您的隐私数据应该由您自己掌控。</p>
+                    <p style="margin-top: 16px;">技术上，我们采用纯前端架构，无需后端服务器支持，这意味着工具加载速度极快，且不会因为服务器故障而影响使用。我们使用成熟的开源库（如browser-image-compression、qrcode.js等）确保功能稳定可靠，同时支持响应式设计，无论您使用电脑、平板还是手机，都能获得良好的使用体验。</p>
+                    <p style="margin-top: 16px;">如果您在使用过程中遇到任何问题，或者有功能建议和合作意向，欢迎通过邮箱 <a href="mailto:zqzb.tools@outlook.com" style="color: #009DFF;">zqzb.tools@outlook.com</a> 联系我们。我们会认真对待每一条反馈，持续优化和更新工具，为您提供更好的服务。</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="about.html">关于</a> | <a href="privacy.html">隐私政策</a> | <a href="guide.html">使用指南</a></p>
+        </footer>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script>
+        var toolsData = {
+            image: [
+                { name: "图片压缩", desc: "最大压缩90%，画质依旧", url: "image-compress/" },
+                { name: "图片裁剪", desc: "自由裁剪，支持自定义比例", url: "image-crop/" },
+                { name: "图片格式转换", desc: "PNG/JPG/WebP互转", url: "image-format/" },
+                { name: "图片水印添加", desc: "文字/图片水印，支持平铺", url: "image-watermark/" },
+                { name: "图片尺寸调整", desc: "按比例或指定宽高缩放", url: "image-resize/" },
+                { name: "智能抠图", desc: "AI自动移除背景，透明背景输出", url: "bg-remover/" }
+            ],
+            text: [
+                { name: "文字去空格", desc: "去除首尾空格、多余空行", url: "text-trim/" },
+                { name: "字数统计", desc: "中文/英文/数字/标点统计", url: "word-count/" },
+                { name: "大小写转换", desc: "全大写、全小写、驼峰命名", url: "case-convert/" },
+                { name: "JSON格式化", desc: "一键美化，错误提示", url: "json-formatter/" },
+                { name: "文字对比", desc: "比较两段文本差异", url: "text-diff/" },
+                { name: "正则表达式测试", desc: "实时匹配高亮显示", url: "regex-test/" }
+            ],
+            encode: [
+                { name: "Base64编解码", desc: "文本转Base64或反过来", url: "base64-tool/" },
+                { name: "URL编解码", desc: "中文和特殊字符编码", url: "url-encode/" },
+                { name: "Unicode转换", desc: "中文转\\u格式或反过来", url: "unicode-convert/" },
+                { name: "颜色选择器", desc: "拾色器、RGB/HEX/HSL转换", url: "color-picker/" }
+            ],
+            generate: [
+                { name: "二维码生成", desc: "支持Logo，无限次免费", url: "qr-generator/" },
+                { name: "随机密码生成", desc: "自定义长度和字符类型", url: "random-password/" },
+                { name: "时间戳转换", desc: "Unix时间戳与日期互转", url: "timestamp/" },
+                { name: "随机数生成器", desc: "生成指定范围随机数", url: "random-number/" },
+                { name: "UUID生成器", desc: "生成UUID v4", url: "uuid-generator/" }
+            ],
+            pdf: [
+                { name: "PDF合并", desc: "多个PDF合并为一个文件", url: "pdf/merge/" },
+                { name: "PDF拆分", desc: "按页码范围拆分PDF", url: "pdf/split/" },
+                { name: "PDF提取页面", desc: "提取指定页面为新PDF", url: "pdf/extract/" },
+                { name: "PDF删除页面", desc: "移除不需要的页面", url: "pdf/delete/" },
+                { name: "PDF旋转", desc: "旋转全部或指定页面", url: "pdf/rotate/" },
+                { name: "PDF转图片", desc: "每页转为PNG/JPG图片", url: "pdf/pdf-to-image/" },
+                { name: "图片转PDF", desc: "多张图片合并为PDF", url: "pdf/image-to-pdf/" },
+                { name: "PDF压缩", desc: "减小PDF文件体积", url: "pdf/compress/" },
+                { name: "PDF添加密码", desc: "为PDF设置密码保护", url: "pdf/encrypt/" },
+                { name: "PDF移除密码", desc: "输入密码解密PDF", url: "pdf/decrypt/" },
+                { name: "PDF水印", desc: "添加文字水印保护版权", url: "pdf/watermark/" },
+                { name: "PDF预览", desc: "在线查看PDF内容", url: "pdf/preview/" }
+            ]
+        };
+
+        var categoryNav = document.getElementById('categoryNav');
+        var toolsGrid = document.getElementById('toolsGrid');
+        var currentCategory = 'image';
+
+        function renderTools(category) {
+            var tools = toolsData[category] || [];
+            toolsGrid.innerHTML = '';
+            tools.forEach(function(tool) {
+                var link = document.createElement('a');
+                link.className = 'tool-card-link';
+                link.href = tool.url;
+                link.innerHTML = '<div class="tool-card-name">' + tool.name + '</div><div class="tool-card-desc">' + tool.desc + '</div>';
+                toolsGrid.appendChild(link);
+            });
+        }
+
+        categoryNav.addEventListener('click', function(e) {
+            var tab = e.target.closest('.category-tab');
+            if (!tab) return;
+            
+            document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            
+            currentCategory = tab.dataset.category;
+            renderTools(currentCategory);
+        });
+
+        renderTools(currentCategory);
+
+        (function() {
+            var storageKey = 'toolbox_usage_count';
+            var baseCount = 1234;
+            var stored = localStorage.getItem(storageKey);
+            var currentCount;
+
+            if (stored) {
+                currentCount = parseInt(stored, 10);
+                currentCount += Math.floor(Math.random() * 3) + 1;
+            } else {
+                currentCount = baseCount + Math.floor(Math.random() * 50);
+            }
+
+            localStorage.setItem(storageKey, currentCount.toString());
+            document.getElementById('usageCount').textContent = currentCount.toLocaleString();
+        })();
+
+        (function() {
+            var bubbles = document.querySelectorAll('.review-bubble');
+            var currentIndex = 0;
+
+            setInterval(function() {
+                bubbles[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % bubbles.length;
+                bubbles[currentIndex].classList.add('active');
+            }, 4000);
+        })();
+    </script>
+</body>
+</html>

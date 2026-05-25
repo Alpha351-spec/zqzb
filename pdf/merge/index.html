@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="在线免费合并多个PDF文件，纯本地处理，不上传服务器，保护隐私。">
+    <title>PDF合并 - 免费在线合并多个PDF文件 | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/" class="active">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/">图片转PDF</a>
+            <a href="../compress/">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/">PDF水印</a>
+            <a href="../preview/">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">PDF合并</h1>
+            <p class="tool-desc">将多个PDF文件合并为一个文件，支持拖拽排序，纯本地处理保护隐私。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>PDF合并工具适用于需要将多个PDF文档整合为一个文件的场景，如合并合同附件、整合报告章节、汇总学习资料等。支持同时选择多个PDF文件，上传后可拖拽调整顺序，按您指定的顺序进行合并。所有处理均在浏览器本地完成，采用pdf-lib库进行高效处理，文件不会上传至任何服务器，确保您的文档安全和隐私。</p>
+            </div>
+            <div class="input-group">
+                <label for="fileInput">选择PDF文件（可多选）</label>
+                <input type="file" id="fileInput" accept=".pdf" multiple>
+            </div>
+            <div id="fileList" style="margin-bottom: 20px;"></div>
+            <button class="btn btn-primary" id="mergeBtn">合并PDF</button>
+            <div class="result-area" id="resultArea" style="display: none;">
+                <p id="resultInfo" style="font-size: 14px; color: #555555;"></p>
+                <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载合并文件</button>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        var fileInput = document.getElementById('fileInput');
+        var fileList = document.getElementById('fileList');
+        var mergeBtn = document.getElementById('mergeBtn');
+        var resultArea = document.getElementById('resultArea');
+        var resultInfo = document.getElementById('resultInfo');
+        var downloadBtn = document.getElementById('downloadBtn');
+        var mergedPdfBytes = null;
+        var selectedFiles = [];
+
+        fileInput.addEventListener('change', function() {
+            selectedFiles = Array.from(this.files);
+            renderFileList();
+        });
+
+        function renderFileList() {
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+            var html = '<div style="border: 1px solid #eaeaea; border-radius: 12px; padding: 16px;">';
+            html += '<p style="font-size: 14px; font-weight: 500; margin-bottom: 12px; color: #111111;">已选择 ' + selectedFiles.length + ' 个文件（拖拽可调整顺序）</p>';
+            selectedFiles.forEach(function(file, index) {
+                html += '<div draggable="true" data-index="' + index + '" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: #f9f9f9; border-radius: 8px; margin-bottom: 8px; cursor: move;">';
+                html += '<span style="font-size: 14px; color: #555555;">' + (index + 1) + '. ' + file.name + '</span>';
+                html += '<button class="btn remove-btn" data-index="' + index + '" style="padding: 4px 12px; font-size: 12px;">移除</button>';
+                html += '</div>';
+            });
+            html += '</div>';
+            fileList.innerHTML = html;
+            initDragAndDrop();
+            initRemoveButtons();
+        }
+
+        function initDragAndDrop() {
+            var items = fileList.querySelectorAll('[draggable="true"]');
+            var dragItem = null;
+
+            items.forEach(function(item) {
+                item.addEventListener('dragstart', function(e) {
+                    dragItem = this;
+                    this.style.opacity = '0.5';
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.style.opacity = '1';
+                    dragItem = null;
+                });
+
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                });
+
+                item.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (dragItem !== this) {
+                        var fromIndex = parseInt(dragItem.dataset.index);
+                        var toIndex = parseInt(this.dataset.index);
+                        var temp = selectedFiles[fromIndex];
+                        selectedFiles.splice(fromIndex, 1);
+                        selectedFiles.splice(toIndex, 0, temp);
+                        renderFileList();
+                    }
+                });
+            });
+        }
+
+        function initRemoveButtons() {
+            var removeBtns = fileList.querySelectorAll('.remove-btn');
+            removeBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var index = parseInt(this.dataset.index);
+                    selectedFiles.splice(index, 1);
+                    renderFileList();
+                });
+            });
+        }
+
+        mergeBtn.addEventListener('click', async function() {
+            if (selectedFiles.length < 2) {
+                alert('请至少选择2个PDF文件进行合并');
+                return;
+            }
+
+            try {
+                mergeBtn.textContent = '合并中...';
+                mergeBtn.disabled = true;
+
+                var mergedPdf = await PDFLib.PDFDocument.create();
+                var totalPages = 0;
+
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    var arrayBuffer = await selectedFiles[i].arrayBuffer();
+                    var pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                    var copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                    copiedPages.forEach(function(page) {
+                        mergedPdf.addPage(page);
+                        totalPages++;
+                    });
+                }
+
+                mergedPdfBytes = await mergedPdf.save();
+
+                resultInfo.textContent = '合并完成！共合并 ' + selectedFiles.length + ' 个文件，合计 ' + totalPages + ' 页。';
+                resultArea.style.display = 'block';
+            } catch (error) {
+                alert('合并失败: ' + error.message);
+            } finally {
+                mergeBtn.textContent = '合并PDF';
+                mergeBtn.disabled = false;
+            }
+        });
+
+        downloadBtn.addEventListener('click', function() {
+            if (!mergedPdfBytes) return;
+
+            var blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'merged.pdf';
+            link.click();
+        });
+    </script>
+</body>
+</html>

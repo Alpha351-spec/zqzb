@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="快速在线预览PDF文件内容，支持翻页和缩放，纯本地处理。">
+    <title>PDF预览 - 在线查看PDF内容 | 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../merge/">PDF合并</a>
+            <a href="../split/">PDF拆分</a>
+            <a href="../extract/">提取页面</a>
+            <a href="../delete/">删除页面</a>
+            <a href="../rotate/">旋转页面</a>
+            <a href="../pdf-to-image/">PDF转图片</a>
+            <a href="../image-to-pdf/">图片转PDF</a>
+            <a href="../compress/">PDF压缩</a>
+            <a href="../encrypt/">添加密码</a>
+            <a href="../decrypt/">移除密码</a>
+            <a href="../watermark/">PDF水印</a>
+            <a href="../preview/" class="active">PDF预览</a>
+        </nav>
+        <main>
+            <h1 class="tool-title">PDF预览</h1>
+            <p class="tool-desc">快速在线预览PDF文件内容，支持翻页和缩放操作。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+                <p>PDF预览工具可以让您在浏览器中直接查看PDF文件内容，无需下载或安装额外软件。支持上一页/下一页翻页操作，可调整缩放比例，实时显示当前页码和总页数。采用pdf.js库进行渲染，所有处理均在浏览器本地完成，文件不会上传到任何服务器，充分保障您的隐私安全。</p>
+            </div>
+            <div class="input-group">
+                <label for="pdfInput">选择PDF文件</label>
+                <input type="file" id="pdfInput" accept=".pdf">
+            </div>
+            <div id="viewerControls" style="display: none; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                    <button class="btn" id="prevBtn">上一页</button>
+                    <span id="pageInfo" style="font-size: 15px; color: #555555;">第 1 页 / 共 1 页</span>
+                    <button class="btn" id="nextBtn">下一页</button>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+                    <button class="btn" id="zoomOutBtn">缩小</button>
+                    <span id="zoomInfo" style="font-size: 15px; color: #555555;">100%</span>
+                    <button class="btn" id="zoomInBtn">放大</button>
+                </div>
+            </div>
+            <div id="canvasContainer" style="display: none; text-align: center; overflow: auto; border: 1px solid #eaeaea; border-radius: 12px; padding: 20px; background: #fafafa;">
+                <canvas id="pdfCanvas"></canvas>
+            </div>
+            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+                <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
+            </div>
+        </main>
+        <div class="recommend-section">
+            <h3>其他PDF工具</h3>
+            <div class="recommend-links">
+                <a href="../merge/">PDF合并</a>
+                <a href="../split/">PDF拆分</a>
+                <a href="../extract/">提取页面</a>
+                <a href="../delete/">删除页面</a>
+                <a href="../rotate/">旋转页面</a>
+                <a href="../pdf-to-image/">PDF转图片</a>
+                <a href="../image-to-pdf/">图片转PDF</a>
+                <a href="../compress/">PDF压缩</a>
+                <a href="../encrypt/">添加密码</a>
+                <a href="../decrypt/">移除密码</a>
+                <a href="../watermark/">PDF水印</a>
+                <a href="../preview/">PDF预览</a>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        var pdfInput = document.getElementById('pdfInput');
+        var viewerControls = document.getElementById('viewerControls');
+        var canvasContainer = document.getElementById('canvasContainer');
+        var canvas = document.getElementById('pdfCanvas');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var pageInfo = document.getElementById('pageInfo');
+        var zoomOutBtn = document.getElementById('zoomOutBtn');
+        var zoomInBtn = document.getElementById('zoomInBtn');
+        var zoomInfo = document.getElementById('zoomInfo');
+
+        var pdfDoc = null;
+        var currentPage = 1;
+        var totalPages = 0;
+        var scale = 1.0;
+
+        function renderPage(pageNum) {
+            pdfDoc.getPage(pageNum).then(function(page) {
+                var viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                var renderContext = {
+                    canvasContext: canvas.getContext('2d'),
+                    viewport: viewport
+                };
+
+                page.render(renderContext);
+                pageInfo.textContent = '第 ' + pageNum + ' 页 / 共 ' + totalPages + ' 页';
+            });
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= totalPages;
+        }
+
+        pdfInput.addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+
+            var fileReader = new FileReader();
+            fileReader.onload = function() {
+                var typedArray = new Uint8Array(this.result);
+
+                pdfjsLib.getDocument(typedArray).promise.then(function(pdf) {
+                    pdfDoc = pdf;
+                    totalPages = pdf.numPages;
+                    currentPage = 1;
+                    scale = 1.0;
+
+                    viewerControls.style.display = 'block';
+                    canvasContainer.style.display = 'block';
+                    zoomInfo.textContent = '100%';
+
+                    renderPage(currentPage);
+                    updateButtons();
+                }).catch(function(error) {
+                    alert('加载PDF失败: ' + error.message);
+                });
+            };
+            fileReader.readAsArrayBuffer(file);
+        });
+
+        prevBtn.addEventListener('click', function() {
+            if (currentPage <= 1) return;
+            currentPage--;
+            renderPage(currentPage);
+            updateButtons();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (currentPage >= totalPages) return;
+            currentPage++;
+            renderPage(currentPage);
+            updateButtons();
+        });
+
+        zoomInBtn.addEventListener('click', function() {
+            if (scale >= 3.0) return;
+            scale += 0.25;
+            zoomInfo.textContent = Math.round(scale * 100) + '%';
+            renderPage(currentPage);
+        });
+
+        zoomOutBtn.addEventListener('click', function() {
+            if (scale <= 0.5) return;
+            scale -= 0.25;
+            zoomInfo.textContent = Math.round(scale * 100) + '%';
+            renderPage(currentPage);
+        });
+    </script>
+</body>
+</html>
