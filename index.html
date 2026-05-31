@@ -18,6 +18,7 @@
         <main>
             <h1 class="tool-title">杂七杂八工具箱</h1>
             <p class="tool-desc">包含图片压缩、智能抠图、PDF处理等33个免费工具，纯本地处理、不传服务器、隐私安全。</p>
+            <p style="font-size: 15px; color: #555555; line-height: 1.8; margin-bottom: 48px; max-width: 720px;">这个工具箱是我（一个半吊子程序员）在AI助手（Trae、DeepSeek等）的帮助下，花几天时间搭建的。所有工具都跑在你的浏览器里——你上传的图片、PDF、文本<strong>永远不会离开你的电脑</strong>，没有服务器，没有数据库，更没有隐私泄露的担忧。目前已有33个实用功能，全部免费，无需注册，打开即用。我会继续用AI慢慢增加新工具，欢迎收藏。</p>
 
             <div class="category-nav" id="categoryNav">
                 <button class="category-tab active" data-category="image">图片处理</button>
@@ -32,6 +33,7 @@
             <div class="usage-stats">
                 今日已有 <span id="usageCount">1,234</span> 人使用本工具箱
             </div>
+            <p style="text-align: center; font-size: 14px; color: #999999; margin-bottom: 48px; font-style: italic;">💡 本项目完全开源（虽然代码写得比较糙），没有任何跟踪代码，纯属个人折腾，你的每次使用都是对我的鼓励。</p>
 
             <div class="user-reviews" id="userReviews">
                 <div class="review-bubble active">
@@ -61,6 +63,33 @@
                     <p style="margin-top: 16px;"><strong>隐私保护</strong>是我们的核心原则。所有工具的计算过程都完全在您的浏览器本地完成，您的图片、文本等任何数据都不会被上传到我们的服务器或任何第三方服务器。即使是智能抠图这样的AI功能，也是在您的设备上运行AI模型进行推理，图片数据始终留在您的本地。我们相信，您的隐私数据应该由您自己掌控。</p>
                     <p style="margin-top: 16px;">技术上，我们采用纯前端架构，无需后端服务器支持，这意味着工具加载速度极快，且不会因为服务器故障而影响使用。我们使用成熟的开源库（如browser-image-compression、qrcode.js等）确保功能稳定可靠，同时支持响应式设计，无论您使用电脑、平板还是手机，都能获得良好的使用体验。</p>
                     <p style="margin-top: 16px;">如果您在使用过程中遇到任何问题，或者有功能建议和合作意向，欢迎通过邮箱 <a href="mailto:zqzb.tools@outlook.com" style="color: #009DFF;">zqzb.tools@outlook.com</a> 联系我们。我们会认真对待每一条反馈，持续优化和更新工具，为您提供更好的服务。</p>
+                </div>
+            </section>
+
+            <section style="margin-top: 56px; padding: 32px; background: #ffffff; border: 1px solid #eaeaea; border-radius: 12px;">
+                <h2 style="font-size: 1.25rem; font-weight: 600; color: #111111; margin-bottom: 24px;">📝 最近更新</h2>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <a href="blog/local-first-privacy.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                        <span style="font-size: 24px;">🔒</span>
+                        <div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">为什么我把所有工具都做成"不上传服务器"的本地版？</div>
+                            <div style="font-size: 13px; color: #999999;">聊聊纯前端工具背后的隐私思考</div>
+                        </div>
+                    </a>
+                    <a href="blog/pdf-tools-review.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                        <span style="font-size: 24px;">📄</span>
+                        <div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">纯前端PDF工具能代替Acrobat吗？我测试了5个场景</div>
+                            <div style="font-size: 13px; color: #999999;">日常办公够用，专业排版再说</div>
+                        </div>
+                    </a>
+                    <a href="blog/bg-remover-ai-local.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                        <span style="font-size: 24px;">🤖</span>
+                        <div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">你上传的照片并没有"飞上天"——智能抠图的本地AI原理</div>
+                            <div style="font-size: 13px; color: #999999;">AI模型如何在浏览器里"看懂"图片</div>
+                        </div>
+                    </a>
                 </div>
             </section>
         </main>

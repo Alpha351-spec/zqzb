@@ -46,6 +46,28 @@
             </div>
         </main>
 
+        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+            <p>Unicode转义序列就是类似\u4e2d\u6587这种格式，编程里经常碰到。处理国际化文本、解析JSON配置、或者从别的系统导出数据时，一不小心满屏都是\u开头的东西，根本看不懂。这个工具帮你把\u编码还原成正常文字，也能把正常文字转成\u格式，搞多语言开发的时候特别方便。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的数据<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">把\u编码文本或者正常文字粘贴到输入框</li>
+                <li style="margin-bottom: 8px;">点击转换按钮，工具会自动识别方向</li>
+                <li style="margin-bottom: 0;">转换结果出现在下方，直接复制使用</li>
+            </ol>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：\u4e2d\u6587是什么？</strong><br>A：这是Unicode字符的十六进制表示。\u4e2d对应"中"字，\u6587对应"文"字。每\u后面跟4位十六进制数，代表一个Unicode码点。</p>
+            <p style="margin-bottom: 0;"><strong>Q：和UTF-8有什么关系？</strong><br>A：Unicode是字符集，UTF-8是编码方式。\u后面跟的是Unicode码点（不是UTF-8字节），所以\u4e2d表示的是"中"这个字符的编号，跟它用UTF-8还是UTF-16存储没关系。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">处理Android的strings.xml或iOS的Localizable.strings多语言资源文件时，这个工具特别有用，能帮你快速检查翻译内容是否正确。</p>
+        </div>
+
         <div class="recommend-section">
             <h3>其他工具</h3>
             <div class="recommend-links">

@@ -30,7 +30,7 @@
             <p class="tool-desc">在浏览器本地压缩图片，不上传服务器。支持JPG/PNG/WebP格式。</p>
 
             <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
-                <p>图片压缩工具专为网页优化、邮件附件、社交媒体上传等场景设计。支持JPG、PNG、WebP三大主流格式，通过滑动条自由调节压缩质量（10%-100%），实时显示压缩前后文件大小及压缩比例。采用先进的browser-image-compression库，基于浏览器原生能力进行高效压缩，无需安装任何软件。所有图片处理均在您的浏览器本地完成，数据不会上传至任何服务器，充分保障您的隐私安全。</p>
+                <p>这个压缩工具是我用browser-image-compression库搓出来的，专门对付那些动不动就好几MB的大图。微信公众号封面图限2MB？电商上传图片嫌太大？手机存储空间告急？拖进来压一压就完事了。支持JPG、PNG、WebP三种格式，质量滑块随便拉，压缩比例实时看，主打一个简单粗暴。</p>
             </div>
 
             <div class="input-group">
@@ -62,6 +62,28 @@
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载压缩图片</button>
             </div>
         </main>
+
+        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+            <p>说实话，市面上压缩图片的工具一抓一大把，但大多数都要上传到人家服务器，心里总觉得不太踏实。所以我自己搓了这个纯本地的压缩工具，用的是browser-image-compression这个库，效果还不错。不管你是要给公众号投稿、往电商平台传图、还是单纯想省点手机空间，都可以拿来用。支持JPG、PNG、WebP三种主流格式，质量从10%到100%随便调，压缩前后的大小和压缩率都给你算得明明白白。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个压缩过程都在你自己的浏览器里完成——这意味着你的照片、设计稿、商品图永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">点击"选择图片"按钮，选一张你想压缩的图片（支持JPG/PNG/WebP）</li>
+                <li style="margin-bottom: 8px;">拖动"压缩质量"滑块，数值越低压缩越狠，文件越小；再看看"最大尺寸"，按需调整</li>
+                <li style="margin-bottom: 0;">点击"压缩图片"，等一小会儿，预览和压缩数据出来后点"下载"就搞定了</li>
+            </ol>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：压缩后图片模糊了怎么办？</strong><br>A：压缩质量别拉太低，一般70%-85%是比较好的平衡点。如果你发现模糊了，把质量调高一点再压一次就行。另外"最大尺寸"那个参数也会影响清晰度，别设太小。</p>
+            <p style="margin-bottom: 0;"><strong>Q：跟那些在线压缩网站有什么区别？</strong><br>A：最大的区别就是——你的图片不会被上传到任何地方。很多在线压缩网站虽然好用，但图片要先传到人家服务器上处理完再传回来，中间谁知道发生了什么。这个工具全程在你浏览器里跑，连网络都不用（除了第一次加载页面）。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">如果你想把图片压到指定大小（比如2MB以内），建议先把"最大尺寸"调小一点（比如1200px），再去调压缩质量，这样效果比单纯降质量要好得多。</p>
+        </div>
 
         <div class="recommend-section">
             <h3>其他工具</h3>

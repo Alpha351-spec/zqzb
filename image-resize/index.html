@@ -30,7 +30,7 @@
             <p class="tool-desc">在浏览器本地按比例或指定宽高缩放图片。所有处理均在本地完成。</p>
 
             <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
-                <p>图片尺寸调整工具适用于缩略图生成、社交媒体配图、批量图片处理等场景。支持输入精确宽高像素值，提供锁定宽高比功能确保图片不变形，内置50%、75%、100%、150%、200%快速缩放按钮方便一键操作。采用Canvas drawImage技术进行目标尺寸绘制，输出图片保持清晰度。所有处理均在浏览器本地完成，无需上传文件至服务器，您的图片数据始终安全可控。</p>
+                <p>你有没有遇到过这种情况：微信头像要正方形、淘宝主图要800×800、公众号配图宽度不能超过900px……各种平台对图片尺寸要求五花八门。这个尺寸调整工具就是帮你快速搞定这些的。可以精确输入宽高像素值，也能一键缩放到50%、75%这些常用比例，还贴心地帮你锁定了宽高比，不用担心拉变形。</p>
             </div>
 
             <div class="input-group">
@@ -79,6 +79,28 @@
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载图片</button>
             </div>
         </main>
+
+        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+            <p>不同平台对图片尺寸的要求真是让人头大——微信公众号封面要2.35:1、淘宝主图要800×800、小红书配图要3:4、抖音封面要9:16……每次都要查半天规格，烦得很。这个尺寸调整工具帮你省掉这些麻烦：输入精确像素值直接缩放，或者用内置的50%、75%快速比例一键搞定。勾上"锁定宽高比"就不会变形，用Canvas drawImage技术画出来的图还是很清晰的。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个调整过程都在你自己的浏览器里完成——这意味着你的照片、设计素材永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">点击"选择图片"，把你要调整尺寸的图片选进来，会自动显示原始尺寸</li>
+                <li style="margin-bottom: 8px;">在宽度和高度输入框里填入目标像素值（记得勾选"锁定宽高比"防止变形），或者直接点快速缩放按钮</li>
+                <li style="margin-bottom: 0;">点击"调整尺寸"，预览确认后点"下载"保存</li>
+            </ol>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：缩小图片后会模糊吗？</strong><br>A：缩小不会模糊，反而会更清晰（因为像素密度变高了）。但如果你把小图放大，那肯定会变糊，毕竟像素不够用了嘛。建议放大倍数不要超过原图的150%。</p>
+            <p style="margin-bottom: 0;"><strong>Q：支持批量调整吗？</strong><br>A：目前不支持批量，一次只能处理一张图。如果你有很多图需要统一尺寸，建议用PS的批处理功能或者一些专门的批量工具。不过偶尔调个一两张图，这个工具完全够用。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">如果图片既需要调尺寸又需要压缩，建议先调尺寸再压缩，效果会比反过来好很多。因为尺寸小了之后，压缩的空间也更大。</p>
+        </div>
 
         <div class="recommend-section">
             <h3>其他工具</h3>
