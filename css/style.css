@@ -107,6 +107,8 @@ body {
     justify-content: center;
     gap: 8px;
     padding: 14px 28px;
+    min-height: 44px;
+    min-width: 44px;
     font-size: 15px;
     font-weight: 400;
     font-family: inherit;
@@ -330,6 +332,8 @@ footer a:hover {
 .about-content,
 .privacy-content {
     line-height: 1.8;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .about-content h2,
