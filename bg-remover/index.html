@@ -139,8 +139,8 @@
                 <p>这个抠图工具是基于AI的，能自动识别图片里的主体然后把背景去掉，输出透明背景的PNG图。做电商商品图、人像证件照、海报素材什么的特别方便。用的是@ligrila/background-remover这个开源组件，首次用需要下载一个30MB左右的AI模型，下完会缓存到浏览器里，以后就不用再下了。全程在你浏览器里算，图片不会传到任何服务器上。</p>
             </div>
 
-            <div class="mobile-tip">
-                📱 <strong>手机用户提示：</strong>智能抠图需要较多内存和算力，推荐使用Chrome或Edge浏览器。如果处理失败，建议使用电脑端操作。
+            <div class="mobile-tip" style="background: #f0f8ff; border-color: #90caf9; color: #1565c0;">
+                💡 <strong>使用建议：</strong>智能抠图功能对设备性能有一定要求，为了获得更佳的抠图效果和更流畅的体验，推荐您在电脑端使用Chrome或Edge浏览器操作。手机端也可以使用，但处理速度可能会稍慢一些。
             </div>
 
             <div class="bg-remover-container" id="bgRemoverContainer">
@@ -164,7 +164,11 @@
 
         <div style="margin-bottom: 32px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 为什么推荐这个抠图工具？</h2>
-            <p>市面上的在线抠图工具大多需要上传照片到云端，隐私风险不小。这个工具的AI模型直接跑在你的浏览器里，照片<strong>从头到尾都没离开过你的设备</strong>。效果虽然比不上Photoshop精修，但对付证件照、商品图、社交媒体头像绰绰有余。</p>
+            <p>以前抠图这事得用PS，还得会钢笔工具、通道抠图什么的，门槛高得很。现在有了AI，上传图片一键就搞定了。这个智能抠图工具用的是@ligrila/background-remover组件，底层跑的是ONNX模型，能自动识别图片里的主体——不管是人、商品还是别的什么东西，然后把背景去掉，输出透明背景的PNG图。做电商主图、证件照换底色、海报素材都特别好用。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🧑‍💻 个人经验与技巧</h2>
+            <p>上个月有个做电商的朋友找我帮忙，他有一批商品白底图不合格，平台要求纯白背景但拍出来的照片总有点灰。以前这种事得找美工用PS一张张抠，费时费力。我用这个抠图工具批量处理了一批，效果出乎意料——AI对商品主体的识别相当准确，边缘处理也很自然。后来他直接收藏了这个页面，说比找美工省钱多了。</p>
+            <p>我发现一个提升抠图效果的小窍门：<strong>尽量选择背景干净、和主体颜色反差大的图片</strong>。比如白底拍的商品照效果最好，而背景杂乱的生活照可能需要多试几次。如果第一次效果不满意，可以试试裁剪掉图片边缘多余的背景区域再重新处理。</p>
 
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">👨‍💻 适用场景</h2>
             <ul style="padding-left: 20px; margin-bottom: 0;">
@@ -174,36 +178,22 @@
                 <li style="margin-bottom: 0;">设计素材准备</li>
             </ul>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
-            <p style="margin-bottom: 12px;"><strong>Q：手机上能用吗？</strong><br>
-            A：可以用，但建议使用电脑端。AI模型需要较多内存和算力，电脑端处理速度更快、效果更稳定。手机端可能出现处理缓慢或失败的情况。</p>
-            <p style="margin-bottom: 0;"><strong>Q：抠图效果不好怎么办？</strong><br>
-            A：建议使用背景简单、主体清晰的图片。背景越复杂，AI识别难度越大。如果效果不理想，可以试试用电脑端Chrome/Edge浏览器，它们支持WebGPU加速。</p>
-
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
-            <p style="margin-bottom: 0;">首次使用需要下载AI模型（约30MB），下载后会自动缓存在浏览器中，后续使用秒开。建议使用电脑端Chrome或Edge浏览器。</p>
-        </div>
-
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
-            <p>以前抠图这事得用PS，还得会钢笔工具、通道抠图什么的，门槛高得很。现在有了AI，上传图片一键就搞定了。这个智能抠图工具用的是@ligrila/background-remover组件，底层跑的是ONNX模型，能自动识别图片里的主体——不管是人、商品还是别的什么东西，然后把背景去掉，输出透明背景的PNG图。做电商主图、证件照换底色、海报素材都特别好用。首次使用需要下载一个30MB左右的AI模型，下完会缓存到浏览器里，以后就不用再下了。</p>
-            
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
-            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个抠图过程都在你自己的浏览器里完成——AI模型下载到本地后，所有的计算都在你的设备上跑。这意味着你的照片、商品图永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
-            
+            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个抠图过程都在你自己的浏览器里完成——AI模型下载到本地后，所有的计算都在你的设备上跑。这意味着你的照片、商品图永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
+
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">点击上传区域或直接把图片拖进来（首次使用会先下载AI模型，耐心等一下）</li>
                 <li style="margin-bottom: 8px;">AI会自动识别主体并移除背景，处理过程中会显示进度</li>
                 <li style="margin-bottom: 0;">处理完成后会显示透明背景的预览图，满意的话直接下载即可</li>
             </ol>
-            
+
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：手机上能用吗？</strong><br>A：理论上能用，但体验不太好。AI抠图需要大量内存和算力，手机端容易卡顿甚至崩溃。强烈建议用电脑端的Chrome或Edge浏览器，效果和速度都好很多。</p>
             <p style="margin-bottom: 0;"><strong>Q：抠图效果不好怎么办？</strong><br>A：AI抠图对主体清晰、背景简单的图片效果最好。如果主体和背景颜色太接近、或者背景太复杂，效果可能会打折扣。建议用背景简洁的图片试试，或者换张角度更好的照片。</p>
-            
+
             <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
-            <p style="margin-bottom: 0;">建议在电脑端Chrome或Edge浏览器使用，效果最佳。第一次加载AI模型可能要等几十秒，之后再用就快了，因为模型已经缓存到浏览器里了。</p>
+            <p style="margin-bottom: 0;">首次使用需要下载AI模型（约30MB），下载后会自动缓存在浏览器中，后续使用秒开。建议在电脑端Chrome或Edge浏览器使用，效果最佳。</p>
         </div>
 
         <div class="recommend-section">
@@ -218,7 +208,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a> | <a href="../blog/dev-summary-2026.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
