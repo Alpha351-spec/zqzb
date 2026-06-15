@@ -21,14 +21,14 @@
             <p style="font-size: 15px; color: #555555; line-height: 1.8; margin-bottom: 48px; max-width: 720px;">这个工具箱是我（一个半吊子程序员）在AI助手（Trae、DeepSeek等）的帮助下，花几天时间搭建的。所有工具都跑在你的浏览器里——你上传的图片、PDF、文本<strong>永远不会离开你的电脑</strong>，没有服务器，没有数据库，更没有隐私泄露的担忧。目前已有33个实用功能，全部免费，无需注册，打开即用。我会继续用AI慢慢增加新工具，欢迎收藏。</p>
 
             <div class="category-nav" id="categoryNav">
-                <button class="category-tab active" data-category="image">图片处理</button>
-                <button class="category-tab" data-category="text">文本处理</button>
-                <button class="category-tab" data-category="encode">编码转换</button>
-                <button class="category-tab" data-category="generate">生成工具</button>
-                <button class="category-tab" data-category="pdf">文档处理</button>
+                <a href="#tools" class="category-tab active" data-category="image">图片处理</a>
+                <a href="#tools" class="category-tab" data-category="text">文本处理</a>
+                <a href="#tools" class="category-tab" data-category="encode">编码转换</a>
+                <a href="#tools" class="category-tab" data-category="generate">生成工具</a>
+                <a href="#tools" class="category-tab" data-category="pdf">文档处理</a>
             </div>
 
-            <div class="tools-grid" id="toolsGrid"></div>
+            <div class="tools-grid" id="toolsGrid" name="tools"></div>
 
             <div class="usage-stats">
                 今日已有 <span id="usageCount">1,234</span> 人使用本工具箱
@@ -74,25 +74,25 @@
             <section style="margin-top: 56px; padding: 32px; background: #ffffff; border: 1px solid #eaeaea; border-radius: 12px;">
                 <h2 style="font-size: 1.25rem; font-weight: 600; color: #111111; margin-bottom: 24px;">📝 最新文章</h2>
                 <div style="display: flex; flex-direction: column; gap: 16px;">
-                    <a href="blog/dev-summary-2026.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
-                        <span style="font-size: 24px;">🧑‍💻</span>
-                        <div>
-                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">一个"半吊子程序员"的2026年终总结：我是如何用AI折腾出这个工具箱的</div>
-                            <div style="font-size: 13px; color: #999999;">分享个人开发经历和AI辅助编程的心得</div>
-                        </div>
-                    </a>
-                    <a href="blog/pdf-merge-contract.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
-                        <span style="font-size: 24px;">📄</span>
-                        <div>
-                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">一个PDF技巧帮你省下500块：我用在线工具合并合同的全过程</div>
-                            <div style="font-size: 13px; color: #999999;">真实案例：合并租房合同的完整教程</div>
-                        </div>
-                    </a>
-                    <a href="blog/local-first.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                    <a href="blog/why-local-first.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
                         <span style="font-size: 24px;">🔒</span>
                         <div>
-                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">为什么我把所有工具都做成"不上传服务器"的本地版？</div>
-                            <div style="font-size: 13px; color: #999999;">聊聊纯前端工具背后的隐私思考</div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">为什么坚持工具不上传服务器？</div>
+                            <div style="font-size: 13px; color: #999999;">一次"后背发凉"的经历，让我彻底改变了做法</div>
+                        </div>
+                    </a>
+                    <a href="blog/bg-remover-tech.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                        <span style="font-size: 24px;">🤖</span>
+                        <div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">智能抠图技术原理科普：AI是如何在浏览器里"看懂"图片的？</div>
+                            <div style="font-size: 13px; color: #999999;">从神经网络到WebGPU，揭秘浏览器端AI的工作原理</div>
+                        </div>
+                    </a>
+                    <a href="blog/pdf-tips.html" style="display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: #f9f9f9; border-radius: 12px; text-decoration: none; transition: transform 0.2s ease;">
+                        <span style="font-size: 24px;">📄</span>
+                        <div>
+                            <div style="font-size: 15px; font-weight: 500; color: #111111; margin-bottom: 4px;">PDF操作小技巧：这些免费工具能帮你省不少事</div>
+                            <div style="font-size: 13px; color: #999999;">合并、旋转、提取、加水印……6个实用技巧</div>
                         </div>
                     </a>
                 </div>
@@ -171,12 +171,14 @@
         categoryNav.addEventListener('click', function(e) {
             var tab = e.target.closest('.category-tab');
             if (!tab) return;
+            e.preventDefault();
             
             document.querySelectorAll('.category-tab').forEach(function(t) { t.classList.remove('active'); });
             tab.classList.add('active');
             
             currentCategory = tab.dataset.category;
             renderTools(currentCategory);
+            document.getElementById('toolsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         renderTools(currentCategory);

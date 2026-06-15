@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alpha351-spec.github.io/zqzb/sitemap.xml
+Sitemap: https://zqzb-online.top/sitemap.xml
