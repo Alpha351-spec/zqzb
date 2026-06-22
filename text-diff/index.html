@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
         }
         .diff-result {
             padding: 20px;
-            background: #f9f9f9;
+            background: var(--color-bg-secondary);
             border-radius: 12px;
             font-family: 'SF Mono', 'Fira Code', monospace;
             font-size: 14px;
@@ -55,7 +55,7 @@
             <h1 class="tool-title">文字对比</h1>
             <p class="tool-desc">比较两段文本的差异，高亮显示不同之处。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>文字对比工具能够逐行比较两段文本并高亮标记差异之处，广泛应用于代码审查、文档版本对比、合同修订校验等场景。工具采用行级差异算法，将两段文本按行拆分后逐一比对，用绿色标注新增内容、红色标注删除内容，让您一目了然地发现修改痕迹。无论是程序员对比代码改动、编辑校对文章修改，还是法务人员审核合同变更，都能显著提升工作效率。所有对比运算均在本地浏览器中进行，您的文档内容不会被传输到外部服务器，隐私安全有保障。</p>
             </div>
 
@@ -81,25 +81,25 @@
             </div>
         </main>
 
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>文字对比工具，简单说就是帮你找两段文字之间的不同。改了代码想看看改了哪里？合同改了几版想确认修改内容？把两个版本丢进来，差异一目了然。绿色是新增的，红色是删除的，比肉眼一行行对快多了。作为一个经常要review代码的半吊子程序员，我觉得这东西比diff命令好用，至少不用开终端。当然它也能对比普通文本，不限于代码。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的文本<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">左边粘贴原始文本，右边粘贴要对比的文本</li>
                 <li style="margin-bottom: 8px;">点"对比文本"按钮</li>
                 <li style="margin-bottom: 0;">下面会显示对比结果，绿色是新增内容，红色是删除内容</li>
             </ol>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：能对比代码吗？</strong><br>A：当然可以，代码也是文本嘛。不过要注意，这个工具是按行对比的，所以如果代码格式化方式不一样（比如一个有缩进一个没有），可能会显示很多差异。</p>
             <p style="margin-bottom: 0;"><strong>Q：支持多长的文本？</strong><br>A：日常使用完全没问题，对比几千行的文档也就一瞬间。但如果你要对比几万行的超大文件，浏览器可能会有点卡，建议分段对比。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">对比代码的时候，建议先把两边的代码都格式化一下再对比，这样能忽略格式差异，更容易看出真正的逻辑改动。</p>
         </div>
 
@@ -168,7 +168,7 @@
                 }
             });
 
-            diffResult.innerHTML = html || '<span style="color: #555555;">两段文本完全相同</span>';
+            diffResult.innerHTML = html || '<span style="color: var(--color-text-secondary);">两段文本完全相同</span>';
             resultArea.style.display = 'block';
         });
 

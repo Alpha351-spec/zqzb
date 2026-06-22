@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +44,8 @@
         .aspect-btn {
             padding: 8px 16px;
             font-size: 14px;
-            border: 1px solid #eaeaea;
-            background: #ffffff;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -62,7 +62,7 @@
         .custom-ratio input {
             width: 60px;
             padding: 8px;
-            border: 1px solid #eaeaea;
+            border: 1px solid var(--color-border);
             border-radius: 8px;
             text-align: center;
             font-size: 14px;
@@ -73,7 +73,7 @@
         }
         .custom-ratio span {
             font-size: 14px;
-            color: #555555;
+            color: var(--color-text-secondary);
         }
     </style>
 </head>
@@ -98,7 +98,7 @@
             <h1 class="tool-title">图片裁剪</h1>
             <p class="tool-desc">在浏览器本地裁剪图片，支持按比例或自由裁剪。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>这个裁剪工具是我用Canvas API手搓的，专门用来处理各种裁剪需求。做证件照？裁头像？扫描文档去白边？选个比例拖一拖就完事了。内置了1:1、4:3、16:9这些常用比例，也支持自定义比例，想怎么裁就怎么裁。裁剪框可以拖着走，四个角都能拉，像素级精准控制，出来的东西跟原图一样清晰。</p>
             </div>
 
@@ -140,25 +140,25 @@
             </div>
         </main>
 
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>裁剪图片这事儿看着简单，但找个好用的工具还真不容易。很多在线裁剪工具要么功能太弱，要么非要你注册登录。这个裁剪工具就不整那些虚的，打开就能用。不管你是要做证件照（一寸两寸三寸随便切）、裁微信头像、还是把拍歪的文档扫描件扶正，选个比例框一下就出图。基于Canvas API做的，像素级精度，裁出来的东西跟原图一样清楚，不会糊。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的图片<strong>不会被上传到任何服务器</strong>。整个裁剪过程都在你自己的浏览器里完成——这意味着你的照片、证件照、文档扫描件永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">点击"选择图片"，把你要裁的图片选进来</li>
                 <li style="margin-bottom: 8px;">选一个比例（1:1、4:3、16:9等），或者输入自定义比例，然后拖动裁剪框调整到你满意的位置</li>
                 <li style="margin-bottom: 0;">点击"裁剪图片"，预览没问题后点"下载"保存到本地</li>
             </ol>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：自定义比例怎么用？</strong><br>A：在比例按钮旁边有两个输入框，左边填宽右边填高，比如你要做3:2的照片就填3和2，然后点"自定义"按钮，裁剪框就会自动锁定这个比例。数字不一定是实际像素，只是比例关系。</p>
             <p style="margin-bottom: 0;"><strong>Q：裁剪后画质会变吗？</strong><br>A：不会。这个工具是直接从原图上切一块出来，不会重新压缩，所以画质跟原图一模一样。输出的是PNG格式，无损的。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">做证件照之前，先查清楚你要的规格尺寸。比如一寸照是25mm×35mm（约295×413像素），二寸照是35mm×49mm（约413×579像素），查好了再裁，省得返工。</p>
         </div>
 

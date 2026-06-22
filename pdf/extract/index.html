@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -33,46 +33,46 @@
         <main>
             <h1 class="tool-title">PDF提取页面</h1>
             <p class="tool-desc">从PDF文档中提取指定页面，生成新的PDF文件。</p>
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>PDF提取页面工具可以从一个PDF文档中提取指定的页面，生成一个新的PDF文件。适用于需要单独保存某些重要页面、提取特定章节或创建精选文档的场景。支持多种页码格式输入，如"1,3,5-7"表示提取第1、3、5、6、7页。所有处理均在浏览器本地完成，采用pdf-lib库进行高效处理，文件不会上传至任何服务器，确保您的文档安全。</p>
             </div>
             <div class="input-group">
                 <label for="fileInput">选择PDF文件</label>
                 <input type="file" id="fileInput" accept=".pdf">
             </div>
-            <div id="pageInfo" style="margin-bottom: 20px; font-size: 14px; color: #555555; display: none;"></div>
+            <div id="pageInfo" style="margin-bottom: 20px; font-size: 14px; color: var(--color-text-secondary); display: none;"></div>
             <div class="input-group">
                 <label for="pageInput">要提取的页码（如：1,3,5-7）</label>
                 <input type="text" id="pageInput" placeholder="输入页码，例如：1,3,5-7">
             </div>
             <button class="btn btn-primary" id="extractBtn">提取页面</button>
             <div class="result-area" id="resultArea" style="display: none;">
-                <p id="resultInfo" style="font-size: 14px; color: #555555;"></p>
+                <p id="resultInfo" style="font-size: 14px; color: var(--color-text-secondary);"></p>
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载提取的PDF</button>
             </div>
-            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+            <div style="margin-top: 24px; padding: 12px 16px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 13px; color: var(--color-text-secondary);">
                 <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
             </div>
         </main>
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>和拆分工具不同，提取工具更像是"复制粘贴"——从一个大PDF里挑出你想要的页面，生成一个新文件，原文件不受影响。比如一份200页的报告，你只需要第10、15、20页给老板看，用这个工具就能精准提取。输入页码就行，支持"1,3,5-7"这种格式，简单方便。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的PDF文件<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成，采用pdf-lib库进行高效处理。文件处理完成后立即从浏览器内存中清除，关闭网页后痕迹完全消失。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">点击"选择PDF文件"按钮，上传你的PDF</li>
                 <li style="margin-bottom: 8px;">输入要提取的页码，比如"1,3,5-7"表示提取第1、3、5、6、7页</li>
                 <li style="margin-bottom: 0;">点击"提取页面"按钮，等一下就能下载提取好的新PDF了</li>
             </ol>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：提取后原文件还在吗？</strong><br>A：当然在，提取只是"复制"，不会修改或删除你的原文件。原文件还是好好的躺在你电脑里。</p>
             <p style="margin-bottom: 0;"><strong>Q：能一次提取多页吗？</strong><br>A：可以，用逗号分隔页码就行，比如"1,3,5-7"。想提多少页就提多少页，没有限制。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">提取和拆分的区别：提取是保留原文件，把指定页面复制出来；拆分是按范围把文件切开。如果你只是想要某几页，用提取就对了。</p>
         </div>
         <div class="recommend-section">

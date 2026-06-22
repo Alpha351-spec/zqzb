@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -45,11 +45,11 @@
             </div>
 
             <div style="display: flex; gap: 16px; margin-bottom: 24px;">
-                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555555;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
                     <input type="radio" name="type" value="integer" checked style="width: 18px; height: 18px; accent-color: #009DFF;">
                     整数
                 </label>
-                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555555;">
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
                     <input type="radio" name="type" value="decimal" style="width: 18px; height: 18px; accent-color: #009DFF;">
                     小数
                 </label>
@@ -70,25 +70,25 @@
             </div>
         </main>
 
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>这个随机数生成器用途可广了——公司年会抽奖、班级分组、桌游决定先后手、写代码测试数据，都能用得上。你可以指定范围和数量，支持生成整数或小数。我当初做这个就是因为年会抽奖需要，后来发现还挺常用的。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的数据<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">设置最小值和最大值，确定随机数的范围</li>
                 <li style="margin-bottom: 8px;">设置要生成的数量，选择整数或小数模式</li>
                 <li style="margin-bottom: 0;">点击"生成随机数"，结果会显示出来，还可以一键复制</li>
             </ol>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：这个随机数真的随机吗？</strong><br>A：对于一般用途来说足够随机了。它用的是浏览器内置的Math.random()函数，虽然不是密码学级别的真随机，但抽奖、分组这些场景完全够用。</p>
             <p style="margin-bottom: 0;"><strong>Q：能生成不重复的随机数吗？</strong><br>A：目前没有去重功能。如果范围小数量多，可能会出现重复。不过你可以多生成几个然后手动去重，或者扩大范围。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">浏览器的Math.random()对一般用途足够安全，但如果你需要密码学级别的随机数，建议用专门的工具。抽奖的话，建议设置好范围后生成一次，避免反复生成"选到满意的"。</p>
         </div>
 

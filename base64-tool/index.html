@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
             <h1 class="tool-title">Base64编解码</h1>
             <p class="tool-desc">文本转Base64，或Base64转回文本。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>Base64是一种基于64个可打印字符来表示二进制数据的编码方式，广泛应用于电子邮件附件传输、Data URL图片嵌入、API身份认证令牌等场景。本工具支持文本与Base64的双向转换，完美处理中文等Unicode字符，采用btoa/atob配合UTF-8编码确保字符准确转换。所有编解码操作均在浏览器本地完成，数据不会上传至任何服务器，充分保护您的隐私安全。</p>
             </div>
 
@@ -50,25 +50,25 @@
             </div>
         </main>
 
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>Base64这玩意儿你可能没听过，但其实你天天都在用。邮件附件、网页里的小图片（Data URL）、各种API的认证令牌（Token），背后都是Base64在干活。它的本质很简单——把二进制数据变成一串ASCII字符，方便在文本环境里传输。作为一个半吊子程序员，我经常需要在调试接口时手动编解码一下，所以就做了这个小工具。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的数据<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">在输入框里粘贴你要编码或解码的文本</li>
                 <li style="margin-bottom: 8px;">点击"编码"或"解码"按钮</li>
                 <li style="margin-bottom: 0;">结果会自动出现在下方，点复制按钮一键搞定</li>
             </ol>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：中文能编码吗？</strong><br>A：当然可以！中文先转成UTF-8字节，再进行Base64编码。解码时也会自动还原成中文，放心用。</p>
             <p style="margin-bottom: 0;"><strong>Q：Base64是加密吗？</strong><br>A：不是！Base64只是一种编码方式，没有任何密钥可言。任何人都能把Base64字符串解码回原文，它只是换了个"马甲"而已。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">Base64不是加密！任何人都能轻松解码，千万别拿它保护密码、密钥之类的敏感信息。它只是个编码工具，不是保险箱。</p>
         </div>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
         <main>
             <h1 class="tool-title">PDF合并</h1>
             <p class="tool-desc">将多个PDF文件合并为一个文件，支持拖拽排序，纯本地处理保护隐私。</p>
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>PDF合并工具适用于需要将多个PDF文档整合为一个文件的场景，如合并合同附件、整合报告章节、汇总学习资料等。支持同时选择多个PDF文件，上传后可拖拽调整顺序，按您指定的顺序进行合并。所有处理均在浏览器本地完成，采用pdf-lib库进行高效处理，文件不会上传至任何服务器，确保您的文档安全和隐私。</p>
             </div>
             <div class="input-group">
@@ -43,27 +43,27 @@
             <div id="fileList" style="margin-bottom: 20px;"></div>
             <button class="btn btn-primary" id="mergeBtn">合并PDF</button>
             <div class="result-area" id="resultArea" style="display: none;">
-                <p id="resultInfo" style="font-size: 14px; color: #555555;"></p>
+                <p id="resultInfo" style="font-size: 14px; color: var(--color-text-secondary);"></p>
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载合并文件</button>
             </div>
-            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+            <div style="margin-top: 24px; padding: 12px 16px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 13px; color: var(--color-text-secondary);">
                 <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
             </div>
         </main>
-        <div style="margin-bottom: 32px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 为什么推荐这个合并工具？</h2>
+        <div style="margin-bottom: 32px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 为什么推荐这个合并工具？</h2>
             <p>作为一个半吊子程序员，我经常需要把好几个PDF合成一个文件。比如写报告的时候，正文是一个PDF，图表是一个PDF，参考资料又是一个PDF，一个个发给别人太麻烦了。这个合并工具就是干这个的——选几个PDF文件，拖拖拽拽排好顺序，一键合并成一个文件。支持同时选择多个PDF，合并后页面顺序就是你拖拽排的顺序，简单粗暴。很多在线PDF合并网站要求你把文件上传到它们的服务器，合同、证件扫描件这些敏感文件就这么交出去了，心里总不踏实。这个工具用pdf-lib库在浏览器本地处理，你的文件<strong>不会离开你的电脑</strong>。</p>
 
-            <div style="margin: 24px 0; padding: 20px 24px; background: #f0f8ff; border-radius: 10px; border-left: 3px solid #009DFF;">
-                <p style="font-size: 14px; color: #666666; margin-bottom: 10px; font-weight: 600;">💬 站长短评</p>
-                <p style="font-size: 15px; color: #444444; line-height: 1.8; margin-bottom: 0;">去年帮家里整理房产材料，十几个PDF——购房合同、贷款协议、各种发票。先试了Adobe Acrobat要订阅好几百块/年，又试了某在线合并网站，合同这种敏感文件要上传到人家服务器，心里不踏实。用这个工具，十几个PDF拖进来排好顺序，不到10秒合并完，文件根本没离开电脑。现在每次需要合并PDF都用它，比找软件安装方便多了。</p>
+            <div style="margin: 24px 0; padding: 20px 24px; background: var(--color-bg-tertiary); border-radius: 10px; border-left: 3px solid #009DFF;">
+                <p style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 10px; font-weight: 600;">💬 站长短评</p>
+                <p style="font-size: 15px; color: var(--color-text); line-height: 1.8; margin-bottom: 0;">去年帮家里整理房产材料，十几个PDF——购房合同、贷款协议、各种发票。先试了Adobe Acrobat要订阅好几百块/年，又试了某在线合并网站，合同这种敏感文件要上传到人家服务器，心里不踏实。用这个工具，十几个PDF拖进来排好顺序，不到10秒合并完，文件根本没离开电脑。现在每次需要合并PDF都用它，比找软件安装方便多了。</p>
             </div>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🧑‍💻 个人经验与技巧</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🧑‍💻 个人经验与技巧</h2>
             <p>去年帮家里整理房产材料，前前后后攒了十几个PDF——购房合同、贷款协议、物业协议、各种发票……每次要用都得翻半天。我先试了Adobe Acrobat，结果要订阅一年好几百块；又试了某在线合并网站，<strong>合同这种敏感文件要上传到人家服务器，心里总不踏实</strong>。后来用这个工具，十几个PDF拖进来，按时间顺序排好，一键合并，整个过程不到10秒，文件只在浏览器里转了一圈，根本没离开我的电脑。</p>
             <p>有个教训分享给大家：<strong>合并前一定要先想好顺序</strong>，因为合并完如果顺序不对，只能重新来过。还有个小技巧：如果你有几个扫描件PDF想合并，但其中某些页面方向不对，可以先用<a href="../pdf/rotate/" style="color: #009DFF; text-decoration: none;">"PDF旋转"</a>工具调整好，再回来合并。另外，合并后的文件体积会比原来所有文件加起来略大一点（通常大5%-10%），这是正常的，因为合并过程会重新编码页面，不用紧张。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">👨‍💻 适用场景</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">👨‍💻 适用场景</h2>
             <ul style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">合并多个扫描件为一个文件</li>
                 <li style="margin-bottom: 8px;">整合报告的不同章节</li>
@@ -71,22 +71,22 @@
                 <li style="margin-bottom: 0;">合并合同附件</li>
             </ul>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的PDF文件<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成，采用pdf-lib库进行高效处理。文件处理完成后立即从浏览器内存中清除，关闭网页后痕迹完全消失。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">点击"选择PDF文件"按钮，按住Ctrl可以多选文件</li>
                 <li style="margin-bottom: 8px;">上传后拖拽文件卡片调整顺序，想让哪个在前就拖到前面</li>
                 <li style="margin-bottom: 0;">点击"合并PDF"按钮，等几秒钟就能下载合并好的文件了</li>
             </ol>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：能合并多少个文件？</strong><br>A：理论上没有数量限制，但建议单次合并不超过20个文件。文件太多可能导致浏览器内存不足，处理速度变慢。</p>
             <p style="margin-bottom: 12px;"><strong>Q：合并后书签还在吗？</strong><br>A：书签会被保留的，不过可能会有点小问题。如果你的PDF有复杂的书签结构，建议合并后检查一下。</p>
             <p style="margin-bottom: 0;"><strong>Q：跟那些在线合并网站有什么区别？</strong><br>A：最大的区别就是——你的文件不会被上传到任何地方。很多在线网站虽然方便，但合同、证件这些敏感文件要先传到人家服务器上，心里总不踏实。这个工具全程在你浏览器里跑。</p>
 
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">合并前记得拖拽调整好顺序，合并后就是按这个顺序排列的。如果发现顺序不对，只能重新来过了。</p>
         </div>
         <div class="recommend-section">
@@ -132,11 +132,11 @@
                 fileList.innerHTML = '';
                 return;
             }
-            var html = '<div style="border: 1px solid #eaeaea; border-radius: 12px; padding: 16px;">';
-            html += '<p style="font-size: 14px; font-weight: 500; margin-bottom: 12px; color: #111111;">已选择 ' + selectedFiles.length + ' 个文件（拖拽可调整顺序）</p>';
+            var html = '<div style="border: 1px solid var(--color-border); border-radius: 12px; padding: 16px;">';
+            html += '<p style="font-size: 14px; font-weight: 500; margin-bottom: 12px; color: var(--color-text);">已选择 ' + selectedFiles.length + ' 个文件（拖拽可调整顺序）</p>';
             selectedFiles.forEach(function(file, index) {
-                html += '<div draggable="true" data-index="' + index + '" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: #f9f9f9; border-radius: 8px; margin-bottom: 8px; cursor: move;">';
-                html += '<span style="font-size: 14px; color: #555555;">' + (index + 1) + '. ' + file.name + '</span>';
+                html += '<div draggable="true" data-index="' + index + '" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: 8px; margin-bottom: 8px; cursor: move;">';
+                html += '<span style="font-size: 14px; color: var(--color-text-secondary);">' + (index + 1) + '. ' + file.name + '</span>';
                 html += '<button class="btn remove-btn" data-index="' + index + '" style="padding: 4px 12px; font-size: 12px;">移除</button>';
                 html += '</div>';
             });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
         <main>
             <h1 class="tool-title">PDF压缩</h1>
             <p class="tool-desc">通过降低图片质量压缩PDF文件，纯本地处理，不上传服务器。</p>
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>PDF压缩工具可以通过重新处理PDF中的图片来减小文件体积。支持三种压缩级别：低压缩（画质优先）、中等压缩（均衡模式）、高压缩（体积优先）。压缩过程基于pdf-lib库在浏览器本地完成，通过重新嵌入图片并调整质量参数来实现压缩效果。适用于需要减小PDF文件大小以便邮件发送、网页上传或节省存储空间等场景。所有处理均在本地完成，保护您的隐私安全。</p>
             </div>
             <div class="input-group">
@@ -53,29 +53,29 @@
                 <div id="fileInfo"></div>
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载压缩后的PDF</button>
             </div>
-            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+            <div style="margin-top: 24px; padding: 12px 16px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 13px; color: var(--color-text-secondary);">
                 <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
             </div>
         </main>
-        <div style="margin-top: 40px; padding: 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.9;">
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin-bottom: 16px;">📌 工具简介</h2>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
             <p>邮件附件有大小限制，上传文件也有体积要求，但你的PDF动不动就几十MB。这个压缩工具可以帮你减小PDF文件体积。支持三种压缩级别：低压缩保持画质、中等压缩均衡模式、高压缩优先减小体积。压缩效果取决于PDF里图片的多少——图片越多，压缩效果越明显。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
             <p>你的PDF文件<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成，采用pdf-lib库进行高效处理。文件处理完成后立即从浏览器内存中清除，关闭网页后痕迹完全消失。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">📖 使用步骤</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
             <ol style="padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;">点击"选择PDF文件"按钮，上传你要压缩的PDF</li>
                 <li style="margin-bottom: 8px;">选择压缩级别（低/中/高），越高压缩率越大但画质可能下降</li>
                 <li style="margin-bottom: 0;">点击"开始压缩"按钮，等一下就能下载压缩后的文件了</li>
             </ol>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">❓ 常见问题</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
             <p style="margin-bottom: 12px;"><strong>Q：压缩后质量会变差吗？</strong><br>A：低压缩基本看不出区别，高压缩可能会让图片稍微模糊一点。如果对画质要求高，建议选低压缩。</p>
             <p style="margin-bottom: 0;"><strong>Q：能压缩到多小？</strong><br>A：取决于PDF内容。图片多的PDF压缩效果明显，可能缩小30-70%；纯文字的PDF压缩效果有限。</p>
             
-            <h2 style="font-size: 1.1rem; font-weight: 600; color: #111111; margin: 28px 0 16px;">💡 小贴士</h2>
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
             <p style="margin-bottom: 0;">如果原PDF主要是文字，压缩效果有限；图片多的PDF压缩效果明显。压缩前可以先预览一下文件大小，心里有个底。</p>
         </div>
         <div class="recommend-section">
@@ -144,16 +144,16 @@
 
                 if (compressedSize >= originalSize) {
                     var originalKB = (originalSize / 1024).toFixed(2);
-                    fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
-                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + '</p>' +
-                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalKB + ' KB</p>' +
+                    fileInfo.innerHTML = '<p style="font-size: 14px; color: var(--color-text-secondary);">文件名: ' + file.name + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">总页数: ' + totalPages + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">原始大小: ' + originalKB + ' KB</p>' +
                         '<p style="margin-top: 8px; font-size: 14px; color: #e74c3c;">该文件已无法进一步压缩，当前大小已是较优状态。</p>';
                 } else {
                     var originalMB = (originalSize / 1024 / 1024).toFixed(2);
                     var compressedMB = (compressedSize / 1024 / 1024).toFixed(2);
-                    fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
-                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + '</p>' +
-                        '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalMB + ' MB | 压缩后: ' + compressedMB + ' MB</p>' +
+                    fileInfo.innerHTML = '<p style="font-size: 14px; color: var(--color-text-secondary);">文件名: ' + file.name + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">总页数: ' + totalPages + '</p>' +
+                        '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">原始大小: ' + originalMB + ' MB | 压缩后: ' + compressedMB + ' MB</p>' +
                         '<p style="margin-top: 8px; font-size: 16px; font-weight: 600; color: #27ae60;">压缩率: ' + ratio + '%</p>';
                 }
 
