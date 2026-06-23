@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -205,10 +205,7 @@
         copyBtn.addEventListener('click', function() {
             var text = passwordText.textContent;
             if (!text || text === '点击"生成密码"按钮') { alert('请先生成密码'); return; }
-            navigator.clipboard.writeText(text).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() { copyBtn.textContent = '复制密码'; }, 2000);
-            });
+            copyToClipboard(text, copyBtn, '复制密码');
         });
 
         batchBtn.addEventListener('click', function() {

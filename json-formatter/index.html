@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -167,14 +167,7 @@
                 return;
             }
 
-            navigator.clipboard.writeText(text).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() {
-                    copyBtn.textContent = '复制结果';
-                }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动复制');
-            });
+            copyToClipboard(text, copyBtn, '复制结果');
         });
 
         clearBtn.addEventListener('click', function() {

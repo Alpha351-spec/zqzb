@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -121,19 +121,13 @@
         copyInputBtn.addEventListener('click', function() {
             var text = textInput.value;
             if (!text) { alert('没有可复制的内容'); return; }
-            navigator.clipboard.writeText(text).then(function() {
-                copyInputBtn.textContent = '已复制';
-                setTimeout(function() { copyInputBtn.textContent = '复制输入'; }, 2000);
-            });
+            copyToClipboard(text, copyInputBtn, '复制输入');
         });
 
         copyOutputBtn.addEventListener('click', function() {
             var text = outputText.value;
             if (!text) { alert('没有可复制的内容'); return; }
-            navigator.clipboard.writeText(text).then(function() {
-                copyOutputBtn.textContent = '已复制';
-                setTimeout(function() { copyOutputBtn.textContent = '复制输出'; }, 2000);
-            });
+            copyToClipboard(text, copyOutputBtn, '复制输出');
         });
 
         clearBtn.addEventListener('click', function() {

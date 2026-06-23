@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -135,10 +135,7 @@
 
         copyBtn.addEventListener('click', function() {
             if (!lastResult) return;
-            navigator.clipboard.writeText(lastResult).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() { copyBtn.textContent = '复制结果'; }, 2000);
-            });
+            copyToClipboard(lastResult, copyBtn, '复制结果');
         });
     </script>
 </body>
