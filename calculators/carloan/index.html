@@ -8,70 +8,269 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        .calc-result {
-            margin-top: 32px;
-            padding: 24px;
-            background: var(--color-bg-secondary);
+        .calculator-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .card-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+        .result-showcase {
+            background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            display: none;
+        }
+        .result-showcase.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .result-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+        .result-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1.2;
+        }
+        .result-unit {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-left: 4px;
         }
         .result-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
-            margin-bottom: 16px;
+            margin-top: 24px;
         }
-        .result-item {
-            text-align: center;
-            padding: 16px;
+        .result-card {
             background: var(--color-bg);
             border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .result-item .label {
-            font-size: 14px;
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .result-card .label {
+            font-size: 13px;
             color: var(--color-text-secondary);
             margin-bottom: 8px;
         }
-        .result-item .value {
-            font-size: 20px;
+        .result-card .value {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .radio-cards {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .radio-card {
+            flex: 1;
+            position: relative;
+        }
+        .radio-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .radio-card label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .radio-card input[type="radio"]:checked + label {
+            border-color: var(--color-accent);
+            background: var(--color-bg-tertiary);
+        }
+        .radio-card label:hover {
+            border-color: var(--color-accent);
+        }
+        .radio-card .icon {
+            font-size: 24px;
+        }
+        .radio-card .text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        .radio-card .desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            text-align: center;
+        }
+        .checkbox-cards {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .checkbox-card {
+            position: relative;
+        }
+        .checkbox-card input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .checkbox-card label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: var(--color-text);
+        }
+        .checkbox-card input[type="checkbox"]:checked + label {
+            border-color: var(--color-accent);
+            background: var(--color-bg-tertiary);
+        }
+        .checkbox-card label:hover {
+            border-color: var(--color-accent);
+        }
+        .summary-card {
+            margin-top: 24px;
+            padding: 24px;
+            background: var(--color-bg);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 14px;
+        }
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        .summary-row .label {
+            color: var(--color-text-secondary);
+        }
+        .summary-row .value {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        .summary-row.total {
+            margin-top: 8px;
+            padding-top: 16px;
+            border-top: 2px solid var(--color-accent);
+            border-bottom: none;
+        }
+        .summary-row.total .label,
+        .summary-row.total .value {
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-accent);
         }
-        .result-item .unit {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-        }
-        .result-summary {
-            margin-top: 16px;
-            padding: 16px;
-            background: var(--color-bg-tertiary);
+        .tips-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--color-bg-secondary);
             border-radius: 12px;
+        }
+        .tips-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tips-content {
             font-size: 14px;
             color: var(--color-text-secondary);
             line-height: 1.8;
         }
-        .radio-group {
-            display: flex;
-            gap: 16px;
-            margin-top: 8px;
+        .tips-content p {
+            margin-bottom: 12px;
         }
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 15px;
+        .tips-content p:last-child {
+            margin-bottom: 0;
+        }
+        .tips-content strong {
             color: var(--color-text);
         }
-        .radio-group input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--color-accent);
-        }
         @media (max-width: 640px) {
+            .calculator-card {
+                padding: 20px;
+            }
+            .result-value {
+                font-size: 32px;
+            }
             .result-grid {
                 grid-template-columns: 1fr;
             }
-            .radio-group {
+            .radio-cards {
                 flex-direction: column;
             }
         }
@@ -87,110 +286,152 @@
         <nav class="nav-bar">
             <a href="../../">← 返回工具箱</a>
             <a href="../mortgage/">房贷计算器</a>
+            <a href="./" class="active">车贷计算器</a>
             <a href="../date-diff/">日期计算器</a>
             <a href="../unit-convert/">单位换算器</a>
-            <a href="./" class="active">车贷计算器</a>
         </nav>
 
         <main>
-            <h1 class="tool-title">车贷计算器</h1>
+            <h1 class="tool-title">🚗 车贷计算器</h1>
             <p class="tool-desc">在线计算购车贷款月供、总利息、首付金额和还款总额，帮助您规划购车预算。</p>
 
-            <div class="input-group">
-                <label for="carPrice">车辆价格（万元）</label>
-                <input type="number" id="carPrice" value="15" min="1" step="0.1">
-            </div>
-
-            <div class="input-group">
-                <label for="downPayment">首付比例（%）</label>
-                <div style="display: flex; gap: 12px; align-items: center;">
-                    <input type="range" id="downPaymentRange" min="0" max="80" value="30" step="5">
-                    <span class="range-value" id="downPaymentValue">30%</span>
+            <div class="calculator-card">
+                <div class="card-header">
+                    <div class="card-icon">🚙</div>
+                    <div>
+                        <div class="card-title">车辆信息</div>
+                        <div class="card-desc">请输入您的购车详情</div>
+                    </div>
                 </div>
-                <input type="number" id="downPayment" value="30" min="0" max="80" step="5" style="margin-top: 8px; display: none;">
-            </div>
 
-            <div class="input-group">
-                <label for="annualRate">年利率（%）</label>
-                <input type="number" id="annualRate" value="4.5" min="0.1" max="20" step="0.01">
-            </div>
-
-            <div class="input-group">
-                <label for="loanYears">贷款年限（年）</label>
-                <select id="loanYears">
-                    <option value="1">1年</option>
-                    <option value="2">2年</option>
-                    <option value="3" selected>3年</option>
-                    <option value="4">4年</option>
-                    <option value="5">5年</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>还款方式</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="repayType" value="equal-installment" checked>
-                        等额本息
-                    </label>
-                    <label>
-                        <input type="radio" name="repayType" value="equal-principal">
-                        等额本金
-                    </label>
+                <div class="input-group">
+                    <label for="carPrice">车辆价格（万元）</label>
+                    <input type="number" id="carPrice" value="15" min="1" step="0.1">
                 </div>
-            </div>
 
-            <div class="input-group">
-                <label>可选费用</label>
-                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="checkbox" id="includeTax" checked style="width: 18px; height: 18px; accent-color: var(--color-accent);">
-                        购置税
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="checkbox" id="includeInsurance" checked style="width: 18px; height: 18px; accent-color: var(--color-accent);">
-                        保险
-                    </label>
+                <div class="input-group">
+                    <label>首付比例：<strong id="downPaymentDisplay">30%</strong></label>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <input type="range" id="downPaymentRange" min="0" max="80" value="30" step="5" style="flex: 1;">
+                    </div>
                 </div>
+
+                <div class="input-group">
+                    <label for="annualRate">年利率（%）</label>
+                    <input type="number" id="annualRate" value="4.5" min="0.1" max="20" step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="loanYears">贷款年限</label>
+                    <div class="radio-cards">
+                        <div class="radio-card">
+                            <input type="radio" name="loanYears" value="1" id="year1">
+                            <label for="year1">
+                                <span class="text">1年</span>
+                            </label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="loanYears" value="2" id="year2">
+                            <label for="year2">
+                                <span class="text">2年</span>
+                            </label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="loanYears" value="3" id="year3" checked>
+                            <label for="year3">
+                                <span class="text">3年</span>
+                            </label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="loanYears" value="5" id="year5">
+                            <label for="year5">
+                                <span class="text">5年</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>还款方式</label>
+                    <div class="radio-cards">
+                        <div class="radio-card">
+                            <input type="radio" name="repayType" value="equal-installment" id="typeInstallment" checked>
+                            <label for="typeInstallment">
+                                <span class="icon">📊</span>
+                                <span class="text">等额本息</span>
+                                <span class="desc">每月还款固定</span>
+                            </label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="repayType" value="equal-principal" id="typePrincipal">
+                            <label for="typePrincipal">
+                                <span class="icon">📈</span>
+                                <span class="text">等额本金</span>
+                                <span class="desc">逐月递减</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>附加费用</label>
+                    <div class="checkbox-cards">
+                        <div class="checkbox-card">
+                            <input type="checkbox" id="includeTax" checked>
+                            <label for="includeTax">🏛️ 购置税</label>
+                        </div>
+                        <div class="checkbox-card">
+                            <input type="checkbox" id="includeInsurance" checked>
+                            <label for="includeInsurance">🛡️ 保险</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="calcBtn" style="width: 100%; margin-top: 8px;">
+                    🧮 开始计算
+                </button>
             </div>
 
-            <button class="btn btn-primary" id="calcBtn" style="width: 100%;">开始计算</button>
+            <div class="result-showcase" id="calcResult">
+                <div class="result-header">
+                    <div class="result-label" id="monthlyLabel">每月还款</div>
+                    <div>
+                        <span class="result-value" id="monthlyPayment">-</span>
+                        <span class="result-unit">元</span>
+                    </div>
+                </div>
 
-            <div class="calc-result" id="calcResult" style="display: none;">
                 <div class="result-grid">
-                    <div class="result-item">
+                    <div class="result-card">
                         <div class="label">首付金额</div>
                         <div class="value" id="downPaymentAmount">-</div>
-                        <div class="unit">元</div>
                     </div>
-                    <div class="result-item">
+                    <div class="result-card">
                         <div class="label">贷款金额</div>
                         <div class="value" id="loanAmount">-</div>
-                        <div class="unit">元</div>
                     </div>
-                    <div class="result-item">
-                        <div class="label" id="monthlyLabel">每月还款</div>
-                        <div class="value" id="monthlyPayment">-</div>
-                        <div class="unit">元</div>
-                    </div>
-                    <div class="result-item">
+                    <div class="result-card">
                         <div class="label">总利息</div>
                         <div class="value" id="totalInterest">-</div>
-                        <div class="unit">元</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="label">还款总额</div>
+                        <div class="value" id="totalPayment">-</div>
                     </div>
                 </div>
 
-                <div class="result-summary" id="resultSummary">
+                <div class="summary-card" id="resultSummary">
                 </div>
             </div>
 
-            <div class="tool-intro" style="margin-top: 48px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
-                <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 购车费用说明</h2>
-                <p><strong>购置税</strong>：车辆价格 ÷ 1.13 × 10%（燃油车），新能源车目前免征购置税。</p>
-                <p><strong>交强险</strong>：约950元/年（家用6座以下）。</p>
-                <p><strong>商业险</strong>：根据车价和险种不同，一般在3000-8000元/年。</p>
-                <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
-                <p style="margin-bottom: 0;">银行车贷利率一般在3%-6%之间，厂家金融可能有免息活动。建议多比较几家银行和金融方案。</p>
+            <div class="tips-section">
+                <div class="tips-title">📌 购车费用说明</div>
+                <div class="tips-content">
+                    <p><strong>购置税</strong>：车辆价格 ÷ 1.13 × 10%（燃油车），新能源车目前免征购置税。</p>
+                    <p><strong>交强险</strong>：约950元/年（家用6座以下）。</p>
+                    <p><strong>商业险</strong>：根据车价和险种不同，一般在3000-8000元/年。</p>
+                    <p><strong>💡 小贴士</strong>：银行车贷利率一般在3%-6%之间，厂家金融可能有免息活动。建议多比较几家银行和金融方案。</p>
+                </div>
             </div>
         </main>
 
@@ -215,9 +456,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             var carPrice = document.getElementById('carPrice');
             var downPaymentRange = document.getElementById('downPaymentRange');
-            var downPaymentValue = document.getElementById('downPaymentValue');
+            var downPaymentDisplay = document.getElementById('downPaymentDisplay');
             var annualRate = document.getElementById('annualRate');
-            var loanYears = document.getElementById('loanYears');
             var includeTax = document.getElementById('includeTax');
             var includeInsurance = document.getElementById('includeInsurance');
             var calcBtn = document.getElementById('calcBtn');
@@ -226,14 +466,23 @@
             var loanAmount = document.getElementById('loanAmount');
             var monthlyPayment = document.getElementById('monthlyPayment');
             var totalInterest = document.getElementById('totalInterest');
+            var totalPayment = document.getElementById('totalPayment');
             var monthlyLabel = document.getElementById('monthlyLabel');
             var resultSummary = document.getElementById('resultSummary');
 
+            var yearRadios = document.querySelectorAll('input[name="loanYears"]');
             var repayTypeRadios = document.querySelectorAll('input[name="repayType"]');
 
             downPaymentRange.addEventListener('input', function() {
-                downPaymentValue.textContent = this.value + '%';
+                downPaymentDisplay.textContent = this.value + '%';
             });
+
+            function getLoanYears() {
+                for (var i = 0; i < yearRadios.length; i++) {
+                    if (yearRadios[i].checked) return parseInt(yearRadios[i].value);
+                }
+                return 3;
+            }
 
             function getRepayType() {
                 for (var i = 0; i < repayTypeRadios.length; i++) {
@@ -257,7 +506,7 @@
             calcBtn.addEventListener('click', function() {
                 var price = parseFloat(carPrice.value);
                 if (isNaN(price) || price <= 0) {
-                    alert('请输入有效的车辆价格');
+                    showToast('请输入有效的车辆价格');
                     return;
                 }
 
@@ -268,11 +517,11 @@
 
                 var rate = parseFloat(annualRate.value);
                 if (isNaN(rate) || rate < 0) {
-                    alert('请输入有效的年利率');
+                    showToast('请输入有效的年利率');
                     return;
                 }
 
-                var years = parseInt(loanYears.value);
+                var years = getLoanYears();
                 var months = years * 12;
                 var monthlyRate = rate / 100 / 12;
 
@@ -308,29 +557,32 @@
                     monthlyLabel.textContent = '首月还款';
                 }
 
-                var totalPayment = loan + totalInterestVal;
+                var totalPaymentVal = loan + totalInterestVal;
 
                 downPaymentAmount.textContent = formatNumber(downPay);
                 loanAmount.textContent = formatNumber(loan);
                 monthlyPayment.textContent = formatNumber(monthly);
                 totalInterest.textContent = formatNumber(totalInterestVal);
+                totalPayment.textContent = formatNumber(totalPaymentVal);
 
-                var summaryHtml = '<strong>购车总费用明细：</strong><br>';
-                summaryHtml += '车辆价格：' + formatNumber(priceYuan) + ' 元<br>';
-                summaryHtml += '首付（' + downPercent + '%）：' + formatNumber(downPay) + ' 元<br>';
+                var summaryHtml = '<div class="summary-title">📋 购车总费用明细</div>';
+                summaryHtml += '<div class="summary-row"><span class="label">车辆价格</span><span class="value">' + formatNumber(priceYuan) + ' 元</span></div>';
+                summaryHtml += '<div class="summary-row"><span class="label">首付（' + downPercent + '%）</span><span class="value">' + formatNumber(downPay) + ' 元</span></div>';
                 if (tax > 0) {
-                    summaryHtml += '购置税：' + formatNumber(tax) + ' 元<br>';
+                    summaryHtml += '<div class="summary-row"><span class="label">购置税</span><span class="value">' + formatNumber(tax) + ' 元</span></div>';
                 }
                 if (insurance > 0) {
-                    summaryHtml += '保险（预估）：' + formatNumber(insurance) + ' 元<br>';
+                    summaryHtml += '<div class="summary-row"><span class="label">保险（预估）</span><span class="value">' + formatNumber(insurance) + ' 元</span></div>';
                 }
-                summaryHtml += '<strong>首次支付合计：' + formatNumber(totalFirstPay) + ' 元</strong><br>';
-                summaryHtml += '贷款金额：' + formatNumber(loan) + ' 元<br>';
-                summaryHtml += '还款总额：' + formatNumber(totalPayment) + ' 元<br>';
-                summaryHtml += '<strong>购车总花费：' + formatNumber(totalFirstPay + totalPayment) + ' 元</strong>';
+                summaryHtml += '<div class="summary-row total"><span class="label">首次支付合计</span><span class="value">' + formatNumber(totalFirstPay) + ' 元</span></div>';
+                summaryHtml += '<div class="summary-row"><span class="label">贷款金额</span><span class="value">' + formatNumber(loan) + ' 元</span></div>';
+                summaryHtml += '<div class="summary-row"><span class="label">还款总额</span><span class="value">' + formatNumber(totalPaymentVal) + ' 元</span></div>';
+                summaryHtml += '<div class="summary-row total"><span class="label">购车总花费</span><span class="value">' + formatNumber(totalFirstPay + totalPaymentVal) + ' 元</span></div>';
 
                 resultSummary.innerHTML = summaryHtml;
-                calcResult.style.display = 'block';
+                calcResult.classList.add('show');
+                
+                calcResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     </script>
