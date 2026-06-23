@@ -29,7 +29,7 @@
             <h1 class="tool-title">大小写转换</h1>
             <p class="tool-desc">转换文本大小写，支持全大写、全小写、首字母大写、驼峰命名等。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>大小写转换工具为开发者和内容创作者提供便捷的文本格式转换服务。支持全大写、全小写、单词首字母大写、句首大写以及驼峰命名法等多种转换模式，满足编程命名规范、标题格式化、数据标准化等不同需求。工具基于JavaScript字符串方法结合自定义格式化规则实现，转换速度快且准确。无论您是在编写代码时需要统一变量命名，还是在编辑文档时需要调整标题大小写，都可以轻松完成。所有转换操作均在本地执行，无需担心文本数据泄露。</p>
             </div>
 
@@ -53,6 +53,28 @@
             </div>
         </main>
 
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
+            <p>大小写转换工具，别看功能简单，用起来是真的方便。写代码的时候经常要转变量名，写文档的时候要统一标题格式，这些场景它都能搞定。支持全大写、全小写、首字母大写、句首大写，还有程序员最爱的驼峰命名法。说实话，刚开始写代码那会儿，我经常手动改大小写，后来才发现有这种工具，早用早省心。现在每次要格式化变量名，直接粘贴进来一键搞定。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的文本<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">把需要转换的文本粘贴到输入框里</li>
+                <li style="margin-bottom: 8px;">选择你想要的格式：全大写、全小写、首字母大写、驼峰命名等等</li>
+                <li style="margin-bottom: 0;">转换结果会显示在下面，点"复制结果"就能拿走用了</li>
+            </ol>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：驼峰命名是什么？</strong><br>A：驼峰命名就是把多个单词连在一起，每个单词首字母大写，像驼峰一样有高有低。比如"user name"变成"userName"（小驼峰）或"UserName"（大驼峰）。写代码的时候经常用到。</p>
+            <p style="margin-bottom: 0;"><strong>Q：支持哪些格式？</strong><br>A：目前支持全大写、全小写、单词首字母大写、句首大写、驼峰命名这几种。基本覆盖了日常使用场景，如果你需要其他格式可以告诉我。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">写代码时变量名用小驼峰（userName），类名用大驼峰（UserName），这是大多数编程语言的约定俗成。养成好习惯，代码看起来更专业。</p>
+        </div>
+
         <div class="recommend-section">
             <h3>其他工具</h3>
             <div class="recommend-links">
@@ -62,7 +84,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
@@ -115,10 +137,7 @@
         copyBtn.addEventListener('click', function() {
             var text = textOutput.textContent;
             if (!text || text === '转换结果将显示在这里...') { alert('没有可复制的内容'); return; }
-            navigator.clipboard.writeText(text).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() { copyBtn.textContent = '复制结果'; }, 2000);
-            });
+            copyToClipboard(text, copyBtn, '复制结果');
         });
 
         clearBtn.addEventListener('click', function() {

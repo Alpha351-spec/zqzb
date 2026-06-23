@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
         <main>
             <h1 class="tool-title">PDF旋转页面</h1>
             <p class="tool-desc">选择旋转角度旋转PDF页面，支持全部或指定页面，纯本地处理。</p>
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>PDF旋转页面工具可以帮助您永久旋转PDF文件中的页面。支持90°、180°、270°三种旋转角度，您可以选择旋转全部页面或指定页码范围。旋转操作基于pdf-lib库在浏览器本地完成，无需上传文件至服务器，充分保障您的隐私安全。适用于扫描文档方向不正确、页面布局需要调整等场景。</p>
             </div>
             <div class="input-group">
@@ -57,10 +57,31 @@
                 <div id="fileInfo"></div>
                 <button class="btn" id="downloadBtn" style="margin-top: 20px;">下载旋转后的PDF</button>
             </div>
-            <div style="margin-top: 24px; padding: 12px 16px; background: #f0f8ff; border-radius: 12px; font-size: 13px; color: #555555;">
+            <div style="margin-top: 24px; padding: 12px 16px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 13px; color: var(--color-text-secondary);">
                 <strong>隐私说明：</strong>所有处理均在您的浏览器本地完成，文件不会上传到任何服务器。
             </div>
         </main>
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
+            <p>扫描件最头疼的问题就是方向不对——有些页面是歪的，有些是倒的。这个旋转工具可以帮你把PDF页面转正。支持90°、180°、270°三种角度，可以旋转全部页面，也可以只旋转指定页面。旋转是永久性的，下载后的文件打开就是正的。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的PDF文件<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成，采用pdf-lib库进行高效处理。文件处理完成后立即从浏览器内存中清除，关闭网页后痕迹完全消失。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">点击"选择PDF文件"按钮，上传你的PDF</li>
+                <li style="margin-bottom: 8px;">选择旋转角度，输入要旋转的页码（留空则旋转全部页面）</li>
+                <li style="margin-bottom: 0;">点击"旋转页面"按钮，等一下就能下载旋转好的PDF了</li>
+            </ol>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：能只旋转某几页吗？</strong><br>A：可以，在页码范围输入框里填上你想旋转的页码就行。留空的话就是旋转全部页面。</p>
+            <p style="margin-bottom: 0;"><strong>Q：旋转后质量会变吗？</strong><br>A：完全不会，旋转只是改变页面的显示方向，内容、图片质量都不会有任何变化。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">扫描件方向不对时，先旋转再做其他处理，这样后续操作会更顺畅。</p>
+        </div>
         <div class="recommend-section">
             <h3>其他PDF工具</h3>
             <div class="recommend-links">
@@ -79,7 +100,7 @@
             </div>
         </div>
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../terms.html">服务条款</a> | <a href="../../guide.html">使用指南</a> | <a href="../../blog.html">博客</a> | <a href="../../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
@@ -164,9 +185,9 @@
                 var originalSize = (file.size / 1024).toFixed(2);
                 var newSize = (rotatedPdfBytes.length / 1024).toFixed(2);
 
-                fileInfo.innerHTML = '<p style="font-size: 14px; color: #555555;">文件名: ' + file.name + '</p>' +
-                    '<p style="margin-top: 8px; font-size: 14px; color: #555555;">总页数: ' + totalPages + ' | 旋转页数: ' + pages.length + '</p>' +
-                    '<p style="margin-top: 8px; font-size: 14px; color: #555555;">原始大小: ' + originalSize + ' KB | 处理后: ' + newSize + ' KB</p>';
+                fileInfo.innerHTML = '<p style="font-size: 14px; color: var(--color-text-secondary);">文件名: ' + file.name + '</p>' +
+                    '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">总页数: ' + totalPages + ' | 旋转页数: ' + pages.length + '</p>' +
+                    '<p style="margin-top: 8px; font-size: 14px; color: var(--color-text-secondary);">原始大小: ' + originalSize + ' KB | 处理后: ' + newSize + ' KB</p>';
 
                 resultArea.style.display = 'block';
             } catch (error) {

@@ -10,14 +10,14 @@
     <style>
         .uuid-display {
             padding: 20px;
-            background: #f9f9f9;
+            background: var(--color-bg-secondary);
             border-radius: 12px;
             margin-bottom: 24px;
         }
         .uuid-text {
             font-family: 'SF Mono', 'Fira Code', monospace;
             font-size: 20px;
-            color: #111111;
+            color: var(--color-text);
             word-break: break-all;
             text-align: center;
         }
@@ -60,21 +60,43 @@
             <div class="input-group">
                 <label>格式选项</label>
                 <div style="display: flex; gap: 16px;">
-                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555555;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
                         <input type="radio" name="format" value="default" checked style="width: 18px; height: 18px; accent-color: #009DFF;">
                         标准格式
                     </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555555;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
                         <input type="radio" name="format" value="no-dash" style="width: 18px; height: 18px; accent-color: #009DFF;">
                         无横线
                     </label>
-                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #555555;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
                         <input type="radio" name="format" value="upper" style="width: 18px; height: 18px; accent-color: #009DFF;">
                         大写
                     </label>
                 </div>
             </div>
         </main>
+
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
+            <p>UUID这东西，搞开发的肯定不陌生。数据库主键、API请求ID、分布式系统里的唯一标识，到处都用得上。这个工具生成的是UUID v4版本，也就是随机生成的那种。支持批量生成，还能选择不同的格式，复制起来也方便。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的数据<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">设置要生成的数量，可以一次生成多个</li>
+                <li style="margin-bottom: 8px;">选择格式：标准格式（带横线）、无横线、大写</li>
+                <li style="margin-bottom: 0;">点击"生成UUID"，然后点"复制结果"一键复制</li>
+            </ol>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：什么是UUID v4？</strong><br>A：UUID是通用唯一识别码的缩写，v4表示它是随机生成的。一个UUID长这样：550e8400-e29b-41d4-a716-446655440000，总共36个字符（含横线），128位。</p>
+            <p style="margin-bottom: 0;"><strong>Q：会重复吗？</strong><br>A：理论上UUID v4的重复概率极低，低到可以忽略不计。全球所有人同时生成UUID撞车的概率，比你中彩票还小得多。放心用就是了。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">UUID v4是随机生成的，理论上重复概率极低，够用了。如果你需要做数据库主键，建议用标准格式（带横线），方便阅读和调试。</p>
+        </div>
 
         <div class="recommend-section">
             <h3>其他工具</h3>
@@ -85,7 +107,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
@@ -125,10 +147,7 @@
 
         copyBtn.addEventListener('click', function() {
             if (!lastResult) { alert('请先生成UUID'); return; }
-            navigator.clipboard.writeText(lastResult).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() { copyBtn.textContent = '复制结果'; }, 2000);
-            });
+            copyToClipboard(lastResult, copyBtn, '复制结果');
         });
     </script>
 </body>

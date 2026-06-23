@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="单位换算器 - 在线换算长度、面积、重量、温度、体积等常用单位，实时计算，支持双向换算。">
+    <title>单位换算器 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .calculator-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .category-btn {
+            padding: 10px 18px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .category-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        .category-btn.active {
+            border-color: var(--color-accent);
+            background: var(--color-bg-tertiary);
+            color: var(--color-accent);
+        }
+        .convert-area {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+        }
+        .convert-area .input-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .swap-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            margin-bottom: 8px;
+        }
+        .swap-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            transform: rotate(180deg);
+        }
+        .result-showcase {
+            background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 24px;
+            text-align: center;
+        }
+        .result-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 12px;
+        }
+        .result-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .result-formula {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            padding: 12px 20px;
+            background: var(--color-bg);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .tips-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+        }
+        .tips-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tips-content {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+        .tips-content p {
+            margin-bottom: 8px;
+        }
+        .tips-content p:last-child {
+            margin-bottom: 0;
+        }
+        .tips-content strong {
+            color: var(--color-text);
+        }
+        @media (max-width: 640px) {
+            .calculator-card {
+                padding: 20px;
+            }
+            .convert-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .swap-btn {
+                align-self: center;
+                transform: rotate(90deg);
+            }
+            .swap-btn:hover {
+                transform: rotate(270deg);
+            }
+            .result-value {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../mortgage/">房贷计算器</a>
+            <a href="../carloan/">车贷计算器</a>
+            <a href="../date-diff/">日期计算器</a>
+            <a href="./" class="active">单位换算器</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">📐 单位换算器</h1>
+            <p class="tool-desc">在线换算长度、面积、重量、温度、体积等常用单位，实时计算结果。</p>
+
+            <div class="calculator-card">
+                <div class="category-nav" id="categoryNav">
+                    <button class="category-btn active" data-category="length">📏 长度</button>
+                    <button class="category-btn" data-category="area">📐 面积</button>
+                    <button class="category-btn" data-category="weight">⚖️ 重量</button>
+                    <button class="category-btn" data-category="temperature">🌡️ 温度</button>
+                    <button class="category-btn" data-category="volume">🧪 体积</button>
+                </div>
+
+                <div class="convert-area">
+                    <div class="input-group">
+                        <label for="fromValue">数值</label>
+                        <input type="number" id="fromValue" value="1" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label for="fromUnit">从</label>
+                        <select id="fromUnit"></select>
+                    </div>
+                    <button class="swap-btn" id="swapBtn" title="交换单位">⇄</button>
+                    <div class="input-group">
+                        <label for="toUnit">到</label>
+                        <select id="toUnit"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-showcase">
+                <div class="result-label">换算结果</div>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-formula" id="resultFormula"></div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">📌 支持的单位</div>
+                <div class="tips-content">
+                    <p><strong>长度</strong>：毫米、厘米、分米、米、千米、英寸、英尺、码、英里</p>
+                    <p><strong>面积</strong>：平方毫米、平方厘米、平方米、平方千米、公顷、亩、平方英尺、英亩</p>
+                    <p><strong>重量</strong>：毫克、克、千克、吨、盎司、磅</p>
+                    <p><strong>温度</strong>：摄氏度、华氏度、开尔文</p>
+                    <p><strong>体积</strong>：毫升、升、立方米、加仑、盎司（液量）</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../mortgage/">房贷计算器</a>
+                <a href="../carloan/">车贷计算器</a>
+                <a href="../date-diff/">日期计算器</a>
+                <a href="../../timestamp/">时间戳转换</a>
+                <a href="../../random-number/">随机数生成</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../terms.html">服务条款</a> | <a href="../../guide.html">使用指南</a> | <a href="../../blog.html">博客</a> | <a href="../../sitemap.xml">网站地图</a></p>
+        </footer>
+    </div>
+
+    <script src="../../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var units = {
+                length: {
+                    name: '长度',
+                    base: 'm',
+                    units: {
+                        'mm': { name: '毫米', factor: 0.001 },
+                        'cm': { name: '厘米', factor: 0.01 },
+                        'dm': { name: '分米', factor: 0.1 },
+                        'm': { name: '米', factor: 1 },
+                        'km': { name: '千米', factor: 1000 },
+                        'in': { name: '英寸', factor: 0.0254 },
+                        'ft': { name: '英尺', factor: 0.3048 },
+                        'yd': { name: '码', factor: 0.9144 },
+                        'mi': { name: '英里', factor: 1609.344 }
+                    }
+                },
+                area: {
+                    name: '面积',
+                    base: 'm2',
+                    units: {
+                        'mm2': { name: '平方毫米', factor: 0.000001 },
+                        'cm2': { name: '平方厘米', factor: 0.0001 },
+                        'm2': { name: '平方米', factor: 1 },
+                        'km2': { name: '平方千米', factor: 1000000 },
+                        'ha': { name: '公顷', factor: 10000 },
+                        'mu': { name: '亩', factor: 666.6667 },
+                        'ft2': { name: '平方英尺', factor: 0.092903 },
+                        'ac': { name: '英亩', factor: 4046.856 }
+                    }
+                },
+                weight: {
+                    name: '重量',
+                    base: 'kg',
+                    units: {
+                        'mg': { name: '毫克', factor: 0.000001 },
+                        'g': { name: '克', factor: 0.001 },
+                        'kg': { name: '千克', factor: 1 },
+                        't': { name: '吨', factor: 1000 },
+                        'oz': { name: '盎司', factor: 0.0283495 },
+                        'lb': { name: '磅', factor: 0.453592 }
+                    }
+                },
+                temperature: {
+                    name: '温度',
+                    base: 'c',
+                    units: {
+                        'c': { name: '摄氏度' },
+                        'f': { name: '华氏度' },
+                        'k': { name: '开尔文' }
+                    }
+                },
+                volume: {
+                    name: '体积',
+                    base: 'l',
+                    units: {
+                        'ml': { name: '毫升', factor: 0.001 },
+                        'l': { name: '升', factor: 1 },
+                        'm3': { name: '立方米', factor: 1000 },
+                        'gal': { name: '加仑', factor: 3.78541 },
+                        'floz': { name: '盎司（液量）', factor: 0.0295735 }
+                    }
+                }
+            };
+
+            var currentCategory = 'length';
+            var fromUnit = document.getElementById('fromUnit');
+            var toUnit = document.getElementById('toUnit');
+            var fromValue = document.getElementById('fromValue');
+            var resultValue = document.getElementById('resultValue');
+            var resultFormula = document.getElementById('resultFormula');
+            var categoryBtns = document.querySelectorAll('.category-btn');
+
+            function populateUnits(category) {
+                var categoryData = units[category];
+                var unitKeys = Object.keys(categoryData.units);
+
+                fromUnit.innerHTML = '';
+                toUnit.innerHTML = '';
+
+                unitKeys.forEach(function(key) {
+                    var option1 = document.createElement('option');
+                    option1.value = key;
+                    option1.textContent = categoryData.units[key].name;
+                    fromUnit.appendChild(option1);
+
+                    var option2 = document.createElement('option');
+                    option2.value = key;
+                    option2.textContent = categoryData.units[key].name;
+                    toUnit.appendChild(option2);
+                });
+
+                if (unitKeys.length > 1) {
+                    toUnit.value = unitKeys[1];
+                }
+            }
+
+            function convertTemperature(value, from, to) {
+                var celsius;
+                if (from === 'c') celsius = value;
+                else if (from === 'f') celsius = (value - 32) * 5 / 9;
+                else celsius = value - 273.15;
+
+                if (to === 'c') return celsius;
+                else if (to === 'f') return celsius * 9 / 5 + 32;
+                else return celsius + 273.15;
+            }
+
+            function convert() {
+                var value = parseFloat(fromValue.value);
+                if (isNaN(value)) {
+                    resultValue.textContent = '-';
+                    resultFormula.textContent = '';
+                    return;
+                }
+
+                var from = fromUnit.value;
+                var to = toUnit.value;
+                var result;
+
+                if (currentCategory === 'temperature') {
+                    result = convertTemperature(value, from, to);
+                } else {
+                    var categoryData = units[currentCategory];
+                    var baseValue = value * categoryData.units[from].factor;
+                    result = baseValue / categoryData.units[to].factor;
+                }
+
+                var formattedResult;
+                if (Math.abs(result) < 0.0001 || Math.abs(result) > 999999999) {
+                    formattedResult = result.toExponential(6);
+                } else {
+                    formattedResult = result.toFixed(6).replace(/\.?0+$/, '');
+                }
+
+                resultValue.textContent = formattedResult;
+                
+                var unitResult;
+                if (currentCategory === 'temperature') {
+                    unitResult = convertTemperature(1, from, to);
+                } else {
+                    var categoryData = units[currentCategory];
+                    unitResult = (1 * categoryData.units[from].factor) / categoryData.units[to].factor;
+                }
+                resultFormula.textContent = '1 ' + units[currentCategory].units[from].name + ' = ' + unitResult.toFixed(6).replace(/\.?0+$/, '') + ' ' + units[currentCategory].units[to].name;
+            }
+
+            categoryBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    currentCategory = this.getAttribute('data-category');
+                    populateUnits(currentCategory);
+                    convert();
+                });
+            });
+
+            fromValue.addEventListener('input', convert);
+            fromUnit.addEventListener('change', convert);
+            toUnit.addEventListener('change', convert);
+
+            document.getElementById('swapBtn').addEventListener('click', function() {
+                var temp = fromUnit.value;
+                fromUnit.value = toUnit.value;
+                toUnit.value = temp;
+                convert();
+            });
+
+            populateUnits(currentCategory);
+            convert();
+        });
+    </script>
+</body>
+</html>

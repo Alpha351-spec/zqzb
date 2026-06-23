@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -17,16 +17,16 @@
             padding: 10px 20px;
             font-size: 14px;
             font-weight: 400;
-            color: #555555;
-            background: #ffffff;
-            border: 1px solid #eaeaea;
+            color: var(--color-text-secondary);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
         .watermark-tab:hover {
-            color: #111111;
-            border-color: #111111;
+            color: var(--color-text);
+            border-color: var(--color-text);
         }
         .watermark-tab.active {
             color: #ffffff;
@@ -44,7 +44,7 @@
             height: 8px;
             -webkit-appearance: none;
             appearance: none;
-            background: linear-gradient(to right, #009DFF 0%, #009DFF 70%, #eaeaea 70%, #eaeaea 100%);
+            background: linear-gradient(to right, #009DFF 0%, #009DFF 70%, var(--color-border) 70%, var(--color-border) 100%);
             outline: none;
             border-radius: 4px;
             cursor: pointer;
@@ -54,7 +54,7 @@
             max-height: 150px;
             margin-top: 12px;
             border-radius: 8px;
-            border: 1px solid #eaeaea;
+            border: 1px solid var(--color-border);
         }
     </style>
 </head>
@@ -79,8 +79,8 @@
             <h1 class="tool-title">图片水印添加</h1>
             <p class="tool-desc">在浏览器本地为图片添加文字或图片水印。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
-                <p>图片水印工具适用于版权保护、品牌标识、照片署名等场景。支持文字水印和图片水印两种模式，提供6种位置选项（四角、居中、平铺），可自由调节水印透明度（10%-100%）。文字水印支持自定义字号和颜色，图片水印支持自定义大小比例。平铺模式下水印以30度倾斜角均匀分布，有效防盗。基于Canvas drawImage和drawText技术实现Alpha混合，所有处理在浏览器本地完成，图片数据不上传服务器。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
+                <p>辛辛苦苦拍的照片、做的设计图，发到网上分分钟被人盗走，想想就来气。这个水印工具就是帮你解决这个问题的——支持文字水印和图片水印两种模式，可以放四角、居中，也可以铺满整张图。平铺模式下水印30度倾斜排列，想抠都抠不掉。透明度、字号、颜色都能调，保护版权的同时尽量不影响美观。</p>
             </div>
 
             <div class="input-group">
@@ -153,6 +153,28 @@
             </div>
         </main>
 
+        <div style="margin-top: 40px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 工具简介</h2>
+            <p>做摄影、做设计的朋友应该都有过这种经历：精心拍的照片发到社交平台，转眼就被人拿去用了，连个招呼都不打。加水印是最基本的自我保护手段。这个工具支持两种水印模式：文字水印和图片水印。文字水印可以自定义内容、字号和颜色；图片水印可以放你的logo。位置可以选四角、居中，也可以铺满整张图。平铺模式特别适合防盗，水印30度倾斜排列，想P掉可没那么容易。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个加水印过程都在你自己的浏览器里完成——这意味着你的照片、设计稿、logo永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">点击"选择底图"，把你要加水印的图片选进来</li>
+                <li style="margin-bottom: 8px;">选文字水印或图片水印模式，填写水印内容、设置位置和透明度</li>
+                <li style="margin-bottom: 0;">点击"添加水印"，预览效果满意后点"下载"保存</li>
+            </ol>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：水印能完全防止盗图吗？</strong><br>A：说实话，没有100%防盗的办法。但加了水印至少能增加盗图成本，特别是平铺模式，想把水印去掉又不伤原图是非常困难的。水印是防盗的第一道防线，不是最后一道。</p>
+            <p style="margin-bottom: 0;"><strong>Q：支持批量加水印吗？</strong><br>A：目前不支持批量操作，一次只能处理一张图。如果你有大量图片需要加水印，建议用桌面端的批量处理软件。不过对于偶尔用用的场景，这个工具完全够了。</p>
+            
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">半透明水印比纯实色的好看很多，建议透明度调到30%-50%左右。如果是为了防盗，选"平铺"模式效果最好；如果只是为了署名，放右下角就够了。</p>
+        </div>
+
         <div class="recommend-section">
             <h3>其他工具</h3>
             <div class="recommend-links">
@@ -165,7 +187,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
@@ -210,7 +232,7 @@
 
         function updateRangeBackground(range, value, min, max) {
             var percentage = ((value - min) / (max - min)) * 100;
-            range.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, #eaeaea ' + percentage + '%, #eaeaea 100%)';
+            range.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, var(--color-border) ' + percentage + '%, var(--color-border) 100%)';
         }
 
         opacityRange.addEventListener('input', function() {

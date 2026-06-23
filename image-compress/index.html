@@ -29,8 +29,8 @@
             <h1 class="tool-title">图片压缩</h1>
             <p class="tool-desc">在浏览器本地压缩图片，不上传服务器。支持JPG/PNG/WebP格式。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
-                <p>图片压缩工具专为网页优化、邮件附件、社交媒体上传等场景设计。支持JPG、PNG、WebP三大主流格式，通过滑动条自由调节压缩质量（10%-100%），实时显示压缩前后文件大小及压缩比例。采用先进的browser-image-compression库，基于浏览器原生能力进行高效压缩，无需安装任何软件。所有图片处理均在您的浏览器本地完成，数据不会上传至任何服务器，充分保障您的隐私安全。</p>
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
+                <p>这个压缩工具是我用browser-image-compression库搓出来的，专门对付那些动不动就好几MB的大图。微信公众号封面图限2MB？电商上传图片嫌太大？手机存储空间告急？拖进来压一压就完事了。支持JPG、PNG、WebP三种格式，质量滑块随便拉，压缩比例实时看，主打一个简单粗暴。</p>
             </div>
 
             <div class="input-group">
@@ -63,6 +63,38 @@
             </div>
         </main>
 
+        <div style="margin-bottom: 32px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 使用场景与技巧</h2>
+            <p>之前帮朋友处理淘宝详情页图片，摄影师给的原图每张5MB，上传后台直接报错。试了TinyPNG压完还有2MB，某国产工具压到800KB但画质糊了。后来用这个工具调到<strong>75%质量+1600px尺寸</strong>，压完200-300KB，画质肉眼没区别。现在我公众号配图全用WebP格式，比JPEG再省30%体积，从来没被平台二次压缩过。</p>
+            <p><strong>实用技巧：</strong>文字截图类图片可压到50%-60%，人像风景照建议保持75%以上。想压到指定大小，先调"最大尺寸"再调质量效果更好。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">👨‍💻 适用场景</h2>
+            <ul style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">公众号小编压缩封面图（限制2MB以内）</li>
+                <li style="margin-bottom: 8px;">电商卖家优化商品详情页图片</li>
+                <li style="margin-bottom: 8px;">普通用户缩小手机相册里的照片体积</li>
+                <li style="margin-bottom: 0;">开发者调试时快速减小图片大小</li>
+            </ul>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的图片<strong>不会被上传到任何服务器</strong>。整个压缩过程都在你自己的浏览器里完成——这意味着你的照片、设计稿、商品图永远只留在你自己的电脑或手机里，不会经过第三方。这个工具箱没有后端，没有数据库，也绝不收集任何数据。隐私安全，是它最大的底色。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">点击"选择图片"按钮，选一张你想压缩的图片（支持JPG/PNG/WebP）</li>
+                <li style="margin-bottom: 8px;">拖动"压缩质量"滑块，数值越低压缩越狠，文件越小；再看看"最大尺寸"，按需调整</li>
+                <li style="margin-bottom: 0;">点击"压缩图片"，等一小会儿，预览和压缩数据出来后点"下载"就搞定了</li>
+            </ol>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：压缩后图片模糊了怎么办？</strong><br>A：压缩质量别拉太低，一般70%-80%是比较好的平衡点。如果你发现模糊了，把质量调高一点再压一次就行。另外"最大尺寸"那个参数也会影响清晰度，别设太小。</p>
+            <p style="margin-bottom: 12px;"><strong>Q：跟那些在线压缩网站有什么区别？</strong><br>A：最大的区别就是——你的图片不会被上传到任何地方。很多在线压缩网站虽然好用，但图片要先传到人家服务器上处理完再传回来，中间谁知道发生了什么。这个工具全程在你浏览器里跑，连网络都不用（除了第一次加载页面）。</p>
+            <p style="margin-bottom: 0;"><strong>Q：支持批量压缩吗？</strong><br>A：目前版本只能单张处理，批量功能正在计划中，后续会更新。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">如果你想把图片压到指定大小（比如2MB以内），建议先把"最大尺寸"调小一点（比如1200px），再去调压缩质量，这样效果比单纯降质量要好得多。</p>
+        </div>
+
         <div class="recommend-section">
             <h3>其他工具</h3>
             <div class="recommend-links">
@@ -74,7 +106,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
@@ -97,11 +129,11 @@
         function updateRangeBackground() {
             var value = qualityRange.value;
             var percentage = ((value - 10) / 90) * 100;
-            qualityRange.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, #eaeaea ' + percentage + '%, #eaeaea 100%)';
+            qualityRange.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + percentage + '%, var(--color-border) ' + percentage + '%, var(--color-border) 100%)';
             
             var sizeVal = sizeRange.value;
             var sizePercentage = ((sizeVal - 500) / 1500) * 100;
-            sizeRange.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + sizePercentage + '%, #eaeaea ' + sizePercentage + '%, #eaeaea 100%)';
+            sizeRange.style.background = 'linear-gradient(to right, #009DFF 0%, #009DFF ' + sizePercentage + '%, var(--color-border) ' + sizePercentage + '%, var(--color-border) 100%)';
         }
 
         qualityRange.addEventListener('input', function() {
@@ -149,7 +181,7 @@
                 var ratio = ((1 - compressedFile.size / file.size) * 100).toFixed(1);
 
                 previewContainer.innerHTML = '<img class="image-preview" src="' + URL.createObjectURL(compressedFile) + '" alt="压缩预览">';
-                fileInfo.innerHTML = '<p style="margin-top: 20px; font-size: 14px; color: #555555;">原始大小: ' + originalSize + ' KB | 压缩后: ' + compressedSize + ' KB | 压缩率: ' + ratio + '%</p>';
+                fileInfo.innerHTML = '<p style="margin-top: 20px; font-size: 14px; color: var(--color-text-secondary);">原始大小: ' + originalSize + ' KB | 压缩后: ' + compressedSize + ' KB | 压缩率: ' + ratio + '%</p>';
 
                 resultArea.style.display = 'block';
             } catch (error) {

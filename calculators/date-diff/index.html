@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="日期计算器 - 在线计算两个日期之间的天数差，或从指定日期加减天数得到新日期，支持工作日计算。">
+    <title>日期计算器 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .calculator-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .card-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+        .mode-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .mode-tab {
+            flex: 1;
+            padding: 14px 20px;
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .mode-tab:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        .mode-tab.active {
+            border-color: var(--color-accent);
+            background: var(--color-bg-tertiary);
+            color: var(--color-accent);
+        }
+        .calc-section {
+            display: none;
+        }
+        .calc-section.active {
+            display: block;
+        }
+        .result-showcase {
+            background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            display: none;
+        }
+        .result-showcase.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .result-main {
+            text-align: center;
+            padding: 32px;
+            background: var(--color-bg);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .result-days {
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1.2;
+        }
+        .result-days-label {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            margin-top: 8px;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .result-card {
+            background: var(--color-bg);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-2px);
+        }
+        .result-card .value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        .result-card .label {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+        .new-date-result {
+            text-align: center;
+            padding: 32px;
+            background: var(--color-bg);
+            border-radius: 16px;
+        }
+        .new-date-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+        }
+        .new-date-weekday {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+        }
+        .tips-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+        }
+        .tips-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tips-content {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+        .tips-content ul {
+            padding-left: 20px;
+            margin-bottom: 12px;
+        }
+        .tips-content li {
+            margin-bottom: 8px;
+        }
+        .tips-content p {
+            margin-bottom: 12px;
+        }
+        .tips-content p:last-child {
+            margin-bottom: 0;
+        }
+        .tips-content strong {
+            color: var(--color-text);
+        }
+        @media (max-width: 640px) {
+            .calculator-card {
+                padding: 20px;
+            }
+            .mode-tabs {
+                flex-direction: column;
+            }
+            .result-days {
+                font-size: 48px;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .new-date-value {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../../">← 返回工具箱</a>
+            <a href="../mortgage/">房贷计算器</a>
+            <a href="../carloan/">车贷计算器</a>
+            <a href="./" class="active">日期计算器</a>
+            <a href="../unit-convert/">单位换算器</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">📅 日期计算器</h1>
+            <p class="tool-desc">在线计算两个日期之间的天数差，或从指定日期加减天数得到新日期。</p>
+
+            <div class="calculator-card">
+                <div class="mode-tabs">
+                    <button class="mode-tab active" data-tab="diff">📆 日期差计算</button>
+                    <button class="mode-tab" data="add">➕ 日期加减计算</button>
+                </div>
+
+                <div class="calc-section active" id="diffSection">
+                    <div class="input-group">
+                        <label for="startDate">起始日期</label>
+                        <input type="date" id="startDate">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="endDate">结束日期</label>
+                        <input type="date" id="endDate">
+                    </div>
+
+                    <button class="btn btn-primary" id="calcDiffBtn" style="width: 100%;">
+                        🧮 计算日期差
+                    </button>
+                </div>
+
+                <div class="calc-section" id="addSection">
+                    <div class="input-group">
+                        <label for="baseDate">起始日期</label>
+                        <input type="date" id="baseDate">
+                    </div>
+
+                    <div class="input-group">
+                        <label>操作</label>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <select id="addOperation" style="width: 100px; min-height: 44px;">
+                                <option value="add">加上</option>
+                                <option value="subtract">减去</option>
+                            </select>
+                            <input type="number" id="addDays" value="30" min="1" style="flex: 1;">
+                            <span style="color: var(--color-text-secondary);">天</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="calcAddBtn" style="width: 100%;">
+                        🧮 计算新日期
+                    </button>
+                </div>
+            </div>
+
+            <div class="result-showcase" id="diffResult">
+                <div class="result-main">
+                    <div class="result-days" id="diffDays">-</div>
+                    <div class="result-days-label">天</div>
+                </div>
+                <div class="result-grid">
+                    <div class="result-card">
+                        <div class="value" id="diffWeeks">-</div>
+                        <div class="label">周</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="value" id="diffMonths">-</div>
+                        <div class="label">月</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="value" id="diffYears">-</div>
+                        <div class="label">年</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-showcase" id="addResult">
+                <div class="new-date-result">
+                    <div class="new-date-value" id="newDate">-</div>
+                    <div class="new-date-weekday" id="newWeekday">-</div>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <div class="tips-title">📌 使用场景</div>
+                <div class="tips-content">
+                    <ul>
+                        <li>计算两个日期之间相隔多少天</li>
+                        <li>计算从今天起100天后是几号</li>
+                        <li>计算项目截止日期还剩多少天</li>
+                        <li>计算年龄（精确到天）</li>
+                    </ul>
+                    <p><strong>💡 小贴士</strong>：点击日期输入框可以快速选择日期。计算结果包含起始日期和结束日期当天。</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="recommend-section">
+            <h3>其他工具</h3>
+            <div class="recommend-links">
+                <a href="../mortgage/">房贷计算器</a>
+                <a href="../carloan/">车贷计算器</a>
+                <a href="../unit-convert/">单位换算器</a>
+                <a href="../../timestamp/">时间戳转换</a>
+                <a href="../../random-number/">随机数生成</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../../about.html">关于</a> | <a href="../../privacy.html">隐私政策</a> | <a href="../../terms.html">服务条款</a> | <a href="../../guide.html">使用指南</a> | <a href="../../blog.html">博客</a> | <a href="../../sitemap.xml">网站地图</a></p>
+        </footer>
+    </div>
+
+    <script src="../../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tabs = document.querySelectorAll('.mode-tab');
+            var sections = document.querySelectorAll('.calc-section');
+
+            tabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    var target = this.getAttribute('data-tab');
+                    tabs.forEach(function(t) { t.classList.remove('active'); });
+                    sections.forEach(function(s) { s.classList.remove('active'); });
+                    this.classList.add('active');
+                    document.getElementById(target + 'Section').classList.add('active');
+                });
+            });
+
+            var today = new Date();
+            var todayStr = today.toISOString().split('T')[0];
+            document.getElementById('startDate').value = todayStr;
+            document.getElementById('endDate').value = todayStr;
+            document.getElementById('baseDate').value = todayStr;
+
+            function getWeekday(date) {
+                var days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+                return days[date.getDay()];
+            }
+
+            function dateDiff(date1, date2) {
+                var d1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+                var d2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
+                var diff = Math.abs(d2 - d1);
+                return Math.floor(diff / (1000 * 60 * 60 * 24));
+            }
+
+            function monthDiff(date1, date2) {
+                var months;
+                months = (date2.getFullYear() - date1.getFullYear()) * 12;
+                months -= date1.getMonth();
+                months += date2.getMonth();
+                return Math.abs(months);
+            }
+
+            document.getElementById('calcDiffBtn').addEventListener('click', function() {
+                var startStr = document.getElementById('startDate').value;
+                var endStr = document.getElementById('endDate').value;
+
+                if (!startStr || !endStr) {
+                    showToast('请选择起始日期和结束日期');
+                    return;
+                }
+
+                var start = new Date(startStr);
+                var end = new Date(endStr);
+
+                var days = dateDiff(start, end);
+                var weeks = Math.floor(days / 7);
+                var months = monthDiff(start, end);
+                var years = Math.floor(months / 12);
+
+                document.getElementById('diffDays').textContent = days;
+                document.getElementById('diffWeeks').textContent = weeks;
+                document.getElementById('diffMonths').textContent = months;
+                document.getElementById('diffYears').textContent = years;
+                
+                document.getElementById('diffResult').classList.add('show');
+                document.getElementById('addResult').classList.remove('show');
+                
+                document.getElementById('diffResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            document.getElementById('calcAddBtn').addEventListener('click', function() {
+                var baseStr = document.getElementById('baseDate').value;
+                var operation = document.getElementById('addOperation').value;
+                var days = parseInt(document.getElementById('addDays').value);
+
+                if (!baseStr) {
+                    showToast('请选择起始日期');
+                    return;
+                }
+
+                if (isNaN(days) || days < 0) {
+                    showToast('请输入有效的天数');
+                    return;
+                }
+
+                var base = new Date(baseStr);
+                var result;
+
+                if (operation === 'add') {
+                    result = new Date(base.getTime() + days * 24 * 60 * 60 * 1000);
+                } else {
+                    result = new Date(base.getTime() - days * 24 * 60 * 60 * 1000);
+                }
+
+                var year = result.getFullYear();
+                var month = String(result.getMonth() + 1).padStart(2, '0');
+                var day = String(result.getDate()).padStart(2, '0');
+
+                document.getElementById('newDate').textContent = year + '年' + month + '月' + day + '日';
+                document.getElementById('newWeekday').textContent = getWeekday(result);
+                
+                document.getElementById('addResult').classList.add('show');
+                document.getElementById('diffResult').classList.remove('show');
+                
+                document.getElementById('addResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

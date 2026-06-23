@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="纯前端PDF工具能代替Acrobat吗？实测合并扫描件、提取页面、删除页面、旋转、加水印5个场景，看看免费本地工具够不够用。">
+    <title>纯前端PDF工具能代替Acrobat吗？我测试了5个场景 - 杂七杂八工具箱</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <div style="background: #fff3cd; border: 1px solid #ffecb5; border-radius: 12px; padding: 16px; margin-bottom: 24px; color: #856404;">
+                ⚠️ 您的浏览器未启用 JavaScript。本工具箱的所有工具都需要 JavaScript 支持才能正常运行，请启用 JavaScript 后重试。
+            </div>
+        </noscript>
+        <nav class="nav-bar">
+            <a href="../">← 返回工具箱</a>
+        </nav>
+
+        <main>
+            <h1 class="tool-title">纯前端PDF工具能代替Acrobat吗？我测试了5个场景</h1>
+
+            <div class="about-content">
+                <p style="color: var(--color-text-tertiary); font-size: 14px;">2026年5月31日 · 杂七杂八工具箱</p>
+
+                <h2>先说结论</h2>
+                <p>作为半个打工人，我每天跟PDF打交道的频率比跟同事说话还高。Adobe Acrobat当然是PDF界的"老大哥"，但一个月几十块的订阅费，加上时不时卡顿的体验，让我一直在想：<strong>日常办公场景下，纯前端的免费工具能不能顶上？</strong></p>
+                <p>我挑了5个最常见的PDF操作场景，用杂七杂八工具箱里的工具逐一测试，结论是：<strong>日常轻度使用完全够用，重度专业排版还是得Acrobat</strong>。下面一个个说。</p>
+
+                <h2>场景一：合并多个扫描件</h2>
+                <p>这是打工人的日常——把身份证正反面、营业执照、合同签字页扫成PDF，然后合成一个文件发给甲方。</p>
+                <p>测试：我拿了3个扫描件PDF，总共大概15MB，用<a href="../pdf/merge/">PDF合并</a>工具拖进去，支持拖拽调整顺序，点一下"合并"，几秒钟就输出了一个完整文件。打开检查了一下，页面顺序正确，画质没有损失，文件大小也合理。</p>
+                <p><strong>体验：很好，跟Acrobat没什么差别。</strong>唯一的小区别是不能在合并前预览每页的缩略图，但对于简单合并来说无所谓。</p>
+
+                <h2>场景二：提取指定页面</h2>
+                <p>甲方发来一份50页的合同，你只需要其中第12到15页的条款做参考。Acrobat里可以"组织页面"然后提取，那前端工具呢？</p>
+                <p>用<a href="../pdf/split/">PDF拆分</a>工具，输入页码范围"12-15"，点击处理，瞬间得到一个4页的新PDF。也可以用<a href="../pdf/extract/">PDF提取页面</a>工具，输入具体页码比如"12,13,14,15"，效果一样。</p>
+                <p><strong>体验：完全没问题。</strong>操作甚至比Acrobat更直观，不需要在一堆菜单里找来找去。</p>
+
+                <h2>场景三：删除多余页面</h2>
+                <p>扫描文件经常会有空白页或者扫歪了的页面，需要删掉。在Acrobat里要进入"组织页面"模式，选中删除。</p>
+                <p>用<a href="../pdf/delete/">PDF删除页面</a>工具，输入要删除的页码（比如"3,7,15"），处理后自动跳过这些页面。我测试了一份20页的PDF，删掉3页后输出17页，内容完全正确。</p>
+                <p><strong>体验：简单粗暴，够用。</strong></p>
+
+                <h2>场景四：旋转页面</h2>
+                <p>有些扫描件方向不对，需要旋转90度或180度。这是个看起来简单但经常需要的操作。</p>
+                <p>用<a href="../pdf/rotate/">PDF旋转</a>工具，可以选择旋转全部页面或指定页面，支持90°、180°、270°三个角度。我把一份横竖混排的扫描件全部统一旋转，效果很好。</p>
+                <p><strong>体验：比Acrobat的操作步骤更少。</strong></p>
+
+                <h2>场景五：添加水印</h2>
+                <p>给合同加"仅供内部使用"水印，或者给设计稿加"样本"字样，这个需求也很常见。</p>
+                <p>用<a href="../pdf/watermark/">PDF水印</a>工具，输入水印文字，可以调整字号、颜色、透明度和旋转角度。我测试了"内部资料"四个字，斜着铺满整个页面，效果跟Acrobat差不多。</p>
+                <p><strong>体验：功能够用，但自定义选项比Acrobat少一些</strong>——比如不能用图片做水印，也不能做那种"只在某一页加水印"的精细操作。不过对于大多数人来说，文字水印就够了。</p>
+
+                <h2>优缺点总结</h2>
+                <p><strong>优点：</strong></p>
+                <p>免费——这是最大的优点，Acrobat一个月的订阅费够吃好几顿饭了。不需要安装——打开浏览器就能用，换了电脑也不受影响。不上传文件——所有处理在本地完成，合同、身份证这些敏感文件不用交给别人。操作简单——没有复杂菜单，该有的功能一目了然。</p>
+                <p><strong>缺点：</strong></p>
+                <p>处理大文件会慢——如果你要合并一个几百页的PDF，纯前端工具会比Acrobat慢不少，因为所有计算都在你的浏览器里完成，吃的是你电脑的资源。但对于几十页以内的日常办公文件，速度完全OK。高级功能缺失——Acrobat的表单编辑、高级批注、OCR文字识别这些专业功能，前端工具目前还做不了（或者说做不好）。</p>
+
+                <h2>我的建议</h2>
+                <p><strong>日常办公：</strong>用杂七杂八工具箱就够了。合并、拆分、旋转、水印这些操作，又快又免费，还不用担心隐私问题。把Acrobat的订阅费省下来喝奶茶不好吗？</p>
+                <p><strong>专业排版：</strong>如果你是做出版、设计的，需要精确控制PDF的每一个像素，那还是老老实实用Acrobat（或者更专业的InDesign）。这种场景下前端工具确实力不从心。</p>
+                <p>最后打个广告（自己给自己打广告也是没谁了）：如果你还没试过，可以去 <a href="../pdf/merge/">PDF合并</a>、<a href="../pdf/split/">PDF拆分</a>、<a href="../pdf/rotate/">PDF旋转</a> 这几个页面体验一下，反正不要钱，不好用再来骂我。</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
+        </footer>
+    </div>
+
+    <script src="../js/common.js"></script>
+</body>
+</html>

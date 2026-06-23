@@ -29,7 +29,7 @@
             <h1 class="tool-title">JSON格式化</h1>
             <p class="tool-desc">粘贴JSON数据，一键格式化、压缩、校验。所有处理均在本地完成。</p>
 
-            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: #f9f9f9; border-radius: 12px; font-size: 15px; color: #555555; line-height: 1.8;">
+            <div class="tool-intro" style="margin-bottom: 32px; padding: 20px 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.8;">
                 <p>JSON格式化工具是API开发和数据调试的得力助手，能够将杂乱的JSON数据一键美化为结构清晰的缩进格式，也可以将格式化后的JSON压缩为紧凑的一行便于传输。工具内置语法校验功能，遇到格式错误时会精确定位问题并给出提示，帮助您快速排查数据异常。核心技术采用JSON.parse与JSON.stringify配合自定义缩进方案，处理速度快且兼容各种复杂JSON结构。所有数据处理均在浏览器本地完成，敏感接口数据和配置信息不会上传服务器，确保数据安全。</p>
             </div>
 
@@ -53,6 +53,40 @@
             <div id="validationResult" style="margin-top: 20px; font-size: 14px;"></div>
         </main>
 
+        <div style="margin-bottom: 32px; padding: 24px; background: var(--color-bg-secondary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 16px;">📌 为什么推荐这个JSON工具？</h2>
+            <p>JSON格式化工具，调API的时候简直是救命神器。你从接口拿回来的JSON经常是一坨挤在一起的，想看某个字段在哪？眼睛都找花了。这个工具粘贴进来一键美化，缩进清清楚楚，层级一目了然。还能压缩、校验，发现语法错误会告诉你具体哪里有问题。作为开发者，调试API时经常需要查看JSON数据，但很多在线格式化工具会把你粘贴的API数据偷偷上传分析。这个工具<strong>完全在浏览器本地处理</strong>，你的API密钥、接口数据、业务逻辑都不会离开你的电脑。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🧑‍💻 个人经验与技巧</h2>
+            <p>有一次调试一个第三方支付接口，返回的JSON嵌套了五六层，光压缩成一行就有好几千字符。我粘贴到这个工具里一格式化，立刻发现对方文档里没写的一个隐藏字段，问题就这么解决了。从那以后我每次对接API都先用这个工具看一下返回数据的结构。</p>
+            <p>还有一个我发现的实用场景：<strong>用压缩功能把格式化的JSON压回一行</strong>，方便直接粘贴到Postman或者curl命令里。另外，如果你在学JSON语法，可以故意写错几个地方，看看校验器怎么报错的，比看文档学得快。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">👨‍💻 适用场景</h2>
+            <ul style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">调试API接口返回的JSON数据</li>
+                <li style="margin-bottom: 8px;">检查JSON语法错误</li>
+                <li style="margin-bottom: 8px;">压缩JSON减少传输体积</li>
+                <li style="margin-bottom: 0;">学习JSON数据结构</li>
+            </ul>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">🔒 隐私与安全</h2>
+            <p>你的文本<strong>不会被上传到任何服务器</strong>。整个处理过程都在你自己的浏览器中完成。这个工具箱没有后端，没有数据库，也绝不收集任何数据。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">📖 使用步骤</h2>
+            <ol style="padding-left: 20px; margin-bottom: 0;">
+                <li style="margin-bottom: 8px;">把JSON数据粘贴到输入框里，压缩的、格式化的都行</li>
+                <li style="margin-bottom: 8px;">点"格式化"按钮，右边就会显示出美化的结果</li>
+                <li style="margin-bottom: 0;">觉得没问题就点"复制结果"，直接拿去用</li>
+            </ol>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">❓ 常见问题</h2>
+            <p style="margin-bottom: 12px;"><strong>Q：JSON报错怎么办？</strong><br>A：工具会告诉你具体错误原因和位置，比如"Unexpected token"或者"Expected comma"。常见的问题有：多了少了逗号、引号没配对、用了单引号（JSON只认双引号）。根据提示修改就行。</p>
+            <p style="margin-bottom: 0;"><strong>Q：支持多大的JSON？</strong><br>A：日常使用完全没问题，处理几MB的JSON也就一瞬间。但如果你要格式化几百MB的日志文件，浏览器可能会有点吃力，建议分段处理。</p>
+
+            <h2 style="font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin: 28px 0 16px;">💡 小贴士</h2>
+            <p style="margin-bottom: 0;">从API返回的JSON通常是压缩成一行的，直接粘贴进来点格式化就行。如果想发给别人，也可以用压缩功能把格式化的JSON压回一行，方便传输。</p>
+        </div>
+
         <div class="recommend-section">
             <h3>其他工具</h3>
             <div class="recommend-links">
@@ -64,7 +98,7 @@
         </div>
 
         <footer>
-            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../guide.html">使用指南</a></p>
+            <p>&copy; <span class="current-year">2024</span> 杂七杂八工具箱 | <a href="../about.html">关于</a> | <a href="../privacy.html">隐私政策</a> | <a href="../terms.html">服务条款</a> | <a href="../guide.html">使用指南</a> | <a href="../blog.html">博客</a> | <a href="../sitemap.xml">网站地图</a></p>
         </footer>
     </div>
 
@@ -133,14 +167,7 @@
                 return;
             }
 
-            navigator.clipboard.writeText(text).then(function() {
-                copyBtn.textContent = '已复制';
-                setTimeout(function() {
-                    copyBtn.textContent = '复制结果';
-                }, 2000);
-            }).catch(function() {
-                alert('复制失败，请手动复制');
-            });
+            copyToClipboard(text, copyBtn, '复制结果');
         });
 
         clearBtn.addEventListener('click', function() {
