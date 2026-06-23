@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="杂七杂八工具箱使用指南与常见问题FAQ - 图片压缩、智能抠图、JSON格式化、二维码生成、PDF处理等33个工具的使用教程，帮助您快速上手。">
-    <title>使用指南与常见问题 - 杂七杂八工具箱 | 33个免费在线工具</title>
+    <meta name="description" content="杂七杂八工具箱使用指南与常见问题FAQ - 图片压缩、智能抠图、JSON格式化、二维码生成、PDF处理等37个工具的使用教程，帮助您快速上手。">
+    <title>使用指南与常见问题 - 杂七杂八工具箱 | 37个免费在线工具</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3874070867090849" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -45,52 +45,44 @@
         .guide-section h2 .section-icon {
             font-size: 20px;
         }
-        .guide-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .tools-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
         }
-        .guide-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 18px 20px;
+        .tools-table th {
+            background: var(--color-bg-secondary);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-text);
+            border-bottom: 2px solid var(--color-border);
+        }
+        .tools-table td {
+            padding: 14px 16px;
             border-bottom: 1px solid var(--color-border);
-            transition: background 0.2s ease;
+            color: var(--color-text-secondary);
+            vertical-align: top;
         }
-        .guide-list li:last-child {
-            border-bottom: none;
-        }
-        .guide-list li:hover {
+        .tools-table tr:hover td {
             background: var(--color-bg-secondary);
         }
-        .guide-list .tool-name {
-            min-width: 120px;
-            flex-shrink: 0;
-        }
-        .guide-list .tool-name a {
+        .tools-table .tool-name a {
             color: #009DFF;
             text-decoration: none;
             font-weight: 500;
-            font-size: 16px;
-            display: inline-block;
-            padding: 4px 0;
         }
-        .guide-list .tool-name a:hover {
+        .tools-table .tool-name a:hover {
             text-decoration: underline;
-        }
-        .guide-list .tool-steps {
-            color: var(--color-text-secondary);
-            font-size: 16px;
-            line-height: 1.6;
         }
         .guide-note {
             font-size: 14px;
             color: var(--color-text-tertiary);
-            margin-top: 12px;
-            padding: 12px 16px;
+            margin-top: 16px;
+            padding: 14px 18px;
             background: var(--color-bg-secondary);
-            border-radius: 8px;
+            border-radius: 10px;
+            line-height: 1.6;
         }
         .faq-list {
             list-style: none;
@@ -138,19 +130,12 @@
             .guide-hero p {
                 font-size: 15px;
             }
-            .guide-list li {
-                flex-direction: column;
-                gap: 6px;
-                padding: 16px 12px;
+            .tools-table {
+                font-size: 14px;
             }
-            .guide-list .tool-name {
-                min-width: auto;
-            }
-            .guide-list .tool-name a {
-                font-size: 16px;
-            }
-            .guide-list .tool-steps {
-                font-size: 15px;
+            .tools-table th,
+            .tools-table td {
+                padding: 12px 10px;
             }
             .faq-list li {
                 padding: 20px 12px;
@@ -180,7 +165,7 @@
             <div class="guide-hero">
                 <div class="hero-icon">🛠️</div>
                 <h1>杂七杂八工具箱 · 使用指南</h1>
-                <p>33个免费在线工具的使用方法和常见问题解答，帮助您快速上手。</p>
+                <p>37个免费在线工具的使用方法和常见问题解答，帮助您快速上手。</p>
             </div>
 
             <div style="margin-bottom: 48px; padding: 20px 24px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
@@ -190,165 +175,235 @@
 
             <div class="guide-section">
                 <h2><span class="section-icon">🖼️</span> 图片处理</h2>
-                <ul class="guide-list">
-                    <li>
-                        <span class="tool-name"><a href="image-compress/">图片压缩</a></span>
-                        <span class="tool-steps">上传图片 → 调节参数 → 下载结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="image-crop/">图片裁剪</a></span>
-                        <span class="tool-steps">上传图片 → 选择比例 → 拖拽选框 → 下载结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="image-format/">格式转换</a></span>
-                        <span class="tool-steps">上传图片 → 选择格式 → 下载结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="image-watermark/">图片水印</a></span>
-                        <span class="tool-steps">上传图片 → 设置水印 → 下载结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="image-resize/">尺寸调整</a></span>
-                        <span class="tool-steps">上传图片 → 输入尺寸 → 下载结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="bg-remover/">智能抠图</a></span>
-                        <span class="tool-steps">上传图片 → AI移除背景 → 下载结果</span>
-                    </li>
-                </ul>
-                <div class="guide-note">💡 智能抠图首次使用需下载AI模型（约30MB），下载后自动缓存在浏览器中，后续使用无需再次下载。建议使用Chrome或Edge最新版。</div>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="image-compress/">图片压缩</a></td>
+                            <td>上传图片 → 调节质量参数 → 下载压缩结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="image-crop/">图片裁剪</a></td>
+                            <td>上传图片 → 选择裁剪比例 → 拖拽选框 → 下载结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="image-format/">格式转换</a></td>
+                            <td>上传图片 → 选择目标格式 → 下载转换结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="image-watermark/">图片水印</a></td>
+                            <td>上传图片 → 设置水印文字/图片 → 下载结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="image-resize/">尺寸调整</a></td>
+                            <td>上传图片 → 输入目标尺寸 → 下载调整结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="bg-remover/">智能抠图</a></td>
+                            <td>上传图片 → AI自动移除背景 → 下载透明PNG</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="guide-note">💡 智能抠图首次使用需下载AI模型（约30MB），下载后自动缓存在浏览器中，后续使用无需再次下载。建议使用Chrome或Edge最新版以获得最佳性能。</div>
             </div>
 
             <div class="guide-section">
                 <h2><span class="section-icon">📝</span> 文本处理</h2>
-                <ul class="guide-list">
-                    <li>
-                        <span class="tool-name"><a href="text-trim/">文字去空格</a></span>
-                        <span class="tool-steps">粘贴文本 → 点击按钮 → 显示结果</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="word-count/">字数统计</a></span>
-                        <span class="tool-steps">粘贴文本 → 自动统计</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="case-convert/">大小写转换</a></span>
-                        <span class="tool-steps">输入文本 → 选择方式 → 自动转换</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="json-formatter/">JSON格式化</a></span>
-                        <span class="tool-steps">粘贴数据 → 点击格式化</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="text-diff/">文字对比</a></span>
-                        <span class="tool-steps">输入两段文本 → 点击对比</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="regex-test/">正则表达式测试</a></span>
-                        <span class="tool-steps">输入正则和文本 → 实时匹配</span>
-                    </li>
-                </ul>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="text-trim/">文字去空格</a></td>
+                            <td>粘贴文本 → 点击处理按钮 → 复制结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="word-count/">字数统计</a></td>
+                            <td>粘贴文本 → 自动统计字数/词数/行数</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="case-convert/">大小写转换</a></td>
+                            <td>输入文本 → 选择转换方式 → 自动转换</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="json-formatter/">JSON格式化</a></td>
+                            <td>粘贴JSON数据 → 点击格式化/压缩/校验</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="text-diff/">文字对比</a></td>
+                            <td>输入两段文本 → 点击对比 → 查看差异高亮</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="regex-test/">正则表达式测试</a></td>
+                            <td>输入正则表达式和测试文本 → 实时匹配高亮</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="guide-section">
                 <h2><span class="section-icon">🔄</span> 编码转换</h2>
-                <ul class="guide-list">
-                    <li>
-                        <span class="tool-name"><a href="base64-tool/">Base64编解码</a></span>
-                        <span class="tool-steps">输入内容 → 选择方向 → 自动生成</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="url-encode/">URL编解码</a></span>
-                        <span class="tool-steps">输入内容 → 自动转换</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="unicode-convert/">Unicode转换</a></span>
-                        <span class="tool-steps">输入内容 → 自动转换</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="color-picker/">颜色选择器</a></span>
-                        <span class="tool-steps">点击选择颜色 → 自动显示值</span>
-                    </li>
-                </ul>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="base64-tool/">Base64编解码</a></td>
+                            <td>输入内容 → 选择编码/解码方向 → 自动生成结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="url-encode/">URL编解码</a></td>
+                            <td>输入URL或编码内容 → 自动转换</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="unicode-convert/">Unicode转换</a></td>
+                            <td>输入中文或Unicode编码 → 自动互转</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="color-picker/">颜色选择器</a></td>
+                            <td>点击选择颜色 → 自动显示HEX/RGB/HSL值</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="guide-section">
                 <h2><span class="section-icon">⚡</span> 生成工具</h2>
-                <ul class="guide-list">
-                    <li>
-                        <span class="tool-name"><a href="qr-generator/">二维码生成</a></span>
-                        <span class="tool-steps">输入内容 → 可选Logo → 生成下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="random-password/">随机密码生成</a></span>
-                        <span class="tool-steps">设置参数 → 点击生成 → 复制密码</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="timestamp/">时间戳转换</a></span>
-                        <span class="tool-steps">输入内容 → 自动互转</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="random-number/">随机数生成器</a></span>
-                        <span class="tool-steps">输入范围 → 点击生成</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="uuid-generator/">UUID生成器</a></span>
-                        <span class="tool-steps">设置数量 → 点击生成</span>
-                    </li>
-                </ul>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="qr-generator/">二维码生成</a></td>
+                            <td>输入内容 → 可选添加Logo → 生成并下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="random-password/">随机密码生成</a></td>
+                            <td>设置长度和字符类型 → 点击生成 → 复制密码</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="timestamp/">时间戳转换</a></td>
+                            <td>输入时间戳或日期时间 → 自动互转</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="random-number/">随机数生成器</a></td>
+                            <td>输入范围和数量 → 点击生成 → 复制结果</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="uuid-generator/">UUID生成器</a></td>
+                            <td>设置生成数量 → 点击生成 → 复制结果</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="guide-section">
                 <h2><span class="section-icon">📄</span> 文档处理</h2>
-                <ul class="guide-list">
-                    <li>
-                        <span class="tool-name"><a href="pdf/merge/">PDF合并</a></span>
-                        <span class="tool-steps">上传文件 → 排序 → 合并下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/split/">PDF拆分</a></span>
-                        <span class="tool-steps">上传文件 → 输入页码范围 → 分别下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/extract/">PDF提取页面</a></span>
-                        <span class="tool-steps">上传文件 → 输入页码 → 提取下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/delete/">PDF删除页面</a></span>
-                        <span class="tool-steps">上传文件 → 输入页码 → 生成下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/rotate/">PDF旋转</a></span>
-                        <span class="tool-steps">上传文件 → 选择角度 → 旋转下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/pdf-to-image/">PDF转图片</a></span>
-                        <span class="tool-steps">上传文件 → 选择格式 → 打包下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/image-to-pdf/">图片转PDF</a></span>
-                        <span class="tool-steps">上传图片 → 选择尺寸 → 生成下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/compress/">PDF压缩</a></span>
-                        <span class="tool-steps">上传文件 → 选择级别 → 压缩下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/encrypt/">PDF添加密码</a></span>
-                        <span class="tool-steps">上传文件 → 设置密码 → 加密下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/decrypt/">PDF移除密码</a></span>
-                        <span class="tool-steps">上传文件 → 输入密码 → 解密下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/watermark/">PDF水印</a></span>
-                        <span class="tool-steps">上传文件 → 设置水印 → 添加下载</span>
-                    </li>
-                    <li>
-                        <span class="tool-name"><a href="pdf/preview/">PDF预览</a></span>
-                        <span class="tool-steps">上传文件 → 翻页浏览</span>
-                    </li>
-                </ul>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/merge/">PDF合并</a></td>
+                            <td>上传多个PDF → 拖拽排序 → 合并下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/split/">PDF拆分</a></td>
+                            <td>上传PDF → 输入页码范围 → 拆分下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/extract/">PDF提取页面</a></td>
+                            <td>上传PDF → 输入要提取的页码 → 提取下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/delete/">PDF删除页面</a></td>
+                            <td>上传PDF → 输入要删除的页码 → 生成下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/rotate/">PDF旋转</a></td>
+                            <td>上传PDF → 选择旋转角度 → 旋转下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/pdf-to-image/">PDF转图片</a></td>
+                            <td>上传PDF → 选择图片格式 → 打包下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/image-to-pdf/">图片转PDF</a></td>
+                            <td>上传图片 → 选择页面尺寸 → 生成PDF下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/compress/">PDF压缩</a></td>
+                            <td>上传PDF → 选择压缩级别 → 压缩下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/encrypt/">PDF添加密码</a></td>
+                            <td>上传PDF → 设置密码 → 加密下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/decrypt/">PDF移除密码</a></td>
+                            <td>上传加密PDF → 输入密码 → 解密下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/watermark/">PDF水印</a></td>
+                            <td>上传PDF → 设置水印文字 → 添加下载</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="pdf/preview/">PDF预览</a></td>
+                            <td>上传PDF → 翻页浏览内容</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="guide-section">
+                <h2><span class="section-icon">🧮</span> 计算工具</h2>
+                <table class="tools-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">工具名称</th>
+                            <th>使用步骤</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name"><a href="calculators/mortgage/">房贷计算器</a></td>
+                            <td>输入贷款金额、利率、年限 → 选择还款方式 → 查看月供和利息</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="calculators/carloan/">车贷计算器</a></td>
+                            <td>输入车价、首付比例、利率 → 选择还款方式 → 查看购车总费用</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="calculators/date-diff/">日期计算器</a></td>
+                            <td>选择两个日期 → 计算天数差，或输入日期加减天数</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name"><a href="calculators/unit-convert/">单位换算器</a></td>
+                            <td>选择单位类型 → 输入数值 → 实时换算结果</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="guide-section">
@@ -360,7 +415,7 @@
                     </li>
                     <li>
                         <div class="faq-q"><span class="q-tag">Q</span> 为什么建议使用电脑端进行智能抠图？</div>
-                        <div class="faq-a">智能抠图功能需要运行AI模型进行图像推理计算，这对设备性能有较高要求。电脑端相比手机端有以下优势：1）<strong>更强的计算性能</strong>：电脑CPU/GPU性能更强，AI模型加载和推理速度更快；2）<strong>更大的内存空间</strong>：AI模型需要占用较多内存，电脑端内存更充裕，不易出现内存不足导致处理失败的情况；3）<strong>更好的浏览器兼容性</strong>：电脑端Chrome/Edge浏览器支持WebGPU硬件加速，可大幅提升抠图速度和效果精度；4）<strong>更稳定的处理体验</strong>：电脑端散热和供电更稳定，长时间处理不会因过热降频而影响效果。综合来看，使用电脑端可以获得更快的处理速度、更精细的抠图效果和更稳定的使用体验。</div>
+                        <div class="faq-a">智能抠图功能需要运行AI模型进行图像推理计算，这对设备性能有较高要求。电脑端相比手机端有更强的计算性能、更大的内存空间、更好的浏览器兼容性（支持WebGPU硬件加速），可以获得更快的处理速度和更稳定的使用体验。</div>
                     </li>
                     <li>
                         <div class="faq-q"><span class="q-tag">Q</span> 我的数据会被上传到服务器吗？</div>
