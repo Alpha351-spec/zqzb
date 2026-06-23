@@ -10,7 +10,7 @@
     <style>
         .guide-hero {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 32px;
         }
         .guide-hero .hero-icon {
             font-size: 48px;
@@ -28,8 +28,39 @@
             max-width: 560px;
             margin: 0 auto;
         }
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 48px;
+            padding: 20px;
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+        }
+        .quick-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .quick-nav a:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        .quick-nav a .nav-icon {
+            font-size: 16px;
+        }
         .guide-section {
             margin-bottom: 56px;
+            scroll-margin-top: 24px;
         }
         .guide-section h2 {
             font-size: 1.25rem;
@@ -44,6 +75,12 @@
         }
         .guide-section h2 .section-icon {
             font-size: 20px;
+        }
+        .guide-section h2 .section-count {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-text-tertiary);
+            margin-left: auto;
         }
         .tools-table {
             width: 100%;
@@ -123,6 +160,55 @@
         .faq-list .faq-a a:hover {
             text-decoration: underline;
         }
+        .tools-card-list {
+            display: none;
+        }
+        .tool-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .tool-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-1px);
+        }
+        .tool-card .card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-bg-secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .tool-card .card-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .tool-card .card-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+        .tool-card .card-steps {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+        .tool-card .card-arrow {
+            color: var(--color-text-tertiary);
+            flex-shrink: 0;
+        }
         @media (max-width: 640px) {
             .guide-hero h1 {
                 font-size: 1.5rem;
@@ -130,12 +216,22 @@
             .guide-hero p {
                 font-size: 15px;
             }
-            .tools-table {
-                font-size: 14px;
+            .quick-nav {
+                padding: 16px;
+                gap: 6px;
             }
-            .tools-table th,
-            .tools-table td {
-                padding: 12px 10px;
+            .quick-nav a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            .tools-table {
+                display: none;
+            }
+            .tools-card-list {
+                display: block;
+            }
+            .guide-section h2 {
+                font-size: 1.1rem;
             }
             .faq-list li {
                 padding: 20px 12px;
@@ -168,13 +264,26 @@
                 <p>37个免费在线工具的使用方法和常见问题解答，帮助您快速上手。</p>
             </div>
 
+            <div class="quick-nav">
+                <a href="#image"><span class="nav-icon">🖼️</span> 图片处理</a>
+                <a href="#text"><span class="nav-icon">📝</span> 文本处理</a>
+                <a href="#encode"><span class="nav-icon">🔄</span> 编码转换</a>
+                <a href="#generate"><span class="nav-icon">⚡</span> 生成工具</a>
+                <a href="#pdf"><span class="nav-icon">📄</span> 文档处理</a>
+                <a href="#calc"><span class="nav-icon">🧮</span> 计算工具</a>
+                <a href="#faq"><span class="nav-icon">❓</span> 常见问题</a>
+            </div>
+
             <div style="margin-bottom: 48px; padding: 20px 24px; background: var(--color-bg-tertiary); border-radius: 12px; font-size: 15px; color: var(--color-text-secondary); line-height: 1.9;">
                 <p style="margin-bottom: 0;"><strong>💡 为什么你可以放心使用？</strong><br>
                 所有工具都是纯前端实现，你上传的文件、粘贴的文本<strong>只会留在你自己的设备上</strong>。不需要注册，不会记录任何操作。如果你对某个工具的用法有疑问，下面的表格有快速指引；如果想了解更多技术细节，可以去<a href="about.html" style="color: #009DFF; text-decoration: none;">"关于"</a>页面逛逛。</p>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">🖼️</span> 图片处理</h2>
+            <div class="guide-section" id="image">
+                <h2>
+                    <span class="section-icon">🖼️</span> 图片处理
+                    <span class="section-count">6个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -209,11 +318,64 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="image-compress/" class="tool-card">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-content">
+                            <div class="card-name">图片压缩</div>
+                            <div class="card-steps">上传图片 → 调节质量参数 → 下载压缩结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="image-crop/" class="tool-card">
+                        <div class="card-icon">✂️</div>
+                        <div class="card-content">
+                            <div class="card-name">图片裁剪</div>
+                            <div class="card-steps">上传图片 → 选择裁剪比例 → 拖拽选框 → 下载结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="image-format/" class="tool-card">
+                        <div class="card-icon">🔄</div>
+                        <div class="card-content">
+                            <div class="card-name">格式转换</div>
+                            <div class="card-steps">上传图片 → 选择目标格式 → 下载转换结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="image-watermark/" class="tool-card">
+                        <div class="card-icon">💧</div>
+                        <div class="card-content">
+                            <div class="card-name">图片水印</div>
+                            <div class="card-steps">上传图片 → 设置水印文字/图片 → 下载结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="image-resize/" class="tool-card">
+                        <div class="card-icon">📐</div>
+                        <div class="card-content">
+                            <div class="card-name">尺寸调整</div>
+                            <div class="card-steps">上传图片 → 输入目标尺寸 → 下载调整结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="bg-remover/" class="tool-card">
+                        <div class="card-icon">🎭</div>
+                        <div class="card-content">
+                            <div class="card-name">智能抠图</div>
+                            <div class="card-steps">上传图片 → AI自动移除背景 → 下载透明PNG</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
                 <div class="guide-note">💡 智能抠图首次使用需下载AI模型（约30MB），下载后自动缓存在浏览器中，后续使用无需再次下载。建议使用Chrome或Edge最新版以获得最佳性能。</div>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">📝</span> 文本处理</h2>
+            <div class="guide-section" id="text">
+                <h2>
+                    <span class="section-icon">📝</span> 文本处理
+                    <span class="section-count">6个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -248,10 +410,63 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="text-trim/" class="tool-card">
+                        <div class="card-icon">✂️</div>
+                        <div class="card-content">
+                            <div class="card-name">文字去空格</div>
+                            <div class="card-steps">粘贴文本 → 点击处理按钮 → 复制结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="word-count/" class="tool-card">
+                        <div class="card-icon">🔢</div>
+                        <div class="card-content">
+                            <div class="card-name">字数统计</div>
+                            <div class="card-steps">粘贴文本 → 自动统计字数/词数/行数</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="case-convert/" class="tool-card">
+                        <div class="card-icon">🔡</div>
+                        <div class="card-content">
+                            <div class="card-name">大小写转换</div>
+                            <div class="card-steps">输入文本 → 选择转换方式 → 自动转换</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="json-formatter/" class="tool-card">
+                        <div class="card-icon">{ }</div>
+                        <div class="card-content">
+                            <div class="card-name">JSON格式化</div>
+                            <div class="card-steps">粘贴JSON数据 → 点击格式化/压缩/校验</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="text-diff/" class="tool-card">
+                        <div class="card-icon">📊</div>
+                        <div class="card-content">
+                            <div class="card-name">文字对比</div>
+                            <div class="card-steps">输入两段文本 → 点击对比 → 查看差异高亮</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="regex-test/" class="tool-card">
+                        <div class="card-icon">🔍</div>
+                        <div class="card-content">
+                            <div class="card-name">正则表达式测试</div>
+                            <div class="card-steps">输入正则表达式和测试文本 → 实时匹配高亮</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">🔄</span> 编码转换</h2>
+            <div class="guide-section" id="encode">
+                <h2>
+                    <span class="section-icon">🔄</span> 编码转换
+                    <span class="section-count">4个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -278,10 +493,47 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="base64-tool/" class="tool-card">
+                        <div class="card-icon">🔐</div>
+                        <div class="card-content">
+                            <div class="card-name">Base64编解码</div>
+                            <div class="card-steps">输入内容 → 选择编码/解码方向 → 自动生成结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="url-encode/" class="tool-card">
+                        <div class="card-icon">🔗</div>
+                        <div class="card-content">
+                            <div class="card-name">URL编解码</div>
+                            <div class="card-steps">输入URL或编码内容 → 自动转换</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="unicode-convert/" class="tool-card">
+                        <div class="card-icon">🌐</div>
+                        <div class="card-content">
+                            <div class="card-name">Unicode转换</div>
+                            <div class="card-steps">输入中文或Unicode编码 → 自动互转</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="color-picker/" class="tool-card">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-content">
+                            <div class="card-name">颜色选择器</div>
+                            <div class="card-steps">点击选择颜色 → 自动显示HEX/RGB/HSL值</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">⚡</span> 生成工具</h2>
+            <div class="guide-section" id="generate">
+                <h2>
+                    <span class="section-icon">⚡</span> 生成工具
+                    <span class="section-count">5个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -312,10 +564,55 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="qr-generator/" class="tool-card">
+                        <div class="card-icon">📱</div>
+                        <div class="card-content">
+                            <div class="card-name">二维码生成</div>
+                            <div class="card-steps">输入内容 → 可选添加Logo → 生成并下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="random-password/" class="tool-card">
+                        <div class="card-icon">🔑</div>
+                        <div class="card-content">
+                            <div class="card-name">随机密码生成</div>
+                            <div class="card-steps">设置长度和字符类型 → 点击生成 → 复制密码</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="timestamp/" class="tool-card">
+                        <div class="card-icon">⏱️</div>
+                        <div class="card-content">
+                            <div class="card-name">时间戳转换</div>
+                            <div class="card-steps">输入时间戳或日期时间 → 自动互转</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="random-number/" class="tool-card">
+                        <div class="card-icon">🎲</div>
+                        <div class="card-content">
+                            <div class="card-name">随机数生成器</div>
+                            <div class="card-steps">输入范围和数量 → 点击生成 → 复制结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="uuid-generator/" class="tool-card">
+                        <div class="card-icon">🆔</div>
+                        <div class="card-content">
+                            <div class="card-name">UUID生成器</div>
+                            <div class="card-steps">设置生成数量 → 点击生成 → 复制结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">📄</span> 文档处理</h2>
+            <div class="guide-section" id="pdf">
+                <h2>
+                    <span class="section-icon">📄</span> 文档处理
+                    <span class="section-count">12个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -374,10 +671,111 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="pdf/merge/" class="tool-card">
+                        <div class="card-icon">📑</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF合并</div>
+                            <div class="card-steps">上传多个PDF → 拖拽排序 → 合并下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/split/" class="tool-card">
+                        <div class="card-icon">✂️</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF拆分</div>
+                            <div class="card-steps">上传PDF → 输入页码范围 → 拆分下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/extract/" class="tool-card">
+                        <div class="card-icon">📤</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF提取页面</div>
+                            <div class="card-steps">上传PDF → 输入要提取的页码 → 提取下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/delete/" class="tool-card">
+                        <div class="card-icon">🗑️</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF删除页面</div>
+                            <div class="card-steps">上传PDF → 输入要删除的页码 → 生成下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/rotate/" class="tool-card">
+                        <div class="card-icon">🔄</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF旋转</div>
+                            <div class="card-steps">上传PDF → 选择旋转角度 → 旋转下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/pdf-to-image/" class="tool-card">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF转图片</div>
+                            <div class="card-steps">上传PDF → 选择图片格式 → 打包下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/image-to-pdf/" class="tool-card">
+                        <div class="card-icon">📷</div>
+                        <div class="card-content">
+                            <div class="card-name">图片转PDF</div>
+                            <div class="card-steps">上传图片 → 选择页面尺寸 → 生成PDF下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/compress/" class="tool-card">
+                        <div class="card-icon">📦</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF压缩</div>
+                            <div class="card-steps">上传PDF → 选择压缩级别 → 压缩下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/encrypt/" class="tool-card">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF添加密码</div>
+                            <div class="card-steps">上传PDF → 设置密码 → 加密下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/decrypt/" class="tool-card">
+                        <div class="card-icon">🔓</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF移除密码</div>
+                            <div class="card-steps">上传加密PDF → 输入密码 → 解密下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/watermark/" class="tool-card">
+                        <div class="card-icon">💧</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF水印</div>
+                            <div class="card-steps">上传PDF → 设置水印文字 → 添加下载</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="pdf/preview/" class="tool-card">
+                        <div class="card-icon">👁️</div>
+                        <div class="card-content">
+                            <div class="card-name">PDF预览</div>
+                            <div class="card-steps">上传PDF → 翻页浏览内容</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
             </div>
 
-            <div class="guide-section">
-                <h2><span class="section-icon">🧮</span> 计算工具</h2>
+            <div class="guide-section" id="calc">
+                <h2>
+                    <span class="section-icon">🧮</span> 计算工具
+                    <span class="section-count">4个工具</span>
+                </h2>
                 <table class="tools-table">
                     <thead>
                         <tr>
@@ -404,9 +802,43 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="tools-card-list">
+                    <a href="calculators/mortgage/" class="tool-card">
+                        <div class="card-icon">🏠</div>
+                        <div class="card-content">
+                            <div class="card-name">房贷计算器</div>
+                            <div class="card-steps">输入贷款金额、利率、年限 → 选择还款方式 → 查看月供和利息</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="calculators/carloan/" class="tool-card">
+                        <div class="card-icon">🚗</div>
+                        <div class="card-content">
+                            <div class="card-name">车贷计算器</div>
+                            <div class="card-steps">输入车价、首付比例、利率 → 选择还款方式 → 查看购车总费用</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="calculators/date-diff/" class="tool-card">
+                        <div class="card-icon">📅</div>
+                        <div class="card-content">
+                            <div class="card-name">日期计算器</div>
+                            <div class="card-steps">选择两个日期 → 计算天数差，或输入日期加减天数</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="calculators/unit-convert/" class="tool-card">
+                        <div class="card-icon">📐</div>
+                        <div class="card-content">
+                            <div class="card-name">单位换算器</div>
+                            <div class="card-steps">选择单位类型 → 输入数值 → 实时换算结果</div>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
             </div>
 
-            <div class="guide-section">
+            <div class="guide-section" id="faq">
                 <h2><span class="section-icon">❓</span> 常见问题</h2>
                 <ul class="faq-list">
                     <li>
